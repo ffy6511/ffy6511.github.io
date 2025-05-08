@@ -1,0 +1,32 @@
+/* 霞鹜文楷屏幕版 - 中文字体 */
+@font-face {
+  font-family: 'WenKai';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/fonts/LXGWWenKaiGBScreen.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'mono';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/fonts/MapleMono-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'mono';
+  font-style: italic;
+  font-weight: normal;
+  src: url('/fonts/MapleMono-Italic.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'mono';
+  font-style: normal;
+  font-weight: bold;
+  src: url('/fonts/MapleMono-Bold.ttf') format('truetype');
+  font-display: swap;
+}
