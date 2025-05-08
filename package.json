@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "hexo": "^7.3.0",
-    "hexo-all-minifier": "^0.5.2",
+    "hexo-all-minifier": "^0.5.7",
     "hexo-deployer-git": "^4.0.0",
     "hexo-filter-mathjax": "^0.9.0",
     "hexo-filter-mermaid-diagrams": "^1.0.5",
