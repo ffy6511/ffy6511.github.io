@@ -1,12 +1,15 @@
 ---
 title: cpp学习记录
 date: 2025-02-14 20:21:21
-tags:
-categories:
+tags: 
+categories: 
+- 编程语言
+- 学习笔记
 excerpt: 围绕zju-OOP课堂内容扩展的cpp学习笔记
 mathjax: true
+thumbnail: https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250509094812819.png?imageSlim
 ---
-
+#### 导论
 编译时, 从`c`的`gcc`转变为了`g++`.
 
 OOP的三大特点:

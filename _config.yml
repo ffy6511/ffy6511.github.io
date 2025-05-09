@@ -103,10 +103,10 @@ theme: redefine
 deploy:
   type: git
   repo: https://github.com/ffy6511/ffy6511.github.io.git # https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
-  branch: gh-pages
-  message: 	[Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}]
+  branch: main
+  # message: 	Site updated
 
-all_minifier: false
+all_minifier: true
 
 mathjax:
     tags: none # or 'ams' or 'all'

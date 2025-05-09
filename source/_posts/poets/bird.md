@@ -3,13 +3,8 @@ title: 倦鸟
 date: 2025-01-08 16:10:10
 tags: 
 - 短诗
-- 她
 categories: 随机掉落的文字碎片
-excerpt: 等一处栖居 🪶
-index_img: /img/倦鸟.png
-banner_img: 
-hide: false
-archive: true
+thumbnail: /img/倦鸟.png
 ---
 <br>
 <p style = " 
@@ -22,7 +17,7 @@ archive: true
 越过人海 坠入你乌黑瞳仁中的夜
 </p>
 
-<img src = "/img/倦鸟.png" width ="70%">
+
 > 下附最初的三节诗, 以及灵感来源.
 
 

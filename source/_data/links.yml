@@ -1,21 +1,18 @@
-- links_category: Elites
-  has_thumbnail: true
-  list:
-      - name: EvanNotFound's Blog
-        link: https://ohevan.com
-        description: 用香港记者的速度更新文章
-        avatar: https://evan.beee.top/avatar.png
-        thumbnail: https://img1.imgtp.com/2023/06/19/Jegvz84P.png # has_thumbnail 为 true 时才需要
+# - links_category: Elites
+#   has_thumbnail: true
+#   list:
+#       - name: EvanNotFound's Blog
+#         link: https://ohevan.com
+#         description: 用香港记者的速度更新文章
+#         avatar: https://evan.beee.top/avatar.png
+#         thumbnail: https://img1.imgtp.com/2023/06/19/Jegvz84P.png # has_thumbnail 为 true 时才需要
  
-- links_category: Normal
+- links_category: 
   has_thumbnail: false
   list:
-      - name: Example Site
-        link: https://example.com
-        description: Example Site Description
-        avatar: https://www.youtube.com/watch?v=dQw4w9WgXcQ
-      - name: Example Site 2
-        link: https://example.com
-        description: Example Site Description
-        avatar: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+      - name: Seele
+        link: https://elysiafollower.github.io/
+        description: 在体力和智力上都是超人般的存在
+        avatar: https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250508221526599.png?imageSlim
+      
  
