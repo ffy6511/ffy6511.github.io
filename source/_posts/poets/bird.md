@@ -5,6 +5,7 @@ tags:
 - 短诗
 categories: 随机掉落的文字碎片
 thumbnail: /img/倦鸟.png
+excerpt: false
 ---
 <br>
 <p style = " 

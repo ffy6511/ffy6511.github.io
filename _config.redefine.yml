@@ -11,7 +11,7 @@
 # Docs: https://redefine-docs.ohevan.com/basic/info
 info:
   # Site title
-  title: ffyの备忘录
+  title: ffyの四次元口袋
   # Site subtitle
   subtitle: 捕捉流浪的灵感
   # Author name
@@ -128,7 +128,7 @@ home_banner:
     light: https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefinedsun.png?imageSlim
     dark: https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefineddark.png?imageSlim
   # Home banner title
-  title: 不时掉落ffy的生活碎片和灵感
+  title: 随机掉落生活碎片和学习记录~
   # Home banner subtitle
   subtitle:
     text: ["This is the first message"] # subtitle text, array
@@ -344,9 +344,9 @@ articles:
 # Docs: https://redefine-docs.ohevan.com/posts/comment
 comment:
   # Whether to enable comment
-  enable: false
+  enable: true
   # Comment system
-  system: waline # waline, gitalk, twikoo, giscus
+  system: giscus # waline, gitalk, twikoo, giscus
   # System configuration
   config:
     # Waline comment system. See https://waline.js.org/
@@ -371,16 +371,16 @@ comment:
       region: # Twikoo region. can be empty
     # Giscus comment system. See https://giscus.app/
     giscus:
-      repo: # Github repository name e.g. EvanNotFound/hexo-theme-redefine
-      repo_id: # Github repository id
-      category: # Github discussion category
-      category_id: # Github discussion category id
+      repo: ffy6511/ffy6511.github.io # Github repository name e.g. EvanNotFound/hexo-theme-redefine
+      repo_id: R_kgD00mnQ1A" # Github repository id
+      category: Announcements # Github discussion category
+      category_id: DIC_kwD00mnQ1M4Cp8zM # Github discussion category id
       mapping: pathname # Which value to use as the unique identifier for the page. e.g. pathname, url, title, og:title. DO NOT USE og:title WITH PJAX ENABLED since pjax will not update og:title when the page changes
       strict: 0 # Whether to enable strict mode. e.g. 0, 1
       reactions_enabled: 1 # Whether to enable reactions. e.g. 0, 1
       emit_metadata: 0 # Whether to emit metadata. e.g. 0, 1
-      lang: en # Giscus language. e.g. en, zh-CN, zh-TW
-      input_position: bottom # Place the comment box above/below the comments. e.g. top, bottom
+      lang: zh-CN # Giscus language. e.g. en, zh-CN, zh-TW
+      input_position: top # Place the comment box above/below the comments. e.g. top, bottom
       loading: lazy # Load the comments lazily
 # COMMENT <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
@@ -410,11 +410,10 @@ footer:
 # Docs: https://redefine-docs.ohevan.com/inject
 inject:
   # Whether to enable inject
-  enable: false
+  enable: true
   # Inject custom head html code
   head: 
-    -
-    -
+    - <link rel="stylesheet" href="/css/custom.css">
   # Inject custom footer html code
   footer:
     -

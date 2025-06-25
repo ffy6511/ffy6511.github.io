@@ -8,7 +8,7 @@ excerpt: ~~你的下一款minisql, 何必是minisql.~~ chatSQL 是一个交互�
 ---
 <p align="center" style="font-size: 1.2em; margin: 20px 0;">
   <a href="https://chat-sql-hazel.vercel.app/" target="_blank" style="font-size: 1.2em; font-weight: bold;">Website</a>
-  <a href="hhttps://github.com/ffy6511/chatSQL" target="_blank" style="font-size: 1.2em; font-weight: bold;">Github Repo</a>
+  <a href="https://github.com/ffy6511/chatSQL" target="_blank" style="font-size: 1.2em; font-weight: bold;">Github Repo</a>
 </p>
 <p align="center">
   <a href="https://deepwiki.com/ffy6511/chatSQL"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki" /></a>
@@ -182,3 +182,23 @@ npm run generate-git
 ## 🤝 贡献
 
 欢迎提交 Pull Request 和 Issue！
+
+
+
+---
+
+## 重要更新
+
+### 25-04-30
+
+- feat: 在主页的侧边栏增加了"初始化教程"功能, 提供不同难度的教程系列;
+
+- feat: 增加分享链接, 可以导出当前的历史记录, 通过粘贴地址在不同设备之间共享(_notice_: 可能覆盖当前已有的记录)
+
+### 25-05-11
+
+- **feat**: 在"初始化教程"中增加了教材Database System Concepts中schema, 根据25春夏DB的PPT的字段要求在官网基础上调整得到.
+
+- feat: 优化了代码编辑的体验(根据上下文修改补足的建议)
+
+- style: 增加了loading的动画, 优化更新日志的页面
