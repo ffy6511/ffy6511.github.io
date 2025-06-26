@@ -1,1 +1,33 @@
-!function(){const e=[],t="fixed"===theme.plugins.aplayer.type,n="mini"===theme.plugins.aplayer.type;for(const t of theme.plugins.aplayer.audios){const n={name:t.name,artist:t.artist,url:t.url,cover:t.cover,lrc:t.lrc,theme:t.theme};e.push(n)}if(n)new APlayer({container:document.getElementById("aplayer"),mini:!0,audio:e});else if(t){new APlayer({container:document.getElementById("aplayer"),fixed:!0,lrcType:3,audio:e});document.querySelector(".aplayer-icon-lrc").click()}}();
+(function() {
+  const audioList = [];
+  const isFixed = theme.plugins.aplayer.type === "fixed";
+  const isMini = theme.plugins.aplayer.type === "mini";
+
+  for (const audio of theme.plugins.aplayer.audios) {
+    const audioObj = {
+      name: audio.name,
+      artist: audio.artist,
+      url: audio.url,
+      cover: audio.cover,
+      lrc: audio.lrc,
+      theme: audio.theme,
+    };
+    audioList.push(audioObj);
+  }
+
+  if (isMini) {
+    new APlayer({
+      container: document.getElementById("aplayer"),
+      mini: true,
+      audio: audioList,
+    });
+  } else if (isFixed) {
+    const player = new APlayer({
+      container: document.getElementById("aplayer"),
+      fixed: true,
+      lrcType: 3,
+      audio: audioList,
+    });
+    document.querySelector(".aplayer-icon-lrc").click();
+  }
+})();

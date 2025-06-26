@@ -1,1 +1,9 @@
-body,div,h1,h2,h3,h4,h5,h6,p,span{font-family:WenKai,sans-serif!important}code,pre{font-family:mono,monospace,sans-serif!important}
+/* 强制应用中文字体 */
+body, p, div, span, h1, h2, h3, h4, h5, h6 {
+  font-family: 'WenKai', sans-serif !important;
+}
+
+/* 针对代码块使用等宽字体 */
+pre, code {
+  font-family: 'mono', monospace, sans-serif !important;
+}
