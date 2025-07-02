@@ -36,10 +36,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/redefine-og.webp">
 <meta property="article:published_time" content="2025-06-28T10:34:17.000Z">
-<meta property="article:modified_time" content="2025-06-28T12:35:02.231Z">
+<meta property="article:modified_time" content="2025-07-02T03:55:49.753Z">
 <meta property="article:author" content="ffy">
-<meta property="article:tag" content="服务器">
 <meta property="article:tag" content="ssh">
+<meta property="article:tag" content="服务器">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/redefine-og.webp">
     
@@ -492,8 +492,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2025-06-28 20:35:02</span>
-            <span class="mobile">2025-06-28 20:35:02</span>
+            <span class="desktop">2025-07-02 11:55:49</span>
+            <span class="mobile">2025-07-02 11:55:49</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -521,11 +521,11 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>&nbsp;
+                        <a href="/tags/ssh/">ssh</a>&nbsp;
                     </li>
                 
                     <li>
-                        | <a href="/tags/ssh/">ssh</a>&nbsp;
+                        | <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>&nbsp;
                     </li>
                 
             </ul>
@@ -535,12 +535,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>1.3k 字</span>
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>1.7k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fa-regular fa-clock"></i>&nbsp;<span>5 分钟</span>
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>6 分钟</span>
         </span>
     
     
@@ -609,8 +609,6 @@
                      
                 >
 
-
-
 <h2 id="安装桌面环境和VNC服务端"><a href="#安装桌面环境和VNC服务端" class="headerlink" title="安装桌面环境和VNC服务端"></a>安装桌面环境和VNC服务端</h2><p><strong>VNC（Virtual Network Computing）</strong>：</p>
 <ul>
 <li>一种图形化远程控制协议和工具，允许用户通过网络远程访问和操作另一台计算机的桌面环境；</li>
@@ -624,20 +622,17 @@
 <p>首先，确保系统是最新配置：</p>
 <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure></div>
 
-<p>然后，安装轻量的桌面环境，此处以<code>xfce4</code>为例：</p>
+<p>然后，安装轻量的桌面环境，此处以 <code>xfce4</code>为例：</p>
 <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install xfce4</span><br></pre></td></tr></table></figure></div>
-
-
 
 <h3 id="安装TigerVNC"><a href="#安装TigerVNC" class="headerlink" title="安装TigerVNC"></a>安装TigerVNC</h3><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install tigervnc-standalone-server</span><br></pre></td></tr></table></figure></div>
 
 <blockquote>
-<p>适用于<code>Ubuntu 20.04 LTS</code>及之后的版本</p>
+<p>适用于 <code>Ubuntu 20.04 LTS</code>及之后的版本</p>
 </blockquote>
 <h3 id="配置VNC-Server"><a href="#配置VNC-Server" class="headerlink" title="配置VNC Server"></a>配置VNC Server</h3><ol>
 <li><p>设置密码：</p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vncpasswd</span><br></pre></td></tr></table></figure></div>
-</li>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vncpasswd</span><br></pre></td></tr></table></figure></div></li>
 <li><p>启动VNC服务：</p>
 <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vncserver :1</span><br></pre></td></tr></table></figure></div>
 
@@ -676,7 +671,7 @@
 
 <p>我们可以通过命令 <code>vncserver -list</code> 查看当前的VNC对话</p>
 <h2 id="使用VNC客户端连接服务器"><a href="#使用VNC客户端连接服务器" class="headerlink" title="使用VNC客户端连接服务器"></a>使用VNC客户端连接服务器</h2><p>此处以<strong>realvnc</strong>为例——<a class="link"   target="_blank" rel="noopener" href="https://www.realvnc.com/en/connect/download/viewer/" >官方的下载地址<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<p>安装完毕之后输入VNC server的<code>IP:端口</code>：</p>
+<p>安装完毕之后输入VNC server的 <code>IP:端口</code>：</p>
 <img  
                      lazyload
                      src="/images/loading.svg"
@@ -689,7 +684,7 @@
 <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tlnp | grep 5901</span><br></pre></td></tr></table></figure></div>
 
 <p>如果类似输出：</p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(base) ubuntu@VM-0-5-ubuntu:~$ netstat -tlnp | grep 5901</span><br><span class="line">(Not all processes could be identified, non-owned process info</span><br><span class="line"> will not be shown, you would have to be root to see it all.)</span><br><span class="line">tcp        0      0 127.0.0.1:5901          0.0.0.0:*               LISTEN      2583/Xtigervnc      </span><br><span class="line">tcp6       0      0 ::1:5901                :::*                    LISTEN      2583/Xtigervnc      </span><br><span class="line">(base) ubuntu@VM-0-5-ubuntu:~$ </span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(base) ubuntu@VM-0-5-ubuntu:~$ netstat -tlnp | grep 5901</span><br><span class="line">(Not all processes could be identified, non-owned process info</span><br><span class="line"> will not be shown, you would have to be root to see it all.)</span><br><span class="line">tcp        0      0 127.0.0.1:5901          0.0.0.0:*               LISTEN      2583/Xtigervnc    </span><br><span class="line">tcp6       0      0 ::1:5901                :::*                    LISTEN      2583/Xtigervnc    </span><br><span class="line">(base) ubuntu@VM-0-5-ubuntu:~$ </span><br></pre></td></tr></table></figure></div>
 
 <p>说明此时云服务器端正在监听本机的端口，可以声明：</p>
 <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vncserver :1 -localhost no</span><br></pre></td></tr></table></figure></div>
@@ -698,8 +693,7 @@
 <p>如果担心VNC端口暴露在公网不安全，可以用SSH隧道方式进行加密连接：</p>
 <ol>
 <li><p>本地开启端口转发：</p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 5901:localhost:5901 用户名@服务器IP</span><br></pre></td></tr></table></figure></div>
-</li>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 5901:localhost:5901 用户名@服务器IP</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动对话</span></span><br><span class="line">vncserver :1</span><br></pre></td></tr></table></figure></div></li>
 <li><p>客户端连接本地端口——在viewer中输入：</p>
 <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localhost:5901</span><br></pre></td></tr></table></figure></div></li>
 </ol>
@@ -710,15 +704,66 @@
                      
                 >
 
-
-
 <p>至此，我们就可以使用本地的VNC client来操作图形化的云服务器 🎉</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h3 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h3><h4 id="使用浏览器查看实验结果"><a href="#使用浏览器查看实验结果" class="headerlink" title="使用浏览器查看实验结果"></a>使用浏览器查看实验结果</h4><p>实验中rl运行的结果在logs文件夹中如图所示：</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250630090112540.png?imageSlim"
+                     
+                >
+
+<ul>
+<li><p>第一个是<strong>TensorBoard日志文件</strong>，由框架自动生成，记录训练过程中的各种指标</p>
+<ul>
+<li><p>为二进制形式，需要使用 Tensorboard 工具查看</p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">pip install tensorboard</span></span><br><span class="line"></span><br><span class="line">tensorboard --logdir=.</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或者指定名称 tensorboard --logdir=output</span></span><br></pre></td></tr></table></figure></div></li>
+</ul>
+</li>
+<li><p>后续以 <code>pt</code>结尾的文件是<strong>PyTorch模型权重文件</strong> ，即保存的神经网络模型参数</p>
+<ul>
+<li><p>是模型快照</p>
+</li>
+<li><p>用PyTorch的 <code>torch.load()</code>函数加载，用于测试、继续训练或推理</p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">加载pt模型</span></span><br><span class="line">import torch</span><br><span class="line">model = torch.load(&#x27;xxx.pt&#x27;)</span><br></pre></td></tr></table></figure></div></li>
+</ul>
+</li>
+</ul>
+<p>我首先尝试使用scp直接传输日志文件到本地，但是传输之后使用上述工具查看时显示：</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250630090521690.png?imageSlim"
+                     
+                >
+
+<blockquote>
+<p>唔， 我也不知道这是什么情况？可能是传输过程的问题？</p>
+</blockquote>
+<p>于是，我尝试直接在服务器上查看，但是碰到了另一个问题——轻量级的桌面似乎没有自带的浏览器？（我点击下方的浏览器，弹出的却是Terminal），于是有两个方法——</p>
+<ol>
+<li><p>在服务器端安装一个浏览器并查看：</p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">假设在6006端口</span></span><br><span class="line"></span><br><span class="line">sudo apt install chromium-browser</span><br><span class="line"></span><br><span class="line">chromium-browser http://localhost:6006</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p>使用之前提到过的SSH隧道的方法，将6006端口映射到本地：</p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 6006:localhost:6006 user@server</span><br></pre></td></tr></table></figure></div>
+
+<p>此时我们就可以在本地查看日志：<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250630091320160.png?imageSlim"
+                     
+                ></p>
+</li>
+</ol>
+<h3 id="常用的VNC-server命令"><a href="#常用的VNC-server命令" class="headerlink" title="常用的VNC server命令"></a>常用的VNC server命令</h3><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动对话，默认监听本地</span></span><br><span class="line">vncserver :1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动并监听所有IP（不安全）</span></span><br><span class="line">vncserver :1 -localhost no</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">停止VNC对话</span></span><br><span class="line">vncserver -kill :1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置密码</span></span><br><span class="line">vncpasswd</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看当前对话</span></span><br><span class="line">vncserver -list</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">结束当前所有对话</span></span><br><span class="line">pkill Xtigervnc</span><br></pre></td></tr></table></figure></div>
+
+
+
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
 <li><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44262492/article/details/128365248" >https://blog.csdn.net/weixin_44262492/article/details/128365248<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
 <li><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/yinjl123/article/details/136853195" >https://blog.csdn.net/yinjl123/article/details/136853195<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
 </ul>
-<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h3 id="常用的VNC-server命令"><a href="#常用的VNC-server命令" class="headerlink" title="常用的VNC server命令"></a>常用的VNC server命令</h3><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动对话，默认监听本地</span></span><br><span class="line">vncserver :1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动并监听所有IP（不安全）</span></span><br><span class="line">vncserver :1 -localhost no</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">停止VNC对话</span></span><br><span class="line">vncserver -kill :1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置密码</span></span><br><span class="line">vncpasswd</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看当前对话</span></span><br><span class="line">vncserver -list</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">结束当前所有对话</span></span><br><span class="line">pkill Xtigervnc</span><br></pre></td></tr></table></figure></div>
-
 
 		</div>
 
@@ -733,7 +778,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2025-06-28 20:35:02
+                    :</strong> 2025-07-02 11:55:49
             </li>
         
         <li>
@@ -759,11 +804,11 @@
 		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
 			
 			<li class="tag-item mx-0.5">
-				<a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">#服务器</a>&nbsp;
+				<a href="/tags/ssh/">#ssh</a>&nbsp;
 			</li>
 			
 			<li class="tag-item mx-0.5">
-				<a href="/tags/ssh/">#ssh</a>&nbsp;
+				<a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">#服务器</a>&nbsp;
 			</li>
 			
 		</ul>
@@ -895,7 +940,7 @@
 	<div class="post-toc">
 		<div class="toc-title">目录</div>
 		<div class="page-title">VNC与云服务器</div>
-		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">准备云服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83%E5%92%8CVNC%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-number">2.</span> <span class="nav-text">安装桌面环境和VNC服务端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85xfce4"><span class="nav-number">2.1.</span> <span class="nav-text">安装xfce4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85TigerVNC"><span class="nav-number">2.2.</span> <span class="nav-text">安装TigerVNC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEVNC-Server"><span class="nav-number">2.3.</span> <span class="nav-text">配置VNC Server</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8VNC%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">使用VNC客户端连接服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87SSH%E9%9A%A7%E9%81%93%E5%AE%89%E5%85%A8%E8%BF%9E%E6%8E%A5"><span class="nav-number">3.1.</span> <span class="nav-text">通过SSH隧道安全连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E5%BD%95"><span class="nav-number">5.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84VNC-server%E5%91%BD%E4%BB%A4"><span class="nav-number">5.1.</span> <span class="nav-text">常用的VNC server命令</span></a></li></ol></li></ol>
+		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">准备云服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83%E5%92%8CVNC%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-number">2.</span> <span class="nav-text">安装桌面环境和VNC服务端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85xfce4"><span class="nav-number">2.1.</span> <span class="nav-text">安装xfce4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85TigerVNC"><span class="nav-number">2.2.</span> <span class="nav-text">安装TigerVNC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEVNC-Server"><span class="nav-number">2.3.</span> <span class="nav-text">配置VNC Server</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8VNC%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">使用VNC客户端连接服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87SSH%E9%9A%A7%E9%81%93%E5%AE%89%E5%85%A8%E8%BF%9E%E6%8E%A5"><span class="nav-number">3.1.</span> <span class="nav-text">通过SSH隧道安全连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E5%BD%95"><span class="nav-number">4.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">4.1.</span> <span class="nav-text">可能遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9F%A5%E7%9C%8B%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">4.1.1.</span> <span class="nav-text">使用浏览器查看实验结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84VNC-server%E5%91%BD%E4%BB%A4"><span class="nav-number">4.2.</span> <span class="nav-text">常用的VNC server命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">4.3.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol>
 
 	</div>
 </div>
@@ -926,7 +971,7 @@
                     </span>
                     
                         <span>
-                            共 72.6k 字
+                            共 72.9k 字
                         </span>
                     
                 </p>
