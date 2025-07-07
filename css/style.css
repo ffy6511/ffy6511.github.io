@@ -439,6 +439,7 @@ button {
   }
 }
 .btn:hover {
+  transform: scaleX(1.06) scaleY(1.06);
   box-shadow: var(--redefine-box-shadow-hover);
 }
 .btn:hover,
@@ -2316,6 +2317,7 @@ html.is-animating .transition-navbar {
 .paginator span.page-number:hover,
 .paginator a.prev:hover,
 .paginator a.next:hover {
+  transform: scaleX(1.06) scaleY(1.06);
   box-shadow: var(--redefine-box-shadow-hover);
 }
 .paginator a.page-number:hover,
@@ -2374,6 +2376,7 @@ html.is-animating .transition-navbar {
   margin-bottom: 0;
 }
 .post-tools-container .article-tools-list li:hover {
+  transform: scaleX(1.06) scaleY(1.06);
   box-shadow: var(--redefine-box-shadow-hover);
 }
 .post-tools-container .article-tools-list li.page-aside-toggle {
@@ -4307,6 +4310,7 @@ html.is-animating .transition-fade-down {
   }
 }
 .home-content-container .home-article-list .home-article-item:hover {
+  transform: scaleX(1.015) scaleY(1.015);
   box-shadow: var(--redefine-box-shadow-hover);
 }
 @media (max-width: 768px) {

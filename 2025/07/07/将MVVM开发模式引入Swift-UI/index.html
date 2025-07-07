@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="ffy">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+            <link rel="preconnect" href="https://evan.beee.top" crossorigin>
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2025/07/07/将mvvm开发模式引入swift-ui/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="将MVVM开发模式引入Swift-UI">
+<meta property="og:url" content="http://example.com/2025/07/07/%E5%B0%86MVVM%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F%E5%BC%95%E5%85%A5Swift-UI/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/redefine-og.webp">
+<meta property="article:published_time" content="2025-07-07T03:07:39.000Z">
+<meta property="article:modified_time" content="2025-07-07T03:29:50.075Z">
+<meta property="article:author" content="ffy">
+<meta property="article:tag" content="swift">
+<meta property="article:tag" content="编程语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/redefine-og.webp">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/img/avatar.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/avatar.svg">
+    <meta name="theme-color" content="#f0ad7c">
+    <link rel="shortcut icon" href="/img/avatar.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            将MVVM开发模式引入Swift-UI | ffyの四次元口袋
+        
+    </title>
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+        
+            
+    
+            
+    
+            
+                
+                    <link rel="stylesheet" href="/css/custom.css">
+                
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/css/build/tailwind.css">
+    
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/fonts/GeistMono/geist-mono.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/fonts/Geist/geist.css">
+    <!--- Font Part-->
+    
+    
+        <link href="/fonts/custom-fonts.css" rel="stylesheet">
+    
+    
+        <link href="/fonts/custom-fonts.css" rel="stylesheet">
+    
+    
+        <link href="/fonts/custom-fonts.css" rel="stylesheet">
+    
+    
+        <link href="/fonts/custom-fonts.css" rel="stylesheet">
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":true,"family":"mono, monospace","url":"/fonts/custom-fonts.css"}},"toc":{"enable":true,"max_depth":4,"number":true,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":true,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#f0ad7c","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":"WenKai, sans-serif","url":"/fonts/custom-fonts.css"},"english":{"enable":true,"family":"mono, sans-serif","url":"/fonts/custom-fonts.css"},"title":{"enable":true,"family":"WenKai, sans-serif","url":"/fonts/custom-fonts.css"}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":true},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefinedsun.png?imageSlim","dark":"https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefineddark.png?imageSlim"},"title":"随机掉落生活碎片和学习记录~","subtitle":{"text":["This is the first message"],"hitokoto":{"enable":true,"show_author":false,"api":"https://v1.hitokoto.cn?c=a&c=d&c=k"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/ffy6511","instagram":null,"zhihu":null,"twitter":null,"email":"1253876012z@gmail.com"},"qrs":{"weixin":"https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefinedvx.JPG?imageSlim"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":true,"type":"fixed","audios":[{"name":"Styx Helix","artist":"MYTH&ROID","url":"/music/styx helix.mp3","cover":"https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250706102548232.png?imageSlim","lrc":"/LRC/styx helix-lrc.lrcx"},{"name":"Flower Dance","artist":"DJ Okawari","url":"/music/Flower Dance.mp3","cover":"https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250706103321696.png?imageSlim# audio cover url","lrc":"/LRC/flower dance-lrc.lrcx"}]},"mermaid":{"enable":true,"version":"11.4.1"}},"version":"2.8.4","navbar":{"auto_hide":true,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"},"Friends":{"path":"/links","icon":"fa-regular fa-heart"},"导航":{"icon":"fa-regular fa-compass","submenus":{"chatSQL":"https://chat-sql-hazel.vercel.app/"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"info","announcement":"在此分享个人的（补天）笔记、摸索技术中的经验心得，同时也会不时掉落一些随笔！欢迎交流与讨论～","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","excerpt_length":130,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2025/5/8 19:11:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                ffyの四次元口袋
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/tags"
+                                        >
+                                    <i class="fa-regular fa-tags fa-fw"></i>
+                                    标签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/categories"
+                                        >
+                                    <i class="fa-regular fa-folder fa-fw"></i>
+                                    分类
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/links"
+                                        >
+                                    <i class="fa-regular fa-heart fa-fw"></i>
+                                    友情链接
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-compass fa-fw"></i>
+                                    导航
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://chat-sql-hazel.vercel.app/">
+                                                    CHATSQL
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/tags"
+                        >
+                            <span>
+                                标签
+                            </span>
+                            
+                                <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/categories"
+                        >
+                            <span>
+                                分类
+                            </span>
+                            
+                                <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/links"
+                        >
+                            <span>
+                                友情链接
+                            </span>
+                            
+                                <i class="fa-regular fa-heart fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-导航"
+                        >
+                            <span>
+                                导航
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-导航">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://chat-sql-hazel.vercel.app/">CHATSQL</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    
+                    
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">26</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">6</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">25</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			
+			
+			<img src="https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250707112933696.png?imageSlim" alt="将MVVM开发模式引入Swift-UI" class="w-full h-60 sm:h-72 md:h-80 object-cover sm:rounded-t-large dark:brightness-75" />
+			
+			<div class="w-full flex items-center absolute bottom-0 justify-start">
+				<h1 class="article-title-cover text-center mx-6 my-6 text-second-text-color bg-background-color-transparent px-4 py-3 text-3xl sm:text-4xl md:text-5xl font-semibold backdrop-blur-lg rounded-xl border border-border-color ">将MVVM开发模式引入Swift-UI</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="/img/avatar.svg">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">ffy</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv3</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-07-07 11:07:39</span>
+        <span class="mobile">2025-07-07 11:07:39</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-07-07 11:29:50</span>
+            <span class="mobile">2025-07-07 11:29:50</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95/">开发记录</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/swift/">swift</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>3.9k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>15 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<p><strong>引言</strong></p>
+<p>最近在以赛促学地使用swift语言开发一款ios端的应用。汲取了web端开发的一些经验和教训，开发的初期我意识到了类似于全局设置的“CSS”变量的重要性，以及框架结构的重要性。本篇文章将以开发过程中的“古琴设计”这一模块为例，介绍Swift UI中的MVVM开发模式的实践</p>
+<h3 id="MVVM-模式"><a href="#MVVM-模式" class="headerlink" title="MVVM 模式"></a>MVVM 模式</h3><h4 id="什么是MVVM"><a href="#什么是MVVM" class="headerlink" title="什么是MVVM"></a>什么是MVVM</h4><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250706195118887.png?imageSlim"
+                     
+                >
+
+<blockquote>
+<p>from 维基百科.</p>
+</blockquote>
+<p><strong>MVVM</strong>, i.e. Model–view–viewmodel 是一种软件架构模式, 将图形界面与业务逻辑的开发相分离:</p>
+<ul>
+<li>Model 模型: 数据和业务逻辑层, 包含对象基本的属性;</li>
+<li>view 视图: 用户界面层，负责展示内容，比如 SwiftUI 的各种界面组件;</li>
+<li>viewModel 视图模型: 连接 Model 和 View 的桥梁，负责处理数据、业务逻辑，并将数据以适合 View 展示的方式提供给 View</li>
+</ul>
+<p>因此, MVVM框架的核心思想是<strong>Model 负责定义底层数据, viewModel负责数据处理, view负责元素的显示</strong></p>
+<p>Swift UI中数据绑定的功能, 比如如 <code>@State</code>, <code>@ObservedObject</code>, <code>@StateObject</code>, <code>@EnvironmentObject</code>, 使得不同模块之间的通信变得十分容易, 从而方便在Swift UI框架下实现MVVM风格的开发.</p>
+<p>e.g.</p>
+<div class="code-container" data-rel="Swift"><figure class="iseeu highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">ContentView</span>: <span class="title class_ inherited__">View</span> &#123;</span><br><span class="line">    <span class="meta">@StateObject</span> <span class="keyword">var</span> viewModel <span class="operator">=</span> <span class="type">ContentViewModel</span>()</span><br><span class="line">    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">Text</span>(viewModel.title)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ContentViewModel</span>: <span class="title class_ inherited__">ObservableObject</span> &#123;</span><br><span class="line">    <span class="meta">@Published</span> <span class="keyword">var</span> title <span class="operator">=</span> <span class="string">&quot;Hello, MVVM!&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h4 id="MVVM的好处"><a href="#MVVM的好处" class="headerlink" title="MVVM的好处"></a>MVVM的好处</h4><p>作为一种分层架构模式, 它使得在Swfit UI框架下的开发更加接近web端开发的<strong>前后端分离</strong>. 一方面，通过MVVM将界面显示和数据更新的操作解耦，便于维护和测试；另一方面，Swfit语法的特性使得视图很容易自动响应视图模型的数据变化，界面和数据同步比React中更加简单</p>
+<h3 id="从一个开发需求实践MVVM"><a href="#从一个开发需求实践MVVM" class="headerlink" title="从一个开发需求实践MVVM"></a>从一个开发需求实践MVVM</h3><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250706200519943.png?imageSlim"
+                     
+                >
+
+<p>假设我们的开发目标如图所示——古琴的设计分为琴身和琴弦两大整体：</p>
+<ul>
+<li>琴身内部的样式细分为形制、材质、铭文；</li>
+<li>琴弦内部的样式细分为弦数、材质和音准</li>
+</ul>
+<p>在交互方面，我们希望用户可以专注于选择其中一个古琴特征进行配置，并且可以保存当前的全局配置</p>
+<hr>
+<h4 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h4><p>从上述的描述中，我们可以分析得到对应的数据模型，比如可以直接为固定的形制类型设计一个枚举及其内部对应的计算属性:</p>
+<div class="code-container" data-rel="Swift"><figure class="iseeu highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">GuqinShape</span>: <span class="title class_ inherited__">String</span>, <span class="title class_ inherited__">CaseIterable</span>, <span class="title class_ inherited__">Identifiable</span>, <span class="title class_ inherited__">Codable</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> fuxi <span class="operator">=</span> <span class="string">&quot;伏羲式&quot;</span></span><br><span class="line">    <span class="keyword">case</span> hundun <span class="operator">=</span> <span class="string">&quot;混沌式&quot;</span></span><br><span class="line">    <span class="keyword">case</span> zhenghe <span class="operator">=</span> <span class="string">&quot;正和式&quot;</span></span><br><span class="line">    <span class="keyword">case</span> zhongni <span class="operator">=</span> <span class="string">&quot;仲尼式&quot;</span></span><br><span class="line">    <span class="keyword">case</span> liezi <span class="operator">=</span> <span class="string">&quot;列子式&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> id: <span class="type">String</span> &#123; <span class="keyword">self</span>.rawValue &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// 形制图片名称</span></span><br><span class="line">    <span class="keyword">var</span> imageName: <span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> <span class="keyword">self</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> .fuxi:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;guqin_fuxi&quot;</span></span><br><span class="line">        <span class="operator">...</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>Codable 使得设计配置可以方便地以JSON格式加密和解密或者存储</p>
+</blockquote>
+<p>分别为古琴的特征设计在model层面的数据模型之后，从视图的角度出发，我们需要根据用户选择的特征来显示对应的选项内容，因此需要额外定义类别的枚举：</p>
+<div class="code-container" data-rel="Swift"><figure class="iseeu highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">CustomizationCategory</span>: <span class="title class_ inherited__">String</span>, <span class="title class_ inherited__">CaseIterable</span>, <span class="title class_ inherited__">Identifiable</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> shape <span class="operator">=</span> <span class="string">&quot;形制&quot;</span></span><br><span class="line">    <span class="keyword">case</span> material <span class="operator">=</span> <span class="string">&quot;材质&quot;</span></span><br><span class="line">    <span class="keyword">case</span> inscription <span class="operator">=</span> <span class="string">&quot;铭文&quot;</span></span><br><span class="line">    <span class="keyword">case</span> stringsCount <span class="operator">=</span> <span class="string">&quot;弦数&quot;</span></span><br><span class="line">    <span class="keyword">case</span> stringsMaterial <span class="operator">=</span> <span class="string">&quot;弦材质&quot;</span></span><br><span class="line">    <span class="keyword">case</span> tuning <span class="operator">=</span> <span class="string">&quot;音准&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> id: <span class="type">String</span> &#123; <span class="keyword">self</span>.rawValue &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>为了存储配置，以及显示当前的配置信息等要求，我们定义一个当前配置的结构体：</p>
+<div class="code-container" data-rel="Swift"><figure class="iseeu highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">GuqinConfiguration</span>: <span class="title class_ inherited__">Codable</span>, <span class="title class_ inherited__">Equatable</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> shape: <span class="type">GuqinShape</span></span><br><span class="line">    <span class="keyword">var</span> material: <span class="type">GuqinMaterialType</span></span><br><span class="line">    <span class="keyword">var</span> inscription: <span class="type">GuqinInscription</span></span><br><span class="line">    <span class="keyword">var</span> stringsCount: <span class="type">GuqinStringsCount</span></span><br><span class="line">    <span class="keyword">var</span> stringsMaterial: <span class="type">GuqinStringsMaterial</span></span><br><span class="line">    <span class="keyword">var</span> tuning: <span class="type">GuqinTuning</span>   </span><br><span class="line"></span><br><span class="line">    <span class="comment">/// 默认配置</span></span><br><span class="line">    <span class="comment">// 使用 &#x27; 避免成为关键字处理</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> `default` <span class="operator">=</span> <span class="type">GuqinConfiguration</span>(</span><br><span class="line">        shape: .fuxi,</span><br><span class="line">        material: .blackLacquer,</span><br><span class="line">        inscription: .default,</span><br><span class="line">        stringsCount: .sevenStrings,</span><br><span class="line">        stringsMaterial: .nylon,</span><br><span class="line">        tuning: .defaultSevenStrings,</span><br><span class="line">        isShowingBack: <span class="literal">false</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// 配置名称（用于保存和显示）</span></span><br><span class="line">    <span class="keyword">var</span> displayName: <span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;<span class="subst">\(shape.rawValue)</span> · <span class="subst">\(material.rawValue)</span> · <span class="subst">\(stringsCount.rawValue)</span>&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// 根据弦数更新音准设置</span></span><br><span class="line">    <span class="keyword">mutating</span> <span class="keyword">func</span> <span class="title function_">updateTuningForStringsCount</span>() &#123;</span><br><span class="line">        tuning <span class="operator">=</span> <span class="type">GuqinTuning</span>.defaultTuning(for: stringsCount)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p><code>mutating</code>用于声明该方法可以改写结构体或者枚举的属性，因为出于数据安全的角度考虑， swift默认禁止值类型修改自身的属性</p>
+</blockquote>
+<p><strong>总结</strong>：模型层是纯粹的数据和业务规则的定义，它不关心 UI 如何展示这些数据，也不直接处理用户交互</p>
+<h4 id="viewmodel"><a href="#viewmodel" class="headerlink" title="viewmodel"></a>viewmodel</h4><p>视图模型是数据与逻辑的桥梁，让 UI 能够响应用户的操作并展示最新的数据</p>
+<p>在 SwiftUI 中，视图模型通常是一个遵循 <code>ObservableObject</code> 协议的 <code>class</code>，并通过 <code>@Published</code> 属性发布其状态变化</p>
+<div class="code-container" data-rel="Swift"><figure class="iseeu highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MARK: - Published Properties</span></span><br><span class="line">    <span class="meta">@Published</span> <span class="keyword">var</span> currentConfiguration: <span class="type">GuqinConfiguration</span> <span class="operator">=</span> .default</span><br><span class="line">    <span class="meta">@Published</span> <span class="keyword">var</span> selectedCategory: <span class="type">CustomizationCategory</span> <span class="operator">=</span> .shape</span><br><span class="line">    <span class="meta">@Published</span> <span class="keyword">var</span> isPreviewMode: <span class="type">Bool</span> <span class="operator">=</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>状态管理</strong>：</p>
+<ul>
+<li><code>@Published var currentConfiguration: GuqinConfiguration</code>：这是视图模型的核心。它持有 <code>GuqinConfiguration</code> 的实例，代表了用户当前定制古琴的实时状态。当 <code>currentConfiguration</code> 的任何属性发生变化时，由于 <code>@Published</code> 的存在，所有观察它的视图都会自动刷新，从而实现 UI 的响应式更新</li>
+<li><code>@Published var selectedCategory: CustomizationCategory</code>：管理用户当前选择的定制类别（如形制、材质），这直接影响到 UI 中显示哪些具体的定制选项</li>
+</ul>
+<p><strong>业务逻辑与方法</strong>：我们在视图模型中定义一系列的公共方法，类似于oop中的方法，供其他对象调用（在这里是高层的视图）</p>
+<ul>
+<li><p><code>selectShape(_ shape: GuqinShape)</code>、<code>selectMaterial(_ material: GuqinMaterialType)</code> 等方法是视图模型<strong>暴露给视图的公共接口</strong>。当用户在 UI 中选择一个形制或材质时，视图会调用 <code>viewModel</code> 中对应的方法。这些方法负责更新<br><code>currentConfiguration</code>，并可能包含额外的<strong>业务逻辑</strong>（如触觉反馈、动画触发）。</p>
+<div class="code-container" data-rel="Swift"><figure class="iseeu highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> <span class="title function_">selectMaterial</span>(<span class="keyword">_</span> <span class="params">material</span>: <span class="type">GuqinMaterialType</span>) &#123;</span><br><span class="line">        withAnimation(.easeInOut(duration: <span class="number">0.3</span>)) &#123;</span><br><span class="line">            currentConfiguration.material <span class="operator">=</span> material</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 触觉反馈</span></span><br><span class="line">        <span class="keyword">let</span> impactFeedback <span class="operator">=</span> <span class="type">UIImpactFeedbackGenerator</span>(style: .medium)</span><br><span class="line">        impactFeedback.impactOccurred()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p><code>withAnimation</code> 作为动画包裹器，接受一个动画参数和闭包作为输入，为闭包内部相关的UI变化自动赋予动画效果</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>数据转换（计算属性）</strong>：通过使用计算属性，比如上述model的琴身形制中的 <code>imageName</code>返回在assests中的实际图片名称，此时在view中定义的方法很简单：</p>
+<div class="code-container" data-rel="Swift"><figure class="iseeu highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> currentShapeImageName: <span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> currentConfiguration.shape.imageName</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>如果我们希望在view中使用默认的SF符号，可以在view中定义计算属性：</p>
+<div class="code-container" data-rel="Swift"><figure class="iseeu highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> systemIconName: <span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> category &#123;</span><br><span class="line">        <span class="keyword">case</span> .shape:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;rectangle.3.group&quot;</span></span><br><span class="line">        <span class="keyword">case</span> .material:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;paintbrush.fill&quot;</span></span><br><span class="line">        <span class="keyword">case</span> .inscription:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;text.word.spacing&quot;</span></span><br><span class="line">        <span class="keyword">case</span> .stringsCount:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;waveform&quot;</span></span><br><span class="line">        <span class="keyword">case</span> .stringsMaterial:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;fiberchannel&quot;</span></span><br><span class="line">        <span class="keyword">case</span> .tuning:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;tuningfork&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>然后可以直接在当前结构体（view本身也是结构体）中调用：</p>
+<div class="code-container" data-rel="Swift"><figure class="iseeu highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Image</span>(systemName: systemIconName)</span><br><span class="line">  .foregroundColor(isSelected <span class="operator">?</span> .accentColor : .secondary)</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li><code>currentShapeImageName</code>、<code>currentMaterialTextureImageName</code> 等计算属性：这些属性将 <code>currentConfiguration</code> 中的原始模型数据（如枚举值）转换为视图可以直接使用的格式（如图片名称字符串、<code>Color</code> 类型），避免视图直接处理复杂的模型逻辑，保持视图的简洁性</li>
+</ul>
+<p>为了判断某个选择项是否被选中，比如下方“伏羲式”是选中的，需要处理额外的视觉、触觉处理：</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250706220413622.png?imageSlim"
+                     
+                >
+
+<p>我们可以使用泛型的思想定义一个函数：</p>
+<div class="code-container" data-rel="Swift"><figure class="iseeu highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> <span class="title function_">isSelected</span>&lt;<span class="type">T</span>: <span class="type">Equatable</span>&gt;(<span class="keyword">_</span> <span class="params">option</span>: <span class="type">T</span>, <span class="params">in</span> <span class="params">category</span>: <span class="type">CustomizationCategory</span>) -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> category &#123;</span><br><span class="line">    <span class="keyword">case</span> .shape:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> shape <span class="operator">=</span> option <span class="keyword">as?</span> <span class="type">GuqinShape</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> currentConfiguration.shape <span class="operator">==</span> shape <span class="comment">// 如果输入的参数类型正确，与当前的配置比较</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="operator">...</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>以shape为例，首先尝试将输入的泛型参数option转换为形制的类型；</p>
+<p><code>as</code>是条件类型转换运算符：如果转换成功，返回转换之后的值；否则返回 <code>nil</code></p>
+<p>此处配置中的shape同样是一个枚举 <code>GuqinShape</code>，枚举值就是具体的形制名称 。所以上述的比较就是</p>
+</blockquote>
+<p>我们也可以使用泛型约束的方式来改写上述检查：</p>
+<div class="code-container" data-rel="Swift"><figure class="iseeu highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> <span class="title function_">isSelected</span>&lt;<span class="type">T</span>: <span class="type">Equatable</span>&gt;(<span class="keyword">_</span> <span class="params">option</span>: <span class="type">T</span>, <span class="params">in</span> <span class="params">category</span>: <span class="type">CustomizationCategory</span>) -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> category &#123;</span><br><span class="line">    <span class="keyword">case</span> .shape:</span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> shape <span class="operator">=</span> option <span class="keyword">as?</span> <span class="type">GuqinShape</span> <span class="keyword">else</span> &#123;<span class="keyword">return</span> <span class="literal">false</span>&#125;</span><br><span class="line">      	<span class="keyword">return</span> currentConfiguration.shape <span class="operator">==</span> shape</span><br><span class="line">    <span class="operator">...</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>总结</strong>：视图模型是应用逻辑的核心。它从模型中获取数据，处理用户交互，更新模型状态，并通过 <code>@Published</code> 属性将最新的状态通知给视图。它充当了模型和视图之间“翻译官”和“协调者”。</p>
+<hr>
+<h4 id="view"><a href="#view" class="headerlink" title="view"></a>view</h4><p>视图层是用户直接看到和交互的部分。在 SwiftUI 中，视图是轻量级的 <code>struct</code>，它们声明式地描述了 UI 的外观，并响应视图模型发布的状态变化:</p>
+<ul>
+<li><p><strong>主视图 (<code>GuqinCustomizationView.swift</code>)</strong>：</p>
+<ul>
+<li><p><strong>职责</strong>：作为古琴定制功能的主入口和布局容器, 不直接处理复杂的业务逻辑，而是将这些职责委托给视图模型和子视图。</p>
+</li>
+<li><p><strong>状态绑定</strong>：通过 <code>@StateObject private var viewModel = GuqinCustomizationViewModel()</code> 实例化并持有视图模型。<code>@StateObject</code> 确保了视图模型在视图生命周期内只被创建一次，并且其 <code>@Published</code> 属性的变化能够驱动视图的刷新。</p>
+<div class="code-container" data-rel="Swift"><figure class="iseeu highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@StateObject</span> <span class="keyword">private</span> <span class="keyword">var</span> viewModel <span class="operator">=</span> <span class="type">GuqinCustomizationViewModel</span>()</span><br></pre></td></tr></table></figure></div></li>
+<li><p><strong>UI 结构</strong>：它将整个界面划分为几个主要区域：</p>
+<ul>
+<li><code>centerPreviewArea</code>：用于显示古琴的实时预览;</li>
+<li><code>categoryScrollView</code>：横向滚动的类别选择器;</li>
+<li><code>CustomizationOptionSelector</code>：底部的定制选项面板;</li>
+</ul>
+</li>
+<li><p><strong>交互委托</strong>：视图中的按钮（如切换预览模式、重置）直接调用 <code>viewModel</code> 中对应的方法，将用户操作传递给视图模型处理。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>组件（Components）——可重用的 UI 模块</strong>：</p>
+<ul>
+<li><strong>职责</strong>：这些是更小、更专注的 UI 单元，它们封装了特定的 UI 元素和行为，提高了代码的复用性。</li>
+<li><strong><code>GuqinPreviewView</code></strong>：<ul>
+<li><strong>职责</strong>：专门负责古琴的视觉渲染。它接收来自 <code>GuqinCustomizationViewModel</code> 的各种参数（如 <code>shapeImageName</code>、<code>materialTextureImageName</code>、<code>stringsImageName</code>、<code>inscription</code> 等），并利用 <code>ZStack</code>、<code>Image</code>、<code>mask</code>、<code>blendMode</code> 等 SwiftUI 修饰符，将这些图像层叠加组合，最终呈现出定制后的古琴</li>
+<li><strong>状态传递</strong>：它通过属性接收数据，而不是直接观察视图模型，这使得它成为一个“哑视图”（<strong>Dumb View</strong>），只负责展示.</li>
+</ul>
+</li>
+<li><strong><code>OptionThumbnailButton</code></strong>：<ul>
+<li><strong>职责</strong>：通用的选项缩略图按钮。</li>
+<li><strong>状态传递</strong>：接收 <code>thumbnailImage</code>、<code>title</code> 和 <code>isSelected</code> 等参数。<code>isSelected</code> 参数决定了按钮的视觉状态（如边框颜色、缩放效果），这个值通常来自视图模型。</li>
+<li><strong>交互</strong>：通过 <code>action</code> 闭包将点击事件回调给父视图（通常是 <code>CustomizationOptionSelector</code>），再由父视图调用视图模型的方法。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>子视图中, 如果需要观察对应的视图模型, i.e. :</p>
+<div class="code-container" data-rel="Swift"><figure class="iseeu highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">CustomizationOptionSelector</span>: <span class="title class_ inherited__">View</span> &#123;</span><br><span class="line">    <span class="meta">@ObservedObject</span> <span class="keyword">var</span> viewModel: <span class="type">GuqinCustomizationViewModel</span></span><br><span class="line">  </span><br><span class="line">    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">VStack</span>(spacing: <span class="number">12</span>) &#123;   </span><br><span class="line">            <span class="comment">// 选项滚动视图</span></span><br><span class="line">            <span class="type">ScrollView</span>(.horizontal, showsIndicators: <span class="literal">false</span>) &#123;</span><br><span class="line">                <span class="type">HStack</span>(spacing: <span class="number">16</span>) &#123;</span><br><span class="line">                    <span class="keyword">switch</span> viewModel.selectedCategory &#123;</span><br><span class="line">                    <span class="keyword">case</span> .shape:</span><br><span class="line">                        <span class="type">ForEach</span>(<span class="type">GuqinShape</span>.allCases) &#123; shape <span class="keyword">in</span></span><br><span class="line">                          <span class="operator">...</span></span><br><span class="line">                        &#125;</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>使用视图模型中存储的“当前选中类别”的信息, 选择显示对应的选项滚动视图</p>
+</blockquote>
+<p>此时, 由于我们已经在外层的视图创建并管理了一个视图模型的实例, 只需要将这个实例作为参数输入给子视图:</p>
+<div class="code-container" data-rel="Swift"><figure class="iseeu highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">GuqinCustomizationView</span>: <span class="title class_ inherited__">View</span> &#123;</span><br><span class="line">    <span class="meta">@StateObject</span> <span class="keyword">private</span> <span class="keyword">var</span> viewModel <span class="operator">=</span> <span class="type">GuqinCustomizationViewModel</span>()</span><br><span class="line">    <span class="meta">@Environment</span>(\.dismiss) <span class="keyword">private</span> <span class="keyword">var</span> dismiss</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">NavigationView</span> &#123;</span><br><span class="line">            <span class="type">GeometryReader</span> &#123; geometry <span class="keyword">in</span></span><br><span class="line">                <span class="type">VStack</span>(spacing: <span class="number">0</span>) &#123;</span><br><span class="line">                   <span class="operator">...</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 底部选择面板</span></span><br><span class="line">                    <span class="type">CustomizationOptionSelector</span>(viewModel: viewModel)</span><br><span class="line">                        .frame(height: <span class="number">140</span>)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="operator">...</span></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li><strong>节（Sections)</strong> : 用于组织复杂视图<ul>
+<li><strong>职责</strong>：将一个大视图分解成逻辑上独立的、可重用的“节”。每个节可以有自己的视图模型或直接观察父视图模型的一部分</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="状态变量的使用"><a href="#状态变量的使用" class="headerlink" title="状态变量的使用"></a>状态变量的使用</h3><p>我们之前提到过, Swift UI之所以适合使用MVVM模式, 是因为内置的一系列状态变量的优势. 此处补充总结几个状态变量的用途和示例:</p>
+<ul>
+<li><p><strong><code>@State</code></strong>：</p>
+<ul>
+<li><strong>用途</strong>：用于管理视图内部的、简单的、私有的状态。当 <code>@State</code> 变量的值改变时，SwiftUI 会自动重新渲染使用该变量的视图。</li>
+<li><strong>示例</strong>：在 <code>InscriptionEditor</code> 中，<code>@State private var inscriptionText: String</code> 和 <code>@State private var fontSize: CGFloat</code> 就是典型的 <code>@State</code> 变量，它们管理着铭文编辑器的临时输入和字体大小。这些状态只在 <code>InscriptionEditor</code> 内部有意义，当它们需要影响到全局的古琴配置时，会通过调用 <code>viewModel.updateInscription()</code> 来更新 <code>viewModel</code> 中的 <code>currentConfiguration</code>。</li>
+</ul>
+</li>
+<li><p><strong><code>@StateObject</code></strong>：</p>
+<ul>
+<li><strong>用途</strong>：用于在视图的生命周期内创建并持有 <code>ObservableObject</code> 的实例。当视图首次出现时，<code>@StateObject</code> 会创建并初始化一个视图模型实例，并在视图的整个生命周期中保持这个实例。</li>
+<li><strong>示例</strong>：在 <code>GuqinCustomizationView</code> 中，<code>@StateObject private var viewModel = GuqinCustomizationViewModel()</code> 就是这样使用的。它确保了 <code>GuqinCustomizationViewModel</code> 在 <code>GuqinCustomizationView</code> 存在期间唯一，并且其 <code>@Published</code> 属性的变化能够驱动 <code>GuqinCustomizationView</code> 及其子视图的刷新;</li>
+</ul>
+</li>
+<li><p><strong><code>@ObservedObject</code></strong>：</p>
+<ul>
+<li><strong>用途</strong>：用于在<strong>子视图中观察</strong>父视图或其他来源传递过来的 <code>ObservableObject</code> 实例。它不负责创建实例，只负责观察。</li>
+</ul>
+</li>
+<li><p><strong><code>@Binding</code></strong>：</p>
+<ul>
+<li><p><strong>用途</strong>：用于在父视图和子视图之间创建双向绑定。子视图可以读取和修改绑定值，而这些修改会反映到父视图的原始数据源上。</p>
+</li>
+<li><p><strong>示例</strong>：在 <code>TuningEditor</code> 中，<code>Slider</code> 的 <code>value</code> 参数使用了 <code>Binding</code>：</p>
+<div class="code-container" data-rel="Swift"><figure class="iseeu highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Slider</span>(</span><br><span class="line">    value: <span class="type">Binding</span>(</span><br><span class="line">        get: &#123; viewModel.currentConfiguration.tuning.stringTunings[index] &#125;,</span><br><span class="line">        set: &#123; newValue <span class="keyword">in</span></span><br><span class="line">            <span class="keyword">var</span> tuning <span class="operator">=</span> viewModel.currentConfiguration.tuning</span><br><span class="line">            tuning.stringTunings[index] <span class="operator">=</span> newValue</span><br><span class="line">            viewModel.updateTuning(tuning)</span><br><span class="line">        &#125;</span><br><span class="line">    ),</span><br><span class="line">    in: <span class="number">0.0</span><span class="operator">...</span><span class="number">1.0</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
+
+<p>这里创建了一个临时的 <code>Binding</code>，它从 <code>viewModel.currentConfiguration.tuning.stringTunings[index]</code> 获取值，并在值改变时调用 <code>viewModel.updateTuning()</code> 来更新视图模型中的数据。</p>
+</li>
+</ul>
+</li>
+</ul>
+ 
+  <div class="note p-4 mb-4 rounded-small info">
+    <p><code>Binding</code>通常用于修改父视图的部分属性, 不会持有或者管理数据, 只是引用父视图的数据 </p>
+
+  </div>
+
+<ul>
+<li><strong><code>@Environment</code></strong>：<ul>
+<li><strong>用途</strong>：用于访问 SwiftUI 环境中提供的共享数据，如 <code>\.dismiss</code>（用于关闭视图）、<code>\.colorScheme</code> 等。</li>
+</ul>
+</li>
+</ul>
+<p>如果希望避免视图模型实例的层层嵌套的传递, 我们可以在创建和管理该实例的view中将其作为环境对象注入到子视图中:</p>
+<div class="code-container" data-rel="Swift"><figure class="iseeu highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">GuqinCustomizationView</span>: <span class="title class_ inherited__">View</span> &#123;</span><br><span class="line">    <span class="meta">@StateObject</span> <span class="keyword">private</span> <span class="keyword">var</span> viewModel <span class="operator">=</span> <span class="type">GuqinCustomizationViewModel</span>() <span class="comment">// 保持不变, 创建和管理实例</span></span><br><span class="line">    <span class="meta">@Environment</span>(\.dismiss) <span class="keyword">private</span> <span class="keyword">var</span> dismiss</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">NavigationView</span> &#123;</span><br><span class="line">            <span class="type">GeometryReader</span> &#123; geometry <span class="keyword">in</span></span><br><span class="line">                <span class="type">VStack</span>(spacing: <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="comment">// 古琴预览区域</span></span><br><span class="line">                    centerPreviewArea</span><br><span class="line">                        .frame(maxHeight: .infinity)</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 类别选择滚动条</span></span><br><span class="line">                    categoryScrollView</span><br><span class="line">                        .frame(height: <span class="number">80</span>)</span><br><span class="line">                        .padding(.vertical, <span class="number">8</span>)</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 底部选择面板</span></span><br><span class="line">                    <span class="type">CustomizationOptionSelector</span> <span class="comment">// 不再需要显示给出参数</span></span><br><span class="line">                        .frame(height: <span class="number">140</span>)</span><br><span class="line">                &#125;</span><br><span class="line">                .environmentObject(viewModel) <span class="comment">// 注入环境对象, 供子视图直接访问</span></span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>对应的, 我们在需要访问该视图模型的子视图中声明观察:</p>
+<div class="code-container" data-rel="Swift"><figure class="iseeu highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">CustomizationOptionSelector</span>: <span class="title class_ inherited__">View</span> &#123;</span><br><span class="line">    <span class="meta">@EnvironmentObject</span> <span class="keyword">var</span> viewModel: <span class="type">GuqinCustomizationViewModel</span> <span class="comment">// &lt;-- 更改为 @EnvironmentObject</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="comment">// ... existing code ...</span></span><br><span class="line">        <span class="comment">// 内部使用 viewModel 的方式不变</span></span><br><span class="line">        <span class="keyword">switch</span> viewModel.selectedCategory &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="keyword">case</span> .inscription:</span><br><span class="line">            <span class="comment">// 传递给 InscriptionEditor 也不再需要显式参数</span></span><br><span class="line">            <span class="type">InscriptionEditor</span>() <span class="comment">// &lt;-- 不再需要 viewModel: viewModel</span></span><br><span class="line">        <span class="keyword">case</span> .tuning:</span><br><span class="line">            <span class="comment">// 传递给 TuningEditor 也不再需要显式参数</span></span><br><span class="line">            <span class="type">TuningEditor</span>() <span class="comment">// &lt;-- 不再需要 viewModel: viewModel</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// ... existing code ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+  <div class="note p-4 mb-4 rounded-small success">
+    <p>只需要在顶层视图注入一次, 由此避免了繁琐的参数传递 </p>
+
+  </div>
+
+<hr>
+<h3 id="数据流与事件流"><a href="#数据流与事件流" class="headerlink" title="数据流与事件流"></a>数据流与事件流</h3><p>现在，让我们把所有模块串联起来，看看它们是如何协同工作的：</p>
+<p><strong>数据流向</strong>：</p>
+<ul>
+<li><strong>自上而下（数据流）</strong>：<code>ViewModel</code> 发布状态变化 (<code>@Published</code>) -&gt; <code>View</code> 观察 (<code>@StateObject</code>&#x2F;<code>@ObservedObject</code>) -&gt; <code>View</code> 刷新 UI，并将数据传递给子视图（通过属性或 <code>@Binding</code>）。</li>
+<li><strong>自下而上（事件流）</strong>：用户在 <code>View</code> 中交互 -&gt; <code>View</code> 调用 <code>ViewModel</code> 的方法 -&gt; <code>ViewModel</code> 更新 <code>Model</code> 状态 -&gt; <code>ViewModel</code> 发布状态变化，循环开始。</li>
+</ul>
+<p>这种模式使得代码高度解耦，每个模块只关注自己的职责</p>
+<hr>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>通过古琴定制这个例子，我们深入探讨了 SwiftUI 中推荐的 MVVM 开发逻辑。我们看到了模型如何定义数据，视图模型如何管理状态和业务逻辑，以及视图如何声明式地呈现 UI 并响应状态变化。同时，我们也理解了 <code>@StateObject</code>、<code>@ObservedObject</code>、<code>@State</code> 和 <code>@Binding</code> 等状态变量在其中扮演的关键角色。</p>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> 将MVVM开发模式引入Swift-UI</li>
+        <li><strong>作者:</strong> ffy</li>
+        <li><strong>创建于
+                :</strong> 2025-07-07 11:07:39</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2025-07-07 11:29:50
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://ffy6511.github.io/2025/07/07/将MVVM开发模式引入Swift-UI/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/swift/">#swift</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">#编程语言</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+  <div class="recommended-article px-2 sm:px-6 md:px-8">
+   <div class="recommended-desktop">
+    <div class="recommended-article-header text-xl md:text-3xl font-bold mt-10">
+     <i aria-hidden="true"></i><span>推荐阅读</span>
+    </div>
+    <div class="recommended-article-group"><a class="recommended-article-item" href="/2025/04/17/编程语言/swift/" title="Swift学习摘记" rel="bookmark">
+  <img src="https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250509094625386.png?imageSlim" alt="Swift学习摘记" class="!max-w-none">
+  <span class="title">Swift学习摘记</span>
+</a><a class="recommended-article-item" href="/2025/05/17/奇思妙想/MAIC/" title="MAIC" rel="bookmark">
+  <img src="https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250625150337542.png?imageSlim" alt="MAIC" class="!max-w-none">
+  <span class="title">MAIC</span>
+</a><a class="recommended-article-item" href="/2025/01/09/编程语言/JavaScript/" title="JavaScript" rel="bookmark">
+  <img src="/images/wallhaven-wqery6-light.webp" alt="JavaScript" class="!max-w-none">
+  <span class="title">JavaScript</span>
+</a></div>
+   </div>
+   <div class="recommended-mobile">
+   <div class="recommended-article-header text-xl md:text-3xl font-bold mt-10">
+     <i aria-hidden="true"></i><span>推荐阅读</span>
+   </div>
+   <div class="recommended-article-group"><a class="recommended-article-item" href="/2025/04/17/编程语言/swift/" title="Swift学习摘记" rel="bookmark">
+  <img src="https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250509094625386.png?imageSlim" alt="Swift学习摘记" class="!max-w-none">
+  <span class="title">Swift学习摘记</span>
+</a><a class="recommended-article-item" href="/2025/05/17/奇思妙想/MAIC/" title="MAIC" rel="bookmark">
+  <img src="https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250625150337542.png?imageSlim" alt="MAIC" class="!max-w-none">
+  <span class="title">MAIC</span>
+</a></div>
+   </div>
+  </div>
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/2025/06/29/%E9%9A%8F%E7%AC%94/%E6%A2%A6%E5%A2%83%E4%B8%8E%E6%BD%9C%E6%84%8F%E8%AF%86/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">我们能够在梦境窥探真实的本我吗</span>
+						<span class="post-nav-item">下一篇</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="giscus-container"></div>
+    <script data-swup-reload-script defer>
+        async function loadGiscus() {
+            const giscusConfig = {
+                'src': 'https://giscus.app/client.js',
+                'data-repo': 'ffy6511/ffy6511.github.io',
+                'data-repo-id': 'R_kgD00mnQ1A&#34;',
+                'data-category': 'Announcements',
+                'data-category-id': 'DIC_kwD00mnQ1M4Cp8zM',
+                'data-mapping': 'pathname',
+                'data-strict': '0',
+                'data-reactions-enabled': '1',
+                'data-emit-metadata': '1',
+                'data-theme': 'preferred_color_scheme',
+                'data-lang': 'zh-CN',
+                'data-input-position': 'top',
+                'data-loading': 'lazy',
+                'crossorigin': 'anonymous',
+                'async': true
+            }
+            const giscusScript = document.createElement('script');
+            for (const key in giscusConfig) {
+                giscusScript.setAttribute(key, giscusConfig[key]);
+            }
+            document.getElementById('giscus-container').appendChild(giscusScript);
+        }
+        if ('true') {
+            let loadGiscusTimeout = setTimeout(() => {
+                loadGiscus();
+                clearTimeout(loadGiscusTimeout);
+            }, 1000);
+        } else {
+            document.addEventListener('DOMContentLoaded', loadGiscus);
+        }
+    </script>
+
+
+        
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">目录</div>
+		<div class="page-title">将MVVM开发模式引入Swift-UI</div>
+		<ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#MVVM-%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">MVVM 模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFMVVM"><span class="nav-number">1.1.</span> <span class="nav-text">什么是MVVM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MVVM%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="nav-number">1.2.</span> <span class="nav-text">MVVM的好处</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E4%B8%80%E4%B8%AA%E5%BC%80%E5%8F%91%E9%9C%80%E6%B1%82%E5%AE%9E%E8%B7%B5MVVM"><span class="nav-number">2.</span> <span class="nav-text">从一个开发需求实践MVVM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Model"><span class="nav-number">2.1.</span> <span class="nav-text">Model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#viewmodel"><span class="nav-number">2.2.</span> <span class="nav-text">viewmodel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#view"><span class="nav-number">2.3.</span> <span class="nav-text">view</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">状态变量的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%B5%81"><span class="nav-number">4.</span> <span class="nav-text">数据流与事件流</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.1.</span> <span class="nav-text">总结</span></a></li></ol></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2025</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 1s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">ffy</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 25 篇文章
+                    </span>
+                    
+                        <span>
+                            共 77.5k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.4</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+            
+                
+        
+                
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="站内搜索您需要的内容..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+<script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/libs/Swup.min.js" ></script><script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/libs/SwupSlideTheme.min.js" ></script><script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/libs/SwupScriptsPlugin.min.js" ></script><script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/libs/SwupProgressPlugin.min.js" ></script><script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/libs/SwupScrollPlugin.min.js" ></script><script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/libs/SwupPreloadPlugin.min.js" ></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	<script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/tools/imageViewer.js" ></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/utils.js" ></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/main.js" ></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/layouts/navbarShrink.js" ></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/tools/scrollTopBottom.js" ></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/tools/lightDarkSwitch.js" ></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/layouts/categoryList.js" ></script>
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/tools/localSearch.js" ></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/tools/codeBlock.js" ></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/layouts/lazyload.js" ></script>
+
+
+
+    <script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/tools/runtime.js" ></script>
+    <script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/libs/odometer.min.js" ></script>
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/libs/Typed.min.js" ></script>
+  <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/plugins/typed.js" ></script>
+
+
+
+    
+        <script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/libs/mermaid.min.js" ></script>
+    
+    <script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/plugins/mermaid.js" ></script>
+
+
+
+
+
+    <script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/libs/anime.min.js" ></script>
+
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/tools/tocToggle.js" data-swup-reload-script></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/layouts/toc.js" data-swup-reload-script></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/plugins/tabs.js" data-swup-reload-script></script>
+
+
+<script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/libs/moment-with-locales.min.js" data-swup-reload-script></script>
+<script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/layouts/essays.js" data-swup-reload-script></script>
+
+
+
+
+	
+	<div id="aplayer"></div>
+<script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/libs/APlayer.min.js" ></script>
+<script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.4/source/js/build/plugins/aplayer.js" ></script>
+
+	
+</body>
+
+</html>
