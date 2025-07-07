@@ -6,9 +6,14 @@ tags:
 - CS课程
 categories: 
 - 课程笔记
+
+mathjax: true
+
 excerpt: 复习阶段整理的arch笔记，整体分为核心知识点回顾、jxh老师PPT的补充、大题题型梳理以及其他补充
 thumbnail: https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250625150044872.png?imageSlim
 ---
+> 任课老师：**何水兵**
+
 # 知识点梳理
 
 ## CH1

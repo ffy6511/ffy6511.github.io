@@ -407,10 +407,10 @@ principle
 
   ```swift
   typealias AudioSample = UInt16
-
+  
   var maxAmplitudeFound = AudioSample.min
   // maxAmplitudeFound 现在为 0
-
+  
   ```
 
 ### 元组
@@ -451,7 +451,7 @@ let http404Error = (404, "Not Found")
 
 ---
 
-- `<u>`可选`</u>`: 存储这种类型的值或者 `nil`.
+-  可选  : 存储这种类型的值或者 `nil`.
 - 提供后备值: `??`
 
   ```swift
@@ -463,12 +463,12 @@ let http404Error = (404, "Not Found")
 
   - 如果 `??` 之前的值不是 `nil`, 就会正常解包, 否则选择后备值;
   - 使用 `()` 包裹.
-- `<u>`隐式解包可选`</u>`: 安全假定一直都有值时使用
+-  隐式解包可选  : 安全假定一直都有值时使用
 
   ```swift
   let possibleString: String? = "An optional string."
   let forcedString: String = possibleString! // 需要显式解包
-
+  
   let assumedString: String! = "An implicitly unwrapped optional string."
   let implicitString: String = assumedString // 隐式解包
   ```
@@ -549,7 +549,7 @@ precondition(index > 0, "Index must be greater than zero.")
 > -9 % 4   // 等于 -1
 > ```
 
-- 数值的正负号可以使用前缀 `-` 切换，称为`<u>`一元负号运算符`</u>`.
+- 数值的正负号可以使用前缀 `-` 切换，称为 一元负号运算符  .
 
   - 中间没有任何空格.
 
@@ -625,7 +625,7 @@ a != nil ? a! : b
 
 > [!NOTE]
 >
-> Swift 逻辑运算符 `&&` 和 `||` 遵循`<u>`从左到右`</u>`的结合顺序，这意味着带有多个逻辑运算符的复合表达式会首先评估最左边的子表达式.
+> Swift 逻辑运算符 `&&` 和 `||` 遵循 从左到右  的结合顺序，这意味着带有多个逻辑运算符的复合表达式会首先评估最左边的子表达式.
 
 ## 控制流
 
@@ -633,7 +633,7 @@ a != nil ? a! : b
 
 - 如果类需要继承, 需要将父类写在所有的协议之前
 - 不能在协议定义中为方法参数指定默认值。
-- 协议也可以要求遵循协议的类型 `<u>`实现指定的构造器`</u>`, 和协议内部的方法一样, 不需要写花括号和构造期的实体
+- 协议也可以要求遵循协议的类型实现指定的构造器, 和协议内部的方法一样, 不需要写花括号和构造期的实体
   - 如果是类, 必须在构造函数的开头加上 `required`修饰符. 这是为了确保所有继承的子类也提供这个构造函数的实现, 从而确保遵守协议;
   - 但是如果一个类被声明为了 `final`, 也就是无法被继承, 那么就不需要 `required`的声明
 
@@ -665,12 +665,108 @@ protocol Tax{
   struct Taxas: Tax{
      var national: Double
     var individual: Double
-
+  
     mutating func changeTax(newValue: Double){
       national = newValue
     }
   }
   ```
+
+#### 常见的协议
+
+`CaseIterable`： 让枚举可以自动生成所有case的集合， 使用 `xx.allCases`可以获得枚举的所有枚举值，适用于列表、选择器等
+
+```swift
+for shape in GuqinShape.allCases {
+    print(shape.rawValue) // 输出所有形制的名称
+}
+```
+
+
+
+`Identifiable`： 让每个枚举值有唯一的 `id`，方便在 SwiftUI 的 List、ForEach 等视图中唯一标识每一项
+
+```swift
+public protocol Identifiable {
+    associatedtype ID: Hashable
+    var id: Self.ID { get }
+}
+```
+
+- 如果实现了这一协议，可以确保通过id完成高效的增删改查
+
+```swift
+// 如果我们的枚举值本身就可以唯一标识
+var id: String { self.rawValue }
+
+// 或者自动生成唯一标识
+let id = UUID()  
+
+// 在结构体中
+struct Book: Identifiable {
+    let isbn: String  // 国际标准书号本身就是唯一的
+    var title: String
+    var author: String
+    
+    var id: String { isbn }  // 使用 isbn 作为 id
+}
+```
+
+
+
+`Codable`：让枚举可以方便地被编码和解码，比如存储到文件、发送到网络或从 JSON 解析回来
+
+e.g.
+
+```swift
+let shape = GuqinShape.fuxi
+let data = try JSONEncoder().encode(shape)
+let decoded = try JSONDecoder().decode(GuqinShape.self, from: data)
+```
+
+
+
+`Equatable`：定义如何比较两个实例是否想等的标准方式
+
+```swift
+public protocol Equatable {
+    static func == (lhs: Self, rhs: Self) -> Bool
+}
+```
+
+- 对于简单的结构体，swift会自动合成Equatable的实现；
+
+- 如果结构体比较复杂，需要显式定义：
+
+  ```swift
+  class Person: Equatable {
+      let id: String
+      var name: String
+      var age: Int
+      
+      init(id: String, name: String, age: Int) {
+          self.id = id
+          self.name = name
+          self.age = age
+      }
+      
+      static func == (lhs: Person, rhs: Person) -> Bool {
+          // 只比较 id，因为 id 是唯一标识符（也可以声明为UUID类型确保唯一）
+          return lhs.id == rhs.id
+      }
+  }
+  
+  let person1 = Person(id: "1", name: "Alice", age: 25)
+  let person2 = Person(id: "1", name: "Alice", age: 30) // 同名但不同年龄
+  let person3 = Person(id: "2", name: "Bob", age: 30)
+  
+  print(person1 == person2) // true (因为 id 相同)
+  print(person1 == person3) // false
+  ```
+
+> 枚举会默认实现`Equatable`，根据枚举值判断两个实例是否相等
+
+
 
 ### 补充协议
 
@@ -691,7 +787,7 @@ protocol Tax{
         }
       }
     }
-
+    
     print((-3).abs);
     // 3
     ```
@@ -820,10 +916,10 @@ for _ in 0..<Status.allCases.count{
   func changeSign(op: Double) -> Double {
       return -op
   }
-
+  
   var operation: (Double) -> Double
   operation = changeSign
-
+  
   let result = operation(4.0) // result = -4.0
   ```
 - 将函数的定义下移:
@@ -831,7 +927,7 @@ for _ in 0..<Status.allCases.count{
   ```swift
   var operation: (Double) -> Double
   operation = (op:Double) -> Double { return -op}
-
+  
   let result  = operation(4.0)
   ```
 - 将 `｛` 提前，并在原来的位置添加 `in`
@@ -968,7 +1064,7 @@ printMathResults（addTwoInts， 3,5）
   enum Type{
     case Cike
     case ...
-
+  
     func blood()-> Double{
       switch self{
         case .Cike: return 10
@@ -976,14 +1072,14 @@ printMathResults（addTwoInts， 3,5）
         ...
       }
     }
-
+  
   }
-
+  
   struct Card {
     var country: Country
     vat type: Type
     var blood: Double
-
+  
     init (country: Country, type: Type){
       self.country = country
       self.type = type;
@@ -991,7 +1087,7 @@ printMathResults（addTwoInts， 3,5）
     }
   }
   ```
-- 结构体和枚举属于 `<u>`值类型`</u>`, 如果赋值的时候进行拷贝操作;
+- 结构体和枚举属于  值类型  , 如果赋值的时候进行拷贝操作;
 
   - 如果结构体声明为 `let`, 即使属性是变量, 那么也无法修改内部的属性,
 - 类是引用类型, 赋值的时候使得左值指向了同样的内存区域, 也就是信息保持一致, 更改同步
@@ -1246,7 +1342,7 @@ PlaygroundPage.current.liveView = customView
   import PlaygroundSupport
   ...
   //#-end-hidden-code
-
+  
   ```
 
 # Swift UI
@@ -1308,7 +1404,7 @@ VStack {
   ```swift
   // 存储搜索文本
   @State private var searchText = ""
-
+  
   // 可选：跟踪搜索是否处于活动状态
   @State private var isSearching = false
   ```
@@ -1327,7 +1423,7 @@ VStack {
           }
       }
   }
-
+  
   // 处理嵌套数据结构的过滤模板
   var filteredNestedItems: [ParentType] {
       if searchText.isEmpty {
@@ -1337,7 +1433,7 @@ VStack {
               let matchedChildren = parent.children.filter { child in
                   child.name.localizedCaseInsensitiveContains(searchText)
               }
-
+  
               if matchedChildren.isEmpty {
                   return nil
               } else {
@@ -1505,7 +1601,7 @@ ForEach(item.restrictions) { restriction in
   // App.swift
   @StateObject var order = Order()
   ```
-- `@StateObject` 属性包装器负责在`<u>`应用程序的整个生命周期中`</u>`保持对象处于活动状态。
+- `@StateObject` 属性包装器负责在**应用程序的整个生命周期中**保持对象处于活动状态。
 - 需要在创建视图结构体的时候传递:
 
   ```swift
@@ -1515,7 +1611,10 @@ ForEach(item.restrictions) { restriction in
   }
   ```
 - 为了让swift知道什么时候更新视图, 常用的是声明 `@Published`属性包装器——足以让它更新任何正在监视更改的 SwiftUI 视图.
-- 同时声明对应的对象遵循可观测协议: **ObservableObject**.
+
+  - 同时声明对应的对象遵循可观测协议: **ObservableObject**.
+  - 使用 `@ObservedObject` 或者 `@StateObject` 来订阅上述的对象, 不同的是:前者引用外部的对象, 后者将直接创建一个新的对象, 且生命周期和视图绑定
+
 
 我们可以使用 `@EnvironmentObject`来访问环境中的共享数据, 也就是传递上一步已经在父视图中创建和管理的对象.
 

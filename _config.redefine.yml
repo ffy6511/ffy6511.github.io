@@ -6,20 +6,18 @@
 # DEMO: https://redefine.ohevan.com
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
-
 # BASIC INFORMATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/basic/info
 info:
   # Site title
   title: ffyの四次元口袋
   # Site subtitle
-  subtitle: 捕捉流浪的灵感
+  subtitle: 猜猜这次是什么呢？
   # Author name
   author: ffy
   # Site URL
   url: https://ffy6511.github.io
 # BASIC INFORMATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
-
 
 # IMAGE CONFIGURATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/basic/defaults
@@ -27,11 +25,10 @@ defaults:
   # Favicon
   favicon: /img/avatar.svg
   # Site logo
-  logo: 
+  logo:
   # Site avatar
   avatar: /img/avatar.svg
 # IMAGE CONFIGURATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
-
 
 # COLORS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/basic/colors
@@ -44,19 +41,18 @@ colors:
   default_mode: light # light, dark
 # COLORS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
-
 # SITE CUSTOMIZATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/basic/global
 global:
   # Custom global fonts
   fonts:
     # Chinese fonts
-    chinese: 
+    chinese:
       enable: true
       family: "WenKai, sans-serif"
       url: /fonts/custom-fonts.css
     # English fonts
-    english: 
+    english:
       enable: true
       family: "mono, sans-serif"
       url: /fonts/custom-fonts.css
@@ -72,7 +68,7 @@ global:
   # Effects on mouse hover
   hover:
     shadow: true # shadow effect
-    scale: false # scale effect
+    scale: true # scale effect
   # Scroll progress
   scroll_progress:
     bar: false # progress bar
@@ -93,14 +89,13 @@ global:
   # Whether to enable open graph
   open_graph:
     enable: true
-    image: /images/redefine-og.webp  # default og:image
+    image: /images/redefine-og.webp # default og:image
     description: Hexo Theme Redefine, Redefine Your Hexo Journey.
   # Google Analytics
   google_analytics:
     enable: false # Whether to enable Google Analytics
-    id:  # Google Analytics Measurement ID
+    id: # Google Analytics Measurement ID
 # SITE CUSTOMIZATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
-    
 
 # FONTAWESOME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/basic/fontawesome
@@ -115,7 +110,6 @@ fontawesome: # Pro v6.2.1
   sharp_solid: false
 # FONTAWESOME <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
-
 # HOME BANNER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/home/home_banner
 home_banner:
@@ -124,7 +118,7 @@ home_banner:
   # style of home banner
   style: fixed # static or fixed
   # Home banner image
-  image: 
+  image:
     light: https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefinedsun.png?imageSlim
     dark: https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefineddark.png?imageSlim
   # Home banner title
@@ -132,7 +126,7 @@ home_banner:
   # Home banner subtitle
   subtitle:
     text: ["This is the first message"] # subtitle text, array
-    hitokoto:  # 一言配置
+    hitokoto: # 一言配置
       enable: true # Whether to enable hitokoto
       show_author: false # Whether to show author
       api: https://v1.hitokoto.cn?c=a&c=d&c=k # API URL, can add types, see https://developer.hitokoto.cn/sentence/#%E5%8F%A5%E5%AD%90%E7%B1%BB%E5%9E%8B-%E5%8F%82%E6%95%B0
@@ -143,11 +137,11 @@ home_banner:
     loop: true # Whether to loop
     smart_backspace: true # Whether to smart backspace
   # Color of home banner text
-  text_color: 
+  text_color:
     light: "#fff" # light mode
     dark: "#d1d1b6" # dark mode
   # Specific style of the text
-  text_style: 
+  text_style:
     # Title font size
     title_size: 2.8rem
     # Subtitle font size
@@ -155,11 +149,11 @@ home_banner:
     # Line height between title and subtitle
     line_height: 1.2
   # Home banner custom font
-  custom_font: 
+  custom_font:
     # Whether to enable custom font
     enable: false
     # Font family
-    family: 
+    family:
     # URL to font CSS file
     url:
   # Home banner social links
@@ -170,18 +164,17 @@ home_banner:
     style: default # default, reverse, center
     # Social links
     links:
-      github:  https://github.com/ffy6511 # your GitHub URL
+      github: https://github.com/ffy6511 # your GitHub URL
       instagram: # your Instagram URL
-      zhihu:  # your ZhiHu URL
-      twitter:  # your twitter URL
-      email:  1253876012z@gmail.com # your email
+      zhihu: # your ZhiHu URL
+      twitter: # your twitter URL
+      email: 1253876012z@gmail.com # your email
       # ...... # you can add more
     # Social links with QRcode drawers
     qrs:
-      weixin:  https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefinedvx.JPG?imageSlim # your Wechat QRcode image URL
+      weixin: https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefinedvx.JPG?imageSlim # your Wechat QRcode image URL
       # ...... # you can add more
 # HOME BANNER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
-
 
 # NAVIGATION BAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/home/navbar
@@ -190,8 +183,8 @@ navbar:
   auto_hide: true
   # Navbar background color
   color:
-    left: "#f78736" #left side 
-    right: "#367df7"  #right side
+    left: "#f78736" #left side
+    right: "#367df7" #right side
     transparency: 35 #percent (10-99)
   # Navbar width (usually no need to modify)
   width:
@@ -199,25 +192,25 @@ navbar:
     pages: 1000px #other pages
   # Navbar links
   links:
-    Home: 
-      path: / 
+    Home:
+      path: /
       icon: fa-regular fa-house # can be empty
-    Archives: 
-      path: /archives 
+    Archives:
+      path: /archives
       icon: fa-regular fa-archive # can be empty
     Tags:
       path: /tags
       icon: fa-regular fa-tags
     Categories:
       path: /categories
-      icon: fa-regular fa-folder  
+      icon: fa-regular fa-folder
     # Album:
     #   path: /masonry/
     #   icon: fa-regular fa-image
     Friends:
       path: /links
       icon: fa-regular fa-heart
-    导航: 
+    导航:
       icon: fa-regular fa-compass
       submenus:
         chatSQL: https://chat-sql-hazel.vercel.app/
@@ -230,7 +223,6 @@ navbar:
     preload: true
 # NAVIGATION BAR <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
-
 # HOME PAGE ARTICLE SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/home/home
 home:
@@ -239,17 +231,17 @@ home:
     enable: true # Whether to enable sidebar
     position: left # Sidebar position. left, right
     first_item: info # First item in sidebar. menu, info
-    announcement: "听说您要来, 波奇酱在ta的柜子里翻出了这些有趣的笔记~" # Announcement text
+    announcement: "在此分享个人的（补天）笔记、摸索技术中的经验心得，同时也会不时掉落一些随笔！欢迎交流与讨论～" # Announcement text
     show_on_mobile: true # Whether to show sidebar navigation on mobile sheet menu
     links:
-      Archives: 
-        path: /archives 
+      Archives:
+        path: /archives
         icon: fa-regular fa-archive # can be empty
-      Tags: 
-        path: /tags 
+      Tags:
+        path: /tags
         icon: fa-regular fa-tags # can be empty
-      Categories: 
-        path: /categories 
+      Categories:
+        path: /categories
         icon: fa-regular fa-folder # can be empty
       # ...... # you can add more
   # Article date format
@@ -258,14 +250,13 @@ home:
   excerpt_length: 130 # Max length of article excerpt
   # Article categories visibility
   categories:
-    enable: true  # Whether to enable
+    enable: true # Whether to enable
     limit: 3 # Max number of categories to display
   # Article tags visibility
   tags:
-    enable: true  # Whether to enable
-    limit: 3  # Max number of tags to display
+    enable: true # Whether to enable
+    limit: 3 # Max number of tags to display
 # HOME PAGE ARTICLE SETTINGS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
-
 
 # ARTICLE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/posts/articles
@@ -293,7 +284,7 @@ articles:
     count: true # Whether to display word count
     min2read: true # Whether to display reading time
   # Author label
-  author_label: 
+  author_label:
     enable: true # Whether to enable
     auto: false # Whether to automatically add author label, e.g. Lv1, Lv2, Lv3...
     list: []
@@ -311,7 +302,7 @@ articles:
   # Table of contents settings
   toc:
     enable: true # Whether to enable TOC
-    max_depth: 3 # TOC depth
+    max_depth: 4 # TOC depth
     number: true # Whether to add number to TOC automatically
     expand: true # Whether to expand TOC
     init_open: true # Open toc by default
@@ -338,7 +329,6 @@ articles:
     # Skip directory
     skip_dirs: []
 # ARTICLE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
-
 
 # COMMENT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/posts/comment
@@ -384,7 +374,6 @@ comment:
       loading: lazy # Load the comments lazily
 # COMMENT <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
-
 # FOOTER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/footer
 footer:
@@ -405,21 +394,19 @@ footer:
     url: # ICP record url
 # FOOTER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
-
 # INJECT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/inject
 inject:
   # Whether to enable inject
   enable: true
   # Inject custom head html code
-  head: 
+  head:
     - <link rel="stylesheet" href="/css/custom.css">
   # Inject custom footer html code
   footer:
     -
     -
 # INJECT <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
-
 
 # PLUGINS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/plugins
@@ -429,26 +416,25 @@ plugins:
     enable: false # Whether to enable
   # Aplayer. See https://github.com/DIYgod/APlayer
   aplayer:
-    enable: false # Whether to enable
+    enable: true # Whether to enable
     type: fixed # fixed, mini
     audios:
-      - name: # audio name
-        artist: # audio artist
-        url: # audio url
-        cover: # audio cover url
-        lrc: # audio cover lrc
-#      - name: # audio name
-#        artist: # audio artist
-#        url: # audio url
-#        cover: # audio cover url
-#        lrc: # audio cover lrc
-      # .... you can add more audios here
+      - name: Styx Helix # audio name
+        artist: MYTH&ROID # audio artist
+        url: /music/styx helix.mp3 # audio url
+        cover: https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250706102548232.png?imageSlim # audio cover url
+        lrc: /LRC/styx helix-lrc.lrcx # audio cover lrc
+      - name: Flower Dance # audio name
+        artist: DJ Okawari # audio artist
+        url: /music/Flower Dance.mp3 # audio url
+        cover: https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250706103321696.png?imageSlim# audio cover url
+        lrc: /LRC/flower dance-lrc.lrcx # audio cover lrc
+  # .... you can add more audios here
   # Mermaid JS. Requires hexo-filter-mermaid-diagrams (npm i hexo-filter-mermaid-diagrams). See https://mermaid.js.org/
   mermaid:
     enable: true # enable mermaid or not
     version: "11.4.1" # default v11.4.1
 # PLUGINS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
-
 
 # PAGE TEMPLATES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/page_templates
@@ -459,18 +445,17 @@ page_templates:
   tags_style: blur # blur, cloud
 # PAGE TEMPLATES <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
-
 # CDN >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/cdn
 cdn:
   # Whether to enable CDN
   enable: true
   # CDN Provider
-  provider:  aliyun # npmmirror, zstatic, cdnjs, jsdelivr, unpkg, custom
+  provider: aliyun # npmmirror, zstatic, cdnjs, jsdelivr, unpkg, custom
   # Custom CDN URL
   # format example: https://cdn.custom.com/hexo-theme-redefine/${version}/source/${path}
   # The ${path} must leads to the root of the "source" folder of the theme
-  custom_url: 
+  custom_url:
 # CDN <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 # DEVELOPER MODE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start

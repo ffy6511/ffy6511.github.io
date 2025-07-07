@@ -7,9 +7,14 @@ tags:
 - CS课程
 categories: 
 - 课程笔记
+
+mathjax: true
+
 excerpt: 复习阶段整理的oop课程笔记，整体分为核心知识点回顾以及针对部分历年卷题目的整理
 thumbnail: https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250509094812819.png?imageSlim
 ---
+> 任课老师：**翁恺**
+
 # 知识点回顾
 
 - `end（）`返回的是容器最后一个位置的**下一个位置**的迭代器
