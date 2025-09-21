@@ -726,7 +726,7 @@ let decoded = try JSONDecoder().decode(GuqinShape.self, from: data)
 
 
 
-`Equatable`：定义如何比较两个实例是否想等的标准方式
+`Equatable`：定义如何比较两个实例是否相等的标准方式
 
 ```swift
 public protocol Equatable {
@@ -1388,6 +1388,10 @@ NavigationLink{
 
 ## 基本语法
 
+`onAppear`：视图第一次出现时调用
+
+``
+
 #### 磨砂效果
 
 ```swift
@@ -1650,6 +1654,12 @@ struct ChildView: View {
   @State private var paymentType = "Cash"
   ```
 
+Notice：
+
+- `NavigationStack` 创建的导航栏不会自动传递环境变量, 所以为了避免上述情况，我们可以在app入口就创建并注入全局所需的环境变量
+
+
+
 #### 菜单视图
 
 为了将菜单视图存放在一个选项卡当中, 我们需要新建一个视图, 用来作为容器:
@@ -1753,9 +1763,46 @@ Toggle("Toggle label", isOn: $showingWelcome.animation(.spring()))
 - `ctrl`按住后点击  `VStack`可以快速地将其添加到 `ZStack`当中
   - 颜色的设置需要通过 `ZStack`来实现.
 - `option`可以显示当前类的介绍
-- 
+- `option` + `command` + `<-` / `->` ：收缩或展开当前的 **代码块**（cursor所在的第一个大`{ }`）
 
 **推荐资源：**
 
 - **Raywenderlich 的 SwiftUI 教程：** [Raywenderlich - SwiftUI Apprentice](https://www.raywenderlich.com/books/swiftui-apprentice)
 - **Big Mountain Studio 的免费电子书：** [SwiftUI Views Quick Start](https://www.bigmountainstudio.com/free-swiftui-book)
+
+
+
+
+
+
+
+## SwiftUI Views
+
+#### Layout Priority
+
+```swift
+.layoutPriority(_ priority: CGFloat)
+```
+
+值越大，优先级越高，越容易获得更多的分配空间
+
+e.g.
+
+```swift
+HStack {
+    TextField("Short", text: $text1)
+        .textFieldStyle(.roundedBorder)
+    
+    TextField("This one should take more space", text: $text2)
+        .textFieldStyle(.roundedBorder)
+        .layoutPriority(1.0) // 提高优先级，让它优先占宽度
+}
+.padding()
+```
+
+
+
+#### LazyVstack
+
+我们可以使用 `pinnedViews：` 来声明一直可见的视图
+

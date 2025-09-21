@@ -14,6 +14,7 @@
   "dependencies": {
     "hexo": "^7.3.0",
     "hexo-all-minifier": "^0.5.2",
+    "hexo-asset-image": "^1.0.0",
     "hexo-deployer-git": "^4.0.0",
     "hexo-filter-mathjax": "^0.9.0",
     "hexo-filter-mermaid-diagrams": "^1.0.5",
@@ -27,7 +28,7 @@
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0",
     "hexo-theme-landscape": "^1.0.0",
-    "hexo-theme-redefine": "^2.8.4",
+    "hexo-theme-redefine": "^2.8.5",
     "hexo-wordcount": "^6.0.1",
     "nodejieba": "^3.4.4"
   }

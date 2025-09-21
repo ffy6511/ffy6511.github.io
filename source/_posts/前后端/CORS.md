@@ -8,9 +8,6 @@ categories: 学习笔记
 excerpt: 在前后端分离的项目中, 常常需要注意跨域资源共享的问题.
 index_img: /img/跨域共享.jpg
 ---
-
-
-
 ## 概述
 
 跨域资源共享（Cross-Origin Resource Sharing, CORS）是现代Web应用程序中的重要安全机制。本文档旨在提供全面的CORS配置指南，涵盖从开发环境到生产部署的完整实施方案。
@@ -63,49 +60,61 @@ CORS(app, resources={
 让我们逐行分析这个配置：
 
 1. **环境变量设置**
+
 ```python
 FRONTEND_URL = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
 ```
-- 使用`os.environ.get()`获取环境变量
-- 提供默认值`'http://localhost:3000'`作为本地开发环境的配置
+
+- 使用 `os.environ.get()`获取环境变量
+- 提供默认值 `'http://localhost:3000'`作为本地开发环境的配置
 - 可以通过环境变量轻松切换不同环境的配置
 
 2. **CORS配置参数**
+
 ```python
 "origins": FRONTEND_URL
 ```
+
 - 动态设置允许的源，基于环境变量
 - 避免了硬编码的问题
 - 支持不同部署环境的灵活配置
 
 3. **HTTP方法配置**
+
 ```python
 "methods": ["GET", "POST", "OPTIONS", "PUT", "DELETE"]
 ```
+
 - 明确定义允许的HTTP方法
 - 包含了RESTful API所需的全部方法
 - `OPTIONS`用于预检请求（preflight request）
 
 4. **请求头配置**
+
 ```python
 "allow_headers": ["Content-Type", "Authorization", "X-Requested-With"]
 ```
+
 - `Content-Type`：允许设置请求的内容类型
 - `Authorization`：支持身份验证令牌
 - `X-Requested-With`：用于标识AJAX请求
 
 5. **凭证支持**
+
 ```python
 "supports_credentials": True
 ```
+
 - 允许跨域请求携带凭证（如Cookie）
 - 对需要身份验证的API至关重要
 
 6. **响应头暴露**
+
 ```python
 "expose_headers": ["Content-Disposition"]
 ```
-- 允许客户端访问`Content-Disposition`响应头
+
+- 允许客户端访问 `Content-Disposition`响应头
 - 通常用于文件下载功能
 
 ### 环境变量配置示例
@@ -126,16 +135,19 @@ export FRONTEND_URL=https://www.example.com
 ### 环境变量管理建议
 
 1. **开发环境**
-- 使用`.env`文件管理本地开发环境变量
-- 将`.env`文件加入`.gitignore`
+
+- 使用 `.env`文件管理本地开发环境变量
+- 将 `.env`文件加入 `.gitignore`
 
 2. **生产环境**
+
 - 使用容器化部署时通过环境变量注入
 - 使用配置管理系统统一管理环境变量
 
 ### 安全性考虑
 
 1. **避免过于宽松的配置**
+
 ```python
 # 不推荐
 "origins": "*"  
@@ -145,7 +157,8 @@ export FRONTEND_URL=https://www.example.com
 ```
 
 2. **合理设置凭证策略**
-- 仅在必要时启用`supports_credentials`
+
+- 仅在必要时启用 `supports_credentials`
 - 确保前端配置匹配（`credentials: 'include'`）
 
 ## 问题排查
@@ -153,11 +166,14 @@ export FRONTEND_URL=https://www.example.com
 ### 常见错误及解决方案
 
 1. **CORS策略违规**
+
 ```plaintext
 Access to XMLHttpRequest at 'http://api.example.com' from origin 'http://example.com' 
 has been blocked by CORS policy
 ```
+
 解决方案：
+
 - 检查环境变量是否正确设置
 - 验证前端请求URL与配置是否匹配
 - 确认所有必要的请求头都已配置
