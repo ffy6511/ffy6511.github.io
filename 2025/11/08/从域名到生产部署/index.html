@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="ffy">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+            <link rel="preconnect" href="https://evan.beee.top" crossorigin>
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2025/11/08/从域名到生产部署/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从域名到生产部署">
+<meta property="og:url" content="http://example.com/2025/11/08/%E4%BB%8E%E5%9F%9F%E5%90%8D%E5%88%B0%E7%94%9F%E4%BA%A7%E9%83%A8%E7%BD%B2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/redefine-og.webp">
+<meta property="article:published_time" content="2025-11-08T06:13:29.000Z">
+<meta property="article:modified_time" content="2025-11-08T07:23:41.584Z">
+<meta property="article:author" content="ffy">
+<meta property="article:tag" content="服务器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/redefine-og.webp">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/img/avatar.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/avatar.svg">
+    <meta name="theme-color" content="#f0ad7c">
+    <link rel="shortcut icon" href="/img/avatar.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            从域名到生产部署 | ffyの四次元口袋
+        
+    </title>
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+        
+            
+    
+            
+    
+            
+                
+                    <link rel="stylesheet" href="/css/custom.css">
+                
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/css/build/tailwind.css">
+    
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/fonts/GeistMono/geist-mono.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/fonts/Geist/geist.css">
+    <!--- Font Part-->
+    
+    
+        <link href="/fonts/custom-fonts.css" rel="stylesheet">
+    
+    
+        <link href="/fonts/custom-fonts.css" rel="stylesheet">
+    
+    
+        <link href="/fonts/custom-fonts.css" rel="stylesheet">
+    
+    
+        <link href="/fonts/custom-fonts.css" rel="stylesheet">
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":true,"family":"mono, monospace","url":"/fonts/custom-fonts.css"}},"toc":{"enable":true,"max_depth":4,"number":true,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":true,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#f0ad7c","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":"WenKai, sans-serif","url":"/fonts/custom-fonts.css"},"english":{"enable":true,"family":"mono, sans-serif","url":"/fonts/custom-fonts.css"},"title":{"enable":true,"family":"WenKai, sans-serif","url":"/fonts/custom-fonts.css"}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":true},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefinedsun.png?imageSlim","dark":"https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefineddark.png?imageSlim"},"title":"随机掉落生活碎片和学习记录~","subtitle":{"text":["This is the first message"],"hitokoto":{"enable":true,"show_author":false,"api":"https://v1.hitokoto.cn?c=a&c=d&c=k"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/ffy6511","instagram":null,"zhihu":null,"twitter":null,"email":"1253876012z@gmail.com"},"qrs":{"weixin":"https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefinedIMG_0855.JPG?imageSlim"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":true,"type":"fixed","audios":[{"name":"Styx Helix","artist":"MYTH&ROID","url":"/music/styx helix.mp3","cover":"https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250706102548232.png?imageSlim","lrc":"/LRC/styx helix-lrc.lrcx"},{"name":"Flower Dance","artist":"DJ Okawari","url":"/music/Flower Dance.mp3","cover":"https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250706103321696.png?imageSlim# audio cover url","lrc":"/LRC/flower dance-lrc.lrcx"}]},"mermaid":{"enable":true,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":true,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"},"Friends":{"path":"/links","icon":"fa-regular fa-heart"},"导航":{"icon":"fa-regular fa-compass","submenus":{"chatSQL":"https://chat-sql-hazel.vercel.app/"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"info","announcement":"在此分享个人的（补天）笔记、摸索技术中的经验心得，同时也会不时掉落一些随笔！欢迎交流与讨论～","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","excerpt_length":130,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2025/5/8 19:11:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                ffyの四次元口袋
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/tags"
+                                        >
+                                    <i class="fa-regular fa-tags fa-fw"></i>
+                                    标签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/categories"
+                                        >
+                                    <i class="fa-regular fa-folder fa-fw"></i>
+                                    分类
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/links"
+                                        >
+                                    <i class="fa-regular fa-heart fa-fw"></i>
+                                    友情链接
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-compass fa-fw"></i>
+                                    导航
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://chat-sql-hazel.vercel.app/">
+                                                    CHATSQL
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/tags"
+                        >
+                            <span>
+                                标签
+                            </span>
+                            
+                                <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/categories"
+                        >
+                            <span>
+                                分类
+                            </span>
+                            
+                                <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/links"
+                        >
+                            <span>
+                                友情链接
+                            </span>
+                            
+                                <i class="fa-regular fa-heart fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-导航"
+                        >
+                            <span>
+                                导航
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-导航">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://chat-sql-hazel.vercel.app/">CHATSQL</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    
+                    
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">30</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">8</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">29</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			
+			
+			<img src="https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefinedPixPin_2025-11-08_15-23-28.png?imageSlim" alt="从域名到生产部署" class="w-full h-60 sm:h-72 md:h-80 object-cover sm:rounded-t-large dark:brightness-75" />
+			
+			<div class="w-full flex items-center absolute bottom-0 justify-start">
+				<h1 class="article-title-cover text-center mx-6 my-6 text-second-text-color bg-background-color-transparent px-4 py-3 text-3xl sm:text-4xl md:text-5xl font-semibold backdrop-blur-lg rounded-xl border border-border-color ">从域名到生产部署</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="/img/avatar.svg">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">ffy</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv3</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-11-08 14:13:29</span>
+        <span class="mobile">2025-11-08 14:13:29</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-11-08 15:23:41</span>
+            <span class="mobile">2025-11-08 15:23:41</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95/">开发记录</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>2.6k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>10 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<p>在这次部署过程中，我从零开始搭建了一个完整的 <strong>Next.js + Nginx + pm2</strong> 的生产环境。</p>
+<p>在介绍整体的配置流程之前，需要说明一系列配置的必要性——即论证“为什么不能只用公网 IP”</p>
+<h2 id="部署逻辑与原理"><a href="#部署逻辑与原理" class="headerlink" title="部署逻辑与原理"></a>部署逻辑与原理</h2><p>当服务器上的 Next.js 应用可以通过 <code>http://&lt;公网IP&gt;:3000</code> 被访问时，<strong>为什么还要购买域名、配置 SSL、再通过 Nginx 反向代理？</strong></p>
+<p>这个问题的答案既与网络协议有关，也与 iOS 平台的安全机制有关。</p>
+<h3 id="域名：互联网的稳定入口"><a href="#域名：互联网的稳定入口" class="headerlink" title="域名：互联网的稳定入口"></a>域名：互联网的稳定入口</h3><p>公网 IP 虽然可以直接访问，但它并不是互联网通信中可靠的标识。</p>
+<p>服务器的 IP 可能会因重启、迁移、负载均衡或云平台调整而变化。</p>
+<p>而域名通过 <strong>DNS 系统</strong> 将请求动态解析到最新的服务器 IP，使访问入口稳定、可记忆、可扩展。</p>
+<p>此外，许多应用层安全机制（例如 HTTPS 证书校验、跨域策略）都<strong>依赖域名</strong>而非 IP。</p>
+<h3 id="SSL-证书：建立加密信任链"><a href="#SSL-证书：建立加密信任链" class="headerlink" title="SSL 证书：建立加密信任链"></a>SSL 证书：建立加密信任链</h3><p>HTTP 协议是明文传输，任何中间节点都能截获或篡改数据。</p>
+<p>HTTPS 则在其上加入了 <strong>TLS&#x2F;SSL 加密层</strong>，通过公私钥交换确保通信内容的机密性和完整性。</p>
+<p>SSL 证书正是这一信任链的核心：它由权威 CA 签发，用于证明“访问的服务器确实是 xxx，而不是某个伪装者”。</p>
+<h3 id="为什么-iOS-App-无法直接访问-HTTP？"><a href="#为什么-iOS-App-无法直接访问-HTTP？" class="headerlink" title="为什么 iOS App 无法直接访问 HTTP？"></a>为什么 iOS App 无法直接访问 HTTP？</h3><img lazyload src="/images/loading.svg" data-src="https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20251108151810608.png?imageSlim">
+
+<p>自 iOS 9 起，苹果在系统层面引入 <strong>App Transport Security (ATS)</strong> 策略：</p>
+<p>App 默认只能访问 <strong>HTTPS 域名</strong>，且证书必须有效、由受信任机构签发。</p>
+<p>这意味着：</p>
+<ul>
+<li>若访问 <code>http://&lt;公网IP&gt;</code>，App 会直接拒绝请求；</li>
+<li>即使在 Info.plist 中临时开放 HTTP，也可能遭到 Apple 审核的拒绝；</li>
+<li>使用域名 + 有效证书是唯一符合 ATS 要求的正式方案。</li>
+</ul>
+<h3 id="Nginx：桥接安全与服务逻辑"><a href="#Nginx：桥接安全与服务逻辑" class="headerlink" title="Nginx：桥接安全与服务逻辑"></a>Nginx：桥接安全与服务逻辑</h3><p>Nginx 承担着“外部世界与应用服务之间的桥梁”角色。</p>
+<p>它监听 80&#x2F;443 端口，处理加密握手、转发流量到内部的 Node 服务端口（3000），同时还能进行日志、缓存、负载均衡。</p>
+<p>这使得 Next.js 应用不需要直接暴露在公网环境下，而是由 Nginx 统一接入和管理。</p>
+<hr>
+<p>总的来说，域名提供了<strong>身份</strong>，SSL 提供了<strong>信任</strong>，Nginx 提供了<strong>通道与隔离</strong>。</p>
+<p>而 iOS 的安全策略则决定了：<strong>仅配置公网 IP 与 HTTP 服务，无法满足现代应用的安全访问标准。</strong></p>
+<p>因此，接下来将按照上述逻辑，复盘配置的流程</p>
+<h2 id="域名与-SSL：建立可信入口"><a href="#域名与-SSL：建立可信入口" class="headerlink" title="域名与 SSL：建立可信入口"></a>域名与 SSL：建立可信入口</h2><p>要让应用可被公网访问，第一步是申请一个域名。域名相当于互联网中的“门牌号”，用户访问 <code>https://carboncoin.asia</code> 的请求会通过 DNS 解析被指向服务器的公网 IP。</p>
+<h3 id="拷贝证书到服务器"><a href="#拷贝证书到服务器" class="headerlink" title="拷贝证书到服务器"></a>拷贝证书到服务器</h3><p>假设本地已经从云厂商下载到了证书文件：</p>
+<ul>
+<li><code>carboncoin.crt</code></li>
+<li><code>carboncoin.key</code></li>
+</ul>
+<p>先在服务器上为证书创建目录：</p>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /etc/nginx/ssl</span><br></pre></td></tr></table></figure></div>
+
+<p>使用 <code>scp</code> 将证书拷贝到服务器：</p>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp carboncoin.crt root@服务器IP:/etc/nginx/ssl/carboncoin.crt</span><br><span class="line">scp carboncoin.key root@服务器IP:/etc/nginx/ssl/carboncoin.key</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>如果能够通过 GUI 操作，也可以直接在平台中创建文件</p>
+</blockquote>
+<h3 id="验证证书链"><a href="#验证证书链" class="headerlink" title="验证证书链"></a>验证证书链</h3><p>配置完成后，可以用 <code>openssl</code> 检查证书与链路是否正常：</p>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl s_client -connect www.carboncoin.asia:443 -servername www.carboncoin.asia</span><br></pre></td></tr></table></figure></div>
+
+<p>在输出末尾看到：</p>
+<div class="code-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Verify return code: 0 (ok)</span><br></pre></td></tr></table></figure></div>
+
+<p>说明证书链配置正确。</p>
+<hr>
+<h2 id="Nginx：反向代理与流量中枢"><a href="#Nginx：反向代理与流量中枢" class="headerlink" title="Nginx：反向代理与流量中枢"></a>Nginx：反向代理与流量中枢</h2><p><a class="link" target="_blank" rel="noopener" href="https://nginx.org/">Nginx<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> 是一个高性能的反向代理与静态资源服务器，它的主要作用是：</p>
+<ul>
+<li>接收外部的 HTTP&#x2F;HTTPS 请求；</li>
+<li>将这些请求转发到运行在本地端口（如 3000）的 Node.js 应用；</li>
+<li>提供静态资源缓存、连接复用等能力。</li>
+</ul>
+<h3 id="安装与基本配置"><a href="#安装与基本配置" class="headerlink" title="安装与基本配置"></a>安装与基本配置</h3><p>以常见的 Linux 发行版为例，可以通过包管理器安装：</p>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># CentOS / Rocky / OpenCloudOS</span></span><br><span class="line"><span class="built_in">sudo</span> yum install -y nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或 Ubuntu / Debian</span></span><br><span class="line"><span class="comment"># sudo apt-get update</span></span><br><span class="line"><span class="comment"># sudo apt-get install -y nginx</span></span><br></pre></td></tr></table></figure></div>
+
+<p>编辑 Nginx 配置（路径可能是 <code>/etc/nginx/nginx.conf</code> 或 <code>/etc/nginx/conf.d/default.conf</code>）：</p>
+<div class="code-container" data-rel="Nginx"><figure class="iseeu highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将HTTP请求重定向到HTTPS</span></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> carboncoin.asia www.carboncoin.asia;</span><br><span class="line">    <span class="attribute">return</span> <span class="number">301</span> https://<span class="variable">$host</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">443</span> ssl;</span><br><span class="line">    <span class="attribute">server_name</span> carboncoin.asia www.carboncoin.asia;</span><br><span class="line"></span><br><span class="line">	  <span class="comment"># 证书配置</span></span><br><span class="line">    <span class="attribute">ssl_certificate</span>     /etc/nginx/ssl/carboncoin.crt;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span> /etc/nginx/ssl/carboncoin.key;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">ssl_protocols</span> TLSv1.<span class="number">2</span> TLSv1.<span class="number">3</span>;</span><br><span class="line">    <span class="attribute">ssl_ciphers</span> HIGH:!aNULL:!MD5;</span><br><span class="line"></span><br><span class="line">  	<span class="comment"># 反向代理到Node.js</span></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://127.0.0.1:3000;</span><br><span class="line">        <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Connection <span class="string">&quot;upgrade&quot;</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">        <span class="attribute">proxy_cache_bypass</span> <span class="variable">$http_upgrade</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>整体流程：</p>
+<ol>
+<li>用户访问 <code>http://carboncoin.asia</code> –&gt; 被第一段配置 301 重定向到 <code>https://carboncoin.asia</code></li>
+<li>Nginx 接收 HTTPS 请求并完成 TLS 握手</li>
+<li>请求转发至本地端口 3000 的 Next.js 服务</li>
+<li>Node.js 生成响应，Nginx 通过 HTTPS 返回给客户端</li>
+</ol>
+<h3 id="检查配置并重载-Nginx"><a href="#检查配置并重载-Nginx" class="headerlink" title="检查配置并重载 Nginx"></a>检查配置并重载 Nginx</h3><p>修改完成后，用以下命令验证配置语法：</p>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nginx -t</span><br></pre></td></tr></table></figure></div>
+
+<p>看到类似：</p>
+<div class="code-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nginx: the configuration file /etc/nginx/nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file /etc/nginx/nginx.conf test is successful</span><br></pre></td></tr></table></figure></div>
+
+<p>说明配置正确，可以重载：</p>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 若 Nginx 未启动</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl start nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改配置后重载</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl reload nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置开机自启</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> nginx</span><br></pre></td></tr></table></figure></div>
+
+<p>此时，从外部访问 <code>https://www.carboncoin.asia/</code> 就会被代理到本机 <code>127.0.0.1:3000</code>。</p>
+<hr>
+<h2 id="DNS-解析：让域名指向服务器"><a href="#DNS-解析：让域名指向服务器" class="headerlink" title="DNS 解析：让域名指向服务器"></a>DNS 解析：让域名指向服务器</h2><p>先查看服务器的公网 IP，如果平台没有给出，可以在 ssh 中使用命令查看：</p>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl ifconfig.me</span><br></pre></td></tr></table></figure></div>
+
+<p>然后在 DNS 管理平台添加两条 <strong>A 记录</strong>：</p>
+<ul>
+<li><code>carboncoin.asia</code> → 服务器公网 IP</li>
+<li><code>www.carboncoin.asia</code> → 服务器公网 IP</li>
+</ul>
+<p>等待解析生效后，可以通过 <code>dig</code> 命令验证：</p>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dig +short carboncoin.asia</span><br><span class="line">dig +short www.carboncoin.asia</span><br></pre></td></tr></table></figure></div>
+
+<p>如果输出的 IP 与服务器公网 IP 一致，说明 DNS 解析已经正确</p>
+<hr>
+<h2 id="Next-js-构建与运行"><a href="#Next-js-构建与运行" class="headerlink" title="Next.js 构建与运行"></a>Next.js 构建与运行</h2><p>Next.js 是 React 的全栈框架，提供了前后端统一的 App Router 架构。<br>在开发阶段，可以使用：</p>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br><span class="line"><span class="comment"># =&gt; next dev --turbopack</span></span><br></pre></td></tr></table></figure></div>
+
+<p>Turbopack 只建议用于开发，生产构建需要使用标准的 <code>next build</code>。否则 App Router 下的 <code>/api</code> 路由可能根本没有被打包进 server 端，导致线上访问 <code>/api/...</code> 出现 404 或奇怪的文本输出。</p>
+<h4 id="什么是–turbopack"><a href="#什么是–turbopack" class="headerlink" title="什么是–turbopack"></a>什么是–turbopack</h4><blockquote>
+<p>Turbopack is an <strong>incremental bundler</strong> optimized for JavaScript and TypeScript, written in Rust, and built into <strong>Next.js</strong>. You can use Turbopack with both the Pages and App Router for a <strong>much faster</strong> local development experience.</p>
+</blockquote>
+<p>–turbopack 是 Next.js 官方在 13+ 版本 引入的新一代编译与打包引擎，用来替代传统的 Webpack</p>
+<p>核心特性：</p>
+<ul>
+<li><strong>增量编译</strong>：只编译修改过的文件，极大缩短冷启动时间</li>
+<li><strong>多线程并行</strong>：利用多核 CPU 加速构建过程</li>
+<li><strong>按需加载</strong>：只加载当前路由所需的代码，减小初始包体积</li>
+</ul>
+<p>但是问题是，官方文档中提及<code>--turbopack</code> 当前主要用于 <strong>local development experience</strong>，在实际部署的时候，我同样发现使用该配置进行 build 然后 start，导致无法访问 <code>/api</code> 路由。因此最终的脚本配置如下：</p>
+<div class="code-container" data-rel="Json"><figure class="iseeu highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;next dev --turbopack&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;prisma generate &amp;&amp; next build&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;start&quot;</span><span class="punctuation">:</span> <span class="string">&quot;next start -H 0.0.0.0 -p 3000&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;lint&quot;</span><span class="punctuation">:</span> <span class="string">&quot;eslint&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;format&quot;</span><span class="punctuation">:</span> <span class="string">&quot;prettier --write \&quot;src/**/*.ts\&quot;&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>其中 <code>-H 0.0.0.0</code> 是为了让 Next.js 服务器监听所有网络接口。</p>
+<hr>
+<h2 id="pm2：守护与持久化运行"><a href="#pm2：守护与持久化运行" class="headerlink" title="pm2：守护与持久化运行"></a>pm2：守护与持久化运行</h2><p><a class="link" target="_blank" rel="noopener" href="https://pm2.keymetrics.io/">pm2<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> 是一个 Node.js 进程管理器，用来管理生产环境里的 Node 服务。它可以：</p>
+<ul>
+<li>在应用崩溃后自动重启；</li>
+<li>在系统重启后自动拉起进程；</li>
+<li>提供日志与监控。</li>
+</ul>
+<h3 id="使用-pm2-启动-Next-js"><a href="#使用-pm2-启动-Next-js" class="headerlink" title="使用 pm2 启动 Next.js"></a>使用 pm2 启动 Next.js</h3><p>在项目根目录执行：</p>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start <span class="string">&quot;npm run start -- -p 3000&quot;</span> --name carboncoin</span><br></pre></td></tr></table></figure></div>
+
+<p>查看进程状态：</p>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pm2 list</span><br><span class="line">pm2 status carboncoin</span><br></pre></td></tr></table></figure></div>
+
+<p>查看日志：</p>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 logs carboncoin</span><br></pre></td></tr></table></figure></div>
+
+<p>保存当前进程并设置开机自启：</p>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pm2 save</span><br><span class="line">pm2 startup</span><br><span class="line"><span class="comment"># 按照输出提示执行一次对应的 systemd 命令</span></span><br></pre></td></tr></table></figure></div>
+
+<p>至此，即使服务器重启，Next.js 服务也会自动拉起，Nginx 仍然将外部请求转发到本地 3000 端口。</p>
+<hr>
+<h2 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h2><h3 id="iOS-与-SSL-缓存的隐性问题"><a href="#iOS-与-SSL-缓存的隐性问题" class="headerlink" title="iOS 与 SSL 缓存的隐性问题"></a>iOS 与 SSL 缓存的隐性问题</h3><p>在迁移到国内服务器后，我遇到过一个非常隐蔽的问题：</p>
+<ul>
+<li>我自己的 iOS 设备访问一切正常；</li>
+<li>新用户在首次访问时，却出现 TLS&#x2F;SSL 证书链错误。</li>
+</ul>
+<p>原因在于：<strong>iOS 系统和 App 都会缓存 SSL&#x2F;TLS 相关的配置</strong>，尤其是：</p>
+<ul>
+<li>证书链的验证结果；</li>
+<li>ATS（App Transport Security）的例外配置。</li>
+</ul>
+<p>已经访问过旧环境的设备，可能还在沿用旧的验证结果，而新设备会直接按照最新配置进行验证，结果就会“分裂”成：</p>
+<ul>
+<li>老设备：依赖缓存，访问正常；</li>
+<li>新设备：严格校验新证书链，报 TLS&#x2F;SSL 错误。</li>
+</ul>
+<p>调试过程中的常用命令包括：</p>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># DNS 解析检查</span></span><br><span class="line">dig +short carboncoin.asia</span><br><span class="line">dig +short www.carboncoin.asia</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在服务器上进行证书链检查</span></span><br><span class="line">openssl s_client -connect www.carboncoin.asia:443 -servername www.carboncoin.asia</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="Nginx-配置问题"><a href="#Nginx-配置问题" class="headerlink" title="Nginx 配置问题"></a>Nginx 配置问题</h3><p>在上述的 Nginx 配置中，Wi-Fi 环境访问正常，但是蜂窝网络下出现 503 upstream connect error.</p>
+<p>问题源于部分移动运营商默认优先通过 HTTP&#x2F;2 与服务器建立 TLS 连接，如果 Nginx 只支持 HTTP&#x2F;1.1，可能在 TLS 协商阶段中断</p>
+<p>因此，我们可以修改配置，提高兼容性与握手成功率：</p>
+<ol>
+<li><p>启用 HTTP&#x2F;2：</p>
+<div class="code-container" data-rel="Nginx"><figure class="iseeu highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">listen</span> <span class="number">443</span> ssl http2;</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p>增加响应超时时间：</p>
+<div class="code-container" data-rel="Nginx"><figure class="iseeu highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">proxy_connect_timeout</span> <span class="number">30s</span>;</span><br><span class="line"><span class="attribute">proxy_send_timeout</span> <span class="number">60s</span>;</span><br><span class="line"><span class="attribute">proxy_read_timeout</span> <span class="number">60s</span>;</span><br><span class="line"><span class="attribute">send_timeout</span> <span class="number">60s</span>;</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p>添加代理头信息：</p>
+<div class="code-container" data-rel="Nginx"><figure class="iseeu highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$remote_addr</span>;</span><br><span class="line"><span class="attribute">proxy_set_header</span> X-Forwarded-Proto <span class="variable">$scheme</span>;</span><br></pre></td></tr></table></figure></div></li>
+</ol>
+<p>修改之后完整的 Nginx 配置；</p>
+<div class="code-container" data-rel="Nginx"><figure class="iseeu highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># HTTP重定向到HTTPS</span></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> carboncoin.asia www.carboncoin.asia;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 强制 HTTPS</span></span><br><span class="line">    <span class="attribute">return</span> <span class="number">301</span> https://<span class="variable">$host</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">443</span> ssl http2;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="attribute">ssl_protocols</span> TLSv1.<span class="number">2</span> TLSv1.<span class="number">3</span>;</span><br><span class="line">    <span class="attribute">ssl_ciphers</span> HIGH:!aNULL:!MD5;</span><br><span class="line">    <span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 安全头</span></span><br><span class="line">    <span class="attribute">add_header</span> Strict-Transport-Security <span class="string">&quot;max-age=31536000; includeSubDomains&quot;</span> always;</span><br><span class="line">    <span class="attribute">add_header</span> X-Content-Type-Options nosniff;</span><br><span class="line">    <span class="attribute">add_header</span> X-Frame-Options SAMEORIGIN;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 超时设置 防止移动网络慢触发 upstream error</span></span><br><span class="line">    <span class="attribute">proxy_connect_timeout</span> <span class="number">30s</span>;</span><br><span class="line">    <span class="attribute">proxy_send_timeout</span> <span class="number">60s</span>;</span><br><span class="line">    <span class="attribute">proxy_read_timeout</span> <span class="number">60s</span>;</span><br><span class="line">    <span class="attribute">send_timeout</span> <span class="number">60s</span>;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://127.0.0.1:3000;</span><br><span class="line">        <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Connection <span class="string">&quot;upgrade&quot;</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$remote_addr</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Proto <span class="variable">$scheme</span>;</span><br><span class="line">        <span class="attribute">proxy_cache_bypass</span> <span class="variable">$http_upgrade</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> 从域名到生产部署</li>
+        <li><strong>作者:</strong> ffy</li>
+        <li><strong>创建于
+                :</strong> 2025-11-08 14:13:29</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2025-11-08 15:23:41
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://ffy6511.github.io/2025/11/08/从域名到生产部署/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">#服务器</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+  <div class="recommended-article px-2 sm:px-6 md:px-8">
+   <div class="recommended-desktop">
+    <div class="recommended-article-header text-xl md:text-3xl font-bold mt-10">
+     <i aria-hidden="true"></i><span>推荐阅读</span>
+    </div>
+    <div class="recommended-article-group"><a class="recommended-article-item" href="/2025/01/17/%E6%9C%8D%E5%8A%A1%E5%99%A8/SSH%E9%9A%A7%E9%81%93/" title="SSH隧道" rel="bookmark">
+  <img src="/images/wallhaven-wqery6-light.webp" alt="SSH隧道" class="!max-w-none">
+  <span class="title">SSH隧道</span>
+</a><a class="recommended-article-item" href="/2025/06/28/%E6%9C%8D%E5%8A%A1%E5%99%A8/VNC%E4%B8%8E%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="VNC与云服务器" rel="bookmark">
+  <img src="https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250628195502186.png?imageSlim" alt="VNC与云服务器" class="!max-w-none">
+  <span class="title">VNC与云服务器</span>
+</a><a class="recommended-article-item" href="/2025/01/18/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E8%AE%A4%E8%AF%81%E9%85%8D%E7%BD%AE/" title="协议切换与认证配置" rel="bookmark">
+  <img src="/images/wallhaven-wqery6-light.webp" alt="协议切换与认证配置" class="!max-w-none">
+  <span class="title">协议切换与认证配置</span>
+</a></div>
+   </div>
+   <div class="recommended-mobile">
+   <div class="recommended-article-header text-xl md:text-3xl font-bold mt-10">
+     <i aria-hidden="true"></i><span>推荐阅读</span>
+   </div>
+   <div class="recommended-article-group"><a class="recommended-article-item" href="/2025/01/17/%E6%9C%8D%E5%8A%A1%E5%99%A8/SSH%E9%9A%A7%E9%81%93/" title="SSH隧道" rel="bookmark">
+  <img src="/images/wallhaven-wqery6-light.webp" alt="SSH隧道" class="!max-w-none">
+  <span class="title">SSH隧道</span>
+</a><a class="recommended-article-item" href="/2025/06/28/%E6%9C%8D%E5%8A%A1%E5%99%A8/VNC%E4%B8%8E%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="VNC与云服务器" rel="bookmark">
+  <img src="https://my-blog-img-1358266118.cos.ap-guangzhou.myqcloud.com/undefined20250628195502186.png?imageSlim" alt="VNC与云服务器" class="!max-w-none">
+  <span class="title">VNC与云服务器</span>
+</a></div>
+   </div>
+  </div>
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/2025/11/07/MAIC%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%8F%82%E8%B5%9B%E5%B0%8F%E7%BB%93/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">MAIC的第一次参赛小结</span>
+						<span class="post-nav-item">下一篇</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="giscus-container"></div>
+    <script data-swup-reload-script defer>
+        async function loadGiscus() {
+            const giscusConfig = {
+                'src': 'https://giscus.app/client.js',
+                'data-repo': 'ffy6511/ffy6511.github.io',
+                'data-repo-id': 'R_kgD00mnQ1A&#34;',
+                'data-category': 'Announcements',
+                'data-category-id': 'DIC_kwD00mnQ1M4Cp8zM',
+                'data-mapping': 'pathname',
+                'data-strict': '0',
+                'data-reactions-enabled': '1',
+                'data-emit-metadata': '1',
+                'data-theme': 'preferred_color_scheme',
+                'data-lang': 'zh-CN',
+                'data-input-position': 'top',
+                'data-loading': 'lazy',
+                'crossorigin': 'anonymous',
+                'async': true
+            }
+            const giscusScript = document.createElement('script');
+            for (const key in giscusConfig) {
+                giscusScript.setAttribute(key, giscusConfig[key]);
+            }
+            document.getElementById('giscus-container').appendChild(giscusScript);
+        }
+        if ('true') {
+            let loadGiscusTimeout = setTimeout(() => {
+                loadGiscus();
+                clearTimeout(loadGiscusTimeout);
+            }, 1000);
+        } else {
+            document.addEventListener('DOMContentLoaded', loadGiscus);
+        }
+    </script>
+
+
+        
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">目录</div>
+		<div class="page-title">从域名到生产部署</div>
+		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E9%80%BB%E8%BE%91%E4%B8%8E%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">部署逻辑与原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%9F%E5%90%8D%EF%BC%9A%E4%BA%92%E8%81%94%E7%BD%91%E7%9A%84%E7%A8%B3%E5%AE%9A%E5%85%A5%E5%8F%A3"><span class="nav-number">1.1.</span> <span class="nav-text">域名：互联网的稳定入口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSL-%E8%AF%81%E4%B9%A6%EF%BC%9A%E5%BB%BA%E7%AB%8B%E5%8A%A0%E5%AF%86%E4%BF%A1%E4%BB%BB%E9%93%BE"><span class="nav-number">1.2.</span> <span class="nav-text">SSL 证书：建立加密信任链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-iOS-App-%E6%97%A0%E6%B3%95%E7%9B%B4%E6%8E%A5%E8%AE%BF%E9%97%AE-HTTP%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">为什么 iOS App 无法直接访问 HTTP？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx%EF%BC%9A%E6%A1%A5%E6%8E%A5%E5%AE%89%E5%85%A8%E4%B8%8E%E6%9C%8D%E5%8A%A1%E9%80%BB%E8%BE%91"><span class="nav-number">1.4.</span> <span class="nav-text">Nginx：桥接安全与服务逻辑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%9F%E5%90%8D%E4%B8%8E-SSL%EF%BC%9A%E5%BB%BA%E7%AB%8B%E5%8F%AF%E4%BF%A1%E5%85%A5%E5%8F%A3"><span class="nav-number">2.</span> <span class="nav-text">域名与 SSL：建立可信入口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%B7%E8%B4%9D%E8%AF%81%E4%B9%A6%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text">拷贝证书到服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E8%AF%81%E4%B9%A6%E9%93%BE"><span class="nav-number">2.2.</span> <span class="nav-text">验证证书链</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx%EF%BC%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E6%B5%81%E9%87%8F%E4%B8%AD%E6%9E%A2"><span class="nav-number">3.</span> <span class="nav-text">Nginx：反向代理与流量中枢</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-number">3.1.</span> <span class="nav-text">安装与基本配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E9%85%8D%E7%BD%AE%E5%B9%B6%E9%87%8D%E8%BD%BD-Nginx"><span class="nav-number">3.2.</span> <span class="nav-text">检查配置并重载 Nginx</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS-%E8%A7%A3%E6%9E%90%EF%BC%9A%E8%AE%A9%E5%9F%9F%E5%90%8D%E6%8C%87%E5%90%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">DNS 解析：让域名指向服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Next-js-%E6%9E%84%E5%BB%BA%E4%B8%8E%E8%BF%90%E8%A1%8C"><span class="nav-number">5.</span> <span class="nav-text">Next.js 构建与运行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E2%80%93turbopack"><span class="nav-number">5.0.1.</span> <span class="nav-text">什么是–turbopack</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pm2%EF%BC%9A%E5%AE%88%E6%8A%A4%E4%B8%8E%E6%8C%81%E4%B9%85%E5%8C%96%E8%BF%90%E8%A1%8C"><span class="nav-number">6.</span> <span class="nav-text">pm2：守护与持久化运行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-pm2-%E5%90%AF%E5%8A%A8-Next-js"><span class="nav-number">6.1.</span> <span class="nav-text">使用 pm2 启动 Next.js</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text">其他问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS-%E4%B8%8E-SSL-%E7%BC%93%E5%AD%98%E7%9A%84%E9%9A%90%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-number">7.1.</span> <span class="nav-text">iOS 与 SSL 缓存的隐性问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx-%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98"><span class="nav-number">7.2.</span> <span class="nav-text">Nginx 配置问题</span></a></li></ol></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2025</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 1s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">ffy</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 29 篇文章
+                    </span>
+                    
+                        <span>
+                            共 83.2k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+            
+                
+        
+                
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="站内搜索您需要的内容..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+<script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/libs/Swup.min.js" ></script><script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/libs/SwupSlideTheme.min.js" ></script><script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/libs/SwupScriptsPlugin.min.js" ></script><script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/libs/SwupProgressPlugin.min.js" ></script><script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/libs/SwupScrollPlugin.min.js" ></script><script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/libs/SwupPreloadPlugin.min.js" ></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	<script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/tools/imageViewer.js" ></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/utils.js" ></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/main.js" ></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/layouts/navbarShrink.js" ></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/tools/scrollTopBottom.js" ></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/tools/lightDarkSwitch.js" ></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/layouts/categoryList.js" ></script>
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/tools/localSearch.js" ></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/tools/codeBlock.js" ></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/layouts/lazyload.js" ></script>
+
+
+
+    <script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/tools/runtime.js" ></script>
+    <script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/libs/odometer.min.js" ></script>
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/libs/Typed.min.js" ></script>
+  <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/plugins/typed.js" ></script>
+
+
+
+    
+        <script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/libs/mermaid.min.js" ></script>
+    
+    <script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/plugins/mermaid.js" ></script>
+
+
+
+
+
+    <script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/libs/anime.min.js" ></script>
+
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/tools/tocToggle.js" data-swup-reload-script></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/layouts/toc.js" data-swup-reload-script></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/plugins/tabs.js" data-swup-reload-script></script>
+
+
+<script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/libs/moment-with-locales.min.js" data-swup-reload-script></script>
+<script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/layouts/essays.js" data-swup-reload-script></script>
+
+
+
+
+	
+	<div id="aplayer"></div>
+<script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/libs/APlayer.min.js" ></script>
+<script  src="https://evan.beee.top/projects/hexo-theme-redefine@2.8.5/source/js/build/plugins/aplayer.js" ></script>
+
+	
+</body>
+
+</html>

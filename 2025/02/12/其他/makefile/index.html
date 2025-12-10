@@ -146,7 +146,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/redefine-og.webp">
 <meta property="article:published_time" content="2025-02-12T10:15:25.000Z">
-<meta property="article:modified_time" content="2025-05-09T09:31:08.713Z">
+<meta property="article:modified_time" content="2025-09-22T07:25:32.861Z">
 <meta property="article:author" content="ffy">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/redefine-og.webp">
@@ -537,7 +537,7 @@
 
         <div class="statistics flex justify-around my-2.5">
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">29</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">30</div>
         <div class="label text-third-text-color text-sm">标签</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
@@ -545,7 +545,7 @@
         <div class="label text-third-text-color text-sm">分类</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">27</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">29</div>
         <div class="label text-third-text-color text-sm">文章</div>
     </a>
 </div>
@@ -596,8 +596,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2025-05-09 17:31:08</span>
-            <span class="mobile">2025-05-09 17:31:08</span>
+            <span class="desktop">2025-09-22 15:25:32</span>
+            <span class="mobile">2025-09-22 15:25:32</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -724,8 +724,7 @@
 </ul>
 </li>
 </ol>
-<h2 id="静态模式"><a href="#静态模式" class="headerlink" title="静态模式"></a>静态模式</h2><p>好的，让我从这几个角度来介绍 Makefile 中的静态模式规则。</p>
-<h3 id="1-引入背景"><a href="#1-引入背景" class="headerlink" title="1. 引入背景"></a>1. 引入背景</h3><p>在 Makefile 中，当我们需要将多个源文件编译成对应的目标文件时，如果按照普通的规则写法，往往需要为每个文件都写一条规则：</p>
+<h2 id="静态模式"><a href="#静态模式" class="headerlink" title="静态模式"></a>静态模式</h2><h3 id="1-引入背景"><a href="#1-引入背景" class="headerlink" title="1. 引入背景"></a>1. 引入背景</h3><p>在 Makefile 中，当我们需要将多个源文件编译成对应的目标文件时，如果按照普通的规则写法，往往需要为每个文件都写一条规则：</p>
 <div class="code-container" data-rel="Makefile"><figure class="iseeu highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">foo.o : foo.c</span><br><span class="line">    <span class="variable">$(CC)</span> -c <span class="variable">$(CFLAGS)</span> foo.c -o foo.o</span><br><span class="line"></span><br><span class="line">bar.o : bar.c</span><br><span class="line">    <span class="variable">$(CC)</span> -c <span class="variable">$(CFLAGS)</span> bar.c -o bar.o</span><br><span class="line"></span><br><span class="line">test.o : test.c</span><br><span class="line">    <span class="variable">$(CC)</span> -c <span class="variable">$(CFLAGS)</span> test.c -o test.o</span><br></pre></td></tr></table></figure></div>
 
 <p>这种写法存在明显问题：</p>
@@ -770,7 +769,7 @@
 
 <p>执行<code>recipe</code>命令的条件:</p>
 <ul>
-<li><code>prerequisites</code>中存在文件的日期早于<code>target</code>的日期;</li>
+<li><code>prerequisites</code>中存在文件比<code>target</code>更新;</li>
 <li><code>target</code>的文件不存在.</li>
 </ul>
 <h2 id="使用变量"><a href="#使用变量" class="headerlink" title="使用变量"></a>使用变量</h2><div class="code-container" data-rel="Makefile"><figure class="iseeu highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义变量: 类似于C的宏定义</span></span><br><span class="line">objects = main.o display.o</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用变量</span></span><br><span class="line"><span class="section">edit: <span class="variable">$(objects)</span></span></span><br><span class="line">    cc -o edit <span class="variable">$(objects)</span></span><br></pre></td></tr></table></figure></div>
@@ -897,7 +896,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2025-05-09 17:31:08
+                    :</strong> 2025-09-22 15:25:32
             </li>
         
         <li>
@@ -1074,11 +1073,11 @@
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        共撰写了 27 篇文章
+                        共撰写了 29 篇文章
                     </span>
                     
                         <span>
-                            共 80.7k 字
+                            共 83.2k 字
                         </span>
                     
                 </p>
