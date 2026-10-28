@@ -1,0 +1,1 @@
+import{n as e}from"./misc.Ann73zLU.js";document.addEventListener(`astro:page-load`,()=>{document.getElementById(`tag-open-button`)?.addEventListener(`click`,()=>{console.debug(`[tag] open panel`),e(`backdrop`,!0,`hidden`),e(`tag-panel`,!0,`hidden!`)})});

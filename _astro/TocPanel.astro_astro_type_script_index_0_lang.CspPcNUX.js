@@ -1,0 +1,1 @@
+import{n as e}from"./misc.Ann73zLU.js";document.addEventListener(`astro:page-load`,()=>{document.getElementById(`toc-panel`)?.addEventListener(`click`,t=>{let n=t.target;n instanceof HTMLElement&&n.closest(`a`)&&(e(`toc-panel`,!1,`hidden!`),e(`backdrop`,!1,`hidden`))})});

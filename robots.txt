@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ffy6511.github.io/sitemap-index.xml

@@ -1,0 +1,1 @@
+import{n as e}from"./misc.Ann73zLU.js";document.addEventListener(`astro:page-load`,()=>{document.getElementById(`nav-open-button`)?.addEventListener(`click`,()=>{e(`backdrop`,!0,`hidden`),e(`nav-panel`,!0,`hidden!`)})});

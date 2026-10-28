@@ -1,0 +1,1 @@
+import{n as e}from"./misc.Ann73zLU.js";document.addEventListener(`astro:page-load`,()=>{document.getElementById(`search-switch`)?.addEventListener(`click`,()=>{e(`backdrop`,!0,`hidden`),e(`search-panel`,!0,`hidden`),requestAnimationFrame(()=>{let e=document.getElementById(`search-input`);e&&e.focus()})})});

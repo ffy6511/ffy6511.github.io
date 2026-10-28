@@ -1,0 +1,336 @@
+<!DOCTYPE html><html lang="en"><head><!-- Global Metadata --><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><script>
+  if (location.hash.length > 1) document.documentElement.style.scrollBehavior = 'auto'
+</script><meta name="generator" content="Astro v7.0.7"><!-- Font --><style>@font-face{font-family:Inter-aa47155a633ac00f;src:url("/_astro/fonts/5288773a5a229461.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:100 900;font-style:normal;}@font-face{font-family:"Inter-aa47155a633ac00f fallback: Arial";src:local("Arial");font-display:swap;font-weight:100 900;font-style:normal;size-adjust:107.1194%;ascent-override:90.4365%;descent-override:22.518%;line-gap-override:0%;}:root{--font-sans:Inter-aa47155a633ac00f,"Inter-aa47155a633ac00f fallback: Arial",ui-sans-serif,system-ui,"\"Apple Color Emoji\"","\"Segoe UI Emoji\"","\"Segoe UI Symbol\"","\"Noto Color Emoji\"",sans-serif;}</style><link rel="preload" href="/_astro/fonts/5288773a5a229461.woff2" as="font" type="font/woff2" crossorigin><style>@font-face{font-family:"DM Mono-1524d8cdd2af925c";src:url("/_astro/fonts/ed1cd790bef069b2.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:400;font-style:normal;}@font-face{font-family:"DM Mono-1524d8cdd2af925c fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:400;font-style:normal;size-adjust:99.9837%;ascent-override:99.2161%;descent-override:31.005%;}:root{--font-mono:"DM Mono-1524d8cdd2af925c","DM Mono-1524d8cdd2af925c fallback: Courier New",ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"\"Liberation Mono\"","\"Courier New\"",monospace;}</style><style>@font-face{font-family:"Roboto Condensed-2700e333fa907558";src:url("/_astro/fonts/50e2b53301c7450d.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:400;font-style:normal;}@font-face{font-family:"Roboto Condensed-2700e333fa907558 fallback: Arial";src:local("Arial");font-display:swap;font-weight:400;font-style:normal;size-adjust:88.828%;ascent-override:104.4416%;descent-override:27.4846%;line-gap-override:0%;}:root{--font-condensed:"Roboto Condensed-2700e333fa907558","Roboto Condensed-2700e333fa907558 fallback: Arial",ui-sans-serif,system-ui,"\"Apple Color Emoji\"","\"Segoe UI Emoji\"","\"Segoe UI Symbol\"","\"Noto Color Emoji\"",sans-serif;}</style><!-- Primary Metadata --><title>Astro Streams - J. Zhuo</title><meta name="title" content="Astro Streams - J. Zhuo"><meta name="description" content="Example: displaying Astro streams with local JSON data"><meta name="author" content="Junhao Zhuo"><!-- Color --><meta name="color-scheme" content=""><meta name="theme-color" content=""><!-- Initialize as inline scripts for faster response, avoiding FOUC  --><script data-astro-rerun>
+  ;(() => {
+    const storedTheme = localStorage.getItem('theme')
+    const prefersDark = window.matchMedia(
+      '(prefers-color-scheme: dark)'
+    ).matches
+    const theme = storedTheme || (prefersDark ? 'dark' : 'light')
+    const themeColor = theme === 'dark' ? '#050505' : '#fff'
+
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+    window.localStorage.setItem('theme', theme)
+
+    const colorScheme = document.querySelector("meta[name='color-scheme']")
+    colorScheme?.setAttribute(
+      'content',
+      theme === 'dark' ? 'dark light' : 'light dark'
+    )
+
+    const themeColorMeta = document.querySelector("meta[name='theme-color']")
+    themeColorMeta?.setAttribute('content', themeColor)
+  })()
+</script><!-- Open Graph & Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://ffy6511.github.io/streams/"><meta property="og:title" content="Astro Streams - J. Zhuo"><meta property="og:description" content="Example: displaying Astro streams with local JSON data"><meta property="og:image" content="https://ffy6511.github.io/og-images/og-image.png"><meta property="og:site_name" content="ffy6511.github.io"><meta property="og:locale" content="en_US"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://ffy6511.github.io/streams/"><meta property="twitter:title" content="Astro Streams - J. Zhuo"><meta property="twitter:description" content="Example: displaying Astro streams with local JSON data"><meta property="twitter:image" content="https://ffy6511.github.io/og-images/og-image.png"><!-- Canonical URL --><link rel="canonical" href="https://ffy6511.github.io/streams/"><!-- Icon --><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" sizes="32x32" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><!-- Manifest --><link rel="manifest" href="/app.webmanifest"><!-- Sitemap --><link rel="sitemap" href="/sitemap-index.xml"><!-- RSS --><link rel="alternate" type="application/rss+xml" title="/rss.xml" href="/rss.xml"><!-- Google JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"webPage","name":"Astro Streams","description":"Example: displaying Astro streams with local JSON data","publisher":{"@type":"ProfilePage","name":"Junhao Zhuo's Personal Website"}}</script><!-- Router --><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.6Spq5I16.js"></script><link rel="stylesheet" href="/_astro/excalidraw-view.ClqZYnRd.css"><link rel="stylesheet" href="/_astro/BaseLayout.xNMFtraK.css"><link rel="stylesheet" href="/_astro/_astro_assets.BHsrmB4F.css"><link rel="stylesheet" href="/_astro/TabbedLayout.BpjGtZyh.css"><link rel="stylesheet" href="/_astro/photos.0sOtqpiU.css"><link rel="stylesheet" href="/_astro/Loader.D9bf4frJ.css"></head><body class="relative flex flex-col min-h-screen
+      font-sans text-gray-700 dark:text-gray-200" style="--enter-step:80ms"><!-- Background --><!-- Skip Link --><a class="op-60 no-underline hover:op-100 sr-only focus:not-sr-only focus:fixed focus:start-1 focus:top-1.5 focus:op-20" href="#main">Skip to content</a><!-- Nav Bar --><header class="flex items-center gap-6 p-[1.75rem_2rem_2rem] lt-md:px-7"><a class="op-60 no-underline hover:op-100 select-none op-transition" href="/" aria-label="Junhao Zhuo" aria-current="false" data-astro-cid-s4i5izk3="true"><div class="logo-container" data-astro-cid-s4i5izk3><!-- ICON SVG --><!-- <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 32 32"
+      width="2em"
+      height="2em"
+      aria-hidden="true"
+    >
+      <path
+        fill="url(#vscodeIconsFileTypeLightAstro0)"
+        d="M11.025 20.499c-.532 1.75-.154 4.184 1.105 5.331v-.042l.042-.112c.154-.741.756-1.203 1.526-1.175c.713.014 1.12.392 1.217 1.217c.042.308.042.616.056.938v.098c0 .7.196 1.371.588 1.959c.35.56.84.993 1.497 1.287l-.028-.056l-.028-.112c-.49-1.469-.14-2.49 1.147-3.358l.392-.266l.868-.573a4.25 4.25 0 0 0 1.791-3.037c.07-.532 0-1.05-.154-1.553l-.21.14c-1.945 1.035-4.17 1.4-6.325.98c-1.301-.197-2.56-.56-3.498-1.652z"
+      >
+      </path>
+      <path
+        class="dark:fill-[#fdfdfd]"
+        fill="#17191e"
+        d="M4.925 20.191s3.736-1.82 7.486-1.82l2.84-8.759c.098-.42.406-.7.756-.7s.644.28.756.714l2.826 8.746c4.45 0 7.487 1.82 7.487 1.82L20.709 2.84c-.168-.518-.49-.84-.896-.84h-7.612c-.406 0-.7.322-.896.84z"
+      >
+      </path>
+      <defs>
+        <linearGradient
+          id="vscodeIconsFileTypeLightAstro0"
+          x1="8.19"
+          x2="16.91"
+          y1="23"
+          y2="18.89"
+          gradientTransform="translate(-.673 -2.198)scale(1.3993)"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0" stop-color="#d83333"></stop>
+          <stop offset="1" stop-color="#f041ff"></stop>
+        </linearGradient>
+      </defs>
+    </svg> --><!-- TEXT SVG: J. Zhuo. The mask is the Great Vibes outline; the paths are its centerline. --><svg class="logo-svg" width="233.68" height="89.608" viewBox="0 0 233.68 89.608" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-astro-cid-s4i5izk3><mask id="site-logo-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="233.68" height="89.608" data-astro-cid-s4i5izk3><rect width="233.68" height="89.608" fill="#000" data-astro-cid-s4i5izk3></rect><path fill="#fff" d="M26.26 87.61L26.26 87.61Q19.42 87.61 13.92 85.30Q8.41 83.00 5.20 78.61Q2 74.22 2 68.02L2 68.02Q2 62.26 4.23 58.56Q6.46 54.85 9.13 52.98L9.13 52.98Q10.64 51.90 11.94 51.43Q13.23 50.96 13.66 50.96L13.66 50.96Q14.10 50.96 14.10 51.32L14.10 51.32Q14.10 51.68 13.74 51.90L13.74 51.90Q9.99 54.13 8.01 58.23Q6.03 62.34 6.03 67.23L6.03 67.23Q6.03 72.85 8.62 76.99Q11.22 81.13 15.82 83.36Q20.43 85.59 26.48 85.59L26.48 85.59Q36.70 85.59 45.99 77.53Q55.28 69.46 63.92 55.06L63.92 55.06Q67.16 49.52 70.04 43.62Q72.92 37.71 75.51 31.95L75.51 31.95Q78.10 26.34 80.44 21.84Q82.78 17.34 84.55 14.24Q86.31 11.14 87.10 9.92L87.10 9.92Q68.89 12.37 58.92 17.70Q48.94 23.02 48.94 31.38L48.94 31.38Q48.94 35.70 51.18 37.82Q53.41 39.94 56.29 39.94L56.29 39.94Q59.10 39.94 61.94 38.14Q64.78 36.34 66.69 33.14Q68.60 29.94 68.60 25.69L68.60 25.69Q68.60 23.60 67.30 22.30L67.30 22.30Q67.30 21.58 68.02 21.58L68.02 21.58Q68.89 21.58 69.57 22.88Q70.26 24.18 70.26 26.12L70.26 26.12Q70.26 30.94 67.99 34.44Q65.72 37.93 62.23 39.80Q58.74 41.67 55.06 41.67L55.06 41.67Q52.26 41.67 49.74 40.45Q47.22 39.22 45.60 36.70Q43.98 34.18 43.98 30.44L43.98 30.44Q43.98 25.54 47.25 21.91Q50.53 18.27 56.47 15.68Q62.41 13.09 70.51 11.22Q78.61 9.34 88.33 7.98L88.33 7.98Q90.34 5.17 92.04 3.58Q93.73 2 95.74 2L95.74 2Q96.90 2 97.58 2.58Q98.26 3.15 98.26 4.30L98.26 4.30Q98.26 5.96 96.90 7.00Q95.53 8.05 93.44 8.66Q91.35 9.27 89.26 9.63L89.26 9.63Q86.60 14.24 84.62 19.10Q82.64 23.96 80.95 29.04Q79.26 34.11 77.35 39.40Q75.44 44.70 72.85 50.24L72.85 50.24Q67.45 61.69 60.39 70.08Q53.34 78.46 44.77 83.04Q36.20 87.61 26.26 87.61ZM90.56 7.83L90.56 7.83Q93.51 7.33 94.52 6.57Q95.53 5.82 95.53 5.17L95.53 5.17Q95.53 4.30 94.66 4.30L94.66 4.30Q93.87 4.30 92.76 5.49Q91.64 6.68 90.56 7.83ZM83.94 61.18L83.94 61.18Q82.78 61.18 82.06 60.46Q81.34 59.74 81.34 58.66L81.34 58.66Q81.34 57.22 82.46 56.22Q83.58 55.21 84.87 55.21L84.87 55.21Q86.02 55.21 86.74 55.89Q87.46 56.58 87.46 57.66L87.46 57.66Q87.46 59.02 86.38 60.10Q85.30 61.18 83.94 61.18ZM112.02 62.98L112.02 62.98Q110.36 62.98 108.52 62.26Q106.69 61.54 105.43 60.00Q104.17 58.45 104.17 56.14L104.17 56.14Q104.17 53.34 106.08 51.68Q107.98 50.02 111.08 50.02L111.08 50.02Q114.03 50.02 117.52 51.64Q121.02 53.26 124.90 55.78L124.90 55.78Q127.06 53.62 129.51 50.74Q131.96 47.86 134.48 44.73Q137 41.60 139.34 38.61Q141.68 35.62 143.70 33.18L143.70 33.18Q150.10 25.40 155.40 20.18Q160.69 14.96 164.72 11.65L164.72 11.65Q160.33 10.42 154.64 9.52Q148.95 8.62 141.68 8.62L141.68 8.62Q136.71 8.62 133.08 9.99Q129.44 11.36 127.46 13.45Q125.48 15.54 125.48 17.77L125.48 17.77Q125.48 19.78 126.74 20.86Q128 21.94 128.94 22.59L128.94 22.59Q129.80 23.10 129.80 23.46L129.80 23.46Q129.80 23.96 128.94 23.96L128.94 23.96Q127.42 23.96 126.09 22.81Q124.76 21.66 123.90 19.89Q123.03 18.13 123.03 16.26L123.03 16.26Q123.03 12.58 125.48 9.99Q127.93 7.40 131.89 6.07Q135.85 4.74 140.38 4.74L140.38 4.74Q144.92 4.74 149.46 5.74Q153.99 6.75 158.24 8.08Q162.49 9.42 166.09 10.57L166.09 10.57Q167.31 9.63 168.97 8.37Q170.62 7.11 172.68 6.14Q174.73 5.17 177.03 5.17L177.03 5.17Q178.98 5.17 180.13 6.14Q181.28 7.11 181.28 8.55L181.28 8.55Q181.28 10.78 179.37 12.15Q177.46 13.52 174.87 13.52L174.87 13.52Q173.29 13.52 171.38 13.20Q169.47 12.87 167.31 12.37L167.31 12.37Q165.37 14.10 163.03 16.87Q160.69 19.64 158.20 22.92Q155.72 26.19 153.31 29.40Q150.90 32.60 148.81 35.19L148.81 35.19Q144.78 40.16 140.67 44.30Q136.57 48.44 132.90 51.61Q129.22 54.78 126.56 56.94L126.56 56.94Q129.66 58.66 133.65 61.08Q137.65 63.49 142.04 65.83Q146.43 68.17 150.79 69.72Q155.14 71.26 158.89 71.26L158.89 71.26Q162.42 71.26 165.69 70.65Q168.97 70.04 171.24 68.42Q173.50 66.80 173.94 63.85L173.94 63.85Q174.15 62.19 174.87 62.19L174.87 62.19Q175.23 62.19 175.52 62.73Q175.81 63.27 175.66 64.86L175.66 64.86Q175.59 65.94 174.87 67.66Q174.15 69.39 172.39 71.16Q170.62 72.92 167.46 74.14Q164.29 75.37 159.25 75.37L159.25 75.37Q154.86 75.37 150.72 73.96Q146.58 72.56 142.76 70.36Q138.94 68.17 135.63 65.79Q132.32 63.42 129.66 61.36Q126.99 59.31 125.12 58.23L125.12 58.23Q121.30 60.97 117.88 61.98Q114.46 62.98 112.02 62.98ZM175.02 12.44L175.02 12.44Q176.67 12.44 177.93 11.65Q179.19 10.86 179.19 9.06L179.19 9.06Q179.19 8.05 178.40 7.40Q177.61 6.75 176.46 6.75L176.46 6.75Q174.87 6.75 172.89 7.94Q170.91 9.13 168.39 11.22L168.39 11.22Q170.34 11.72 171.99 12.08Q173.65 12.44 175.02 12.44ZM113.82 60.68L113.82 60.68Q116.34 60.68 119.04 59.42Q121.74 58.16 123.32 56.79L123.32 56.79Q123.32 56.79 122.60 56.29Q121.88 55.78 121.30 55.50L121.30 55.50Q118.64 53.84 116.48 53.16Q114.32 52.47 112.88 52.47L112.88 52.47Q110.22 52.47 108.85 53.70Q107.48 54.92 107.48 56.36L107.48 56.36Q107.48 57.94 109.06 59.31Q110.65 60.68 113.82 60.68ZM149.67 60.68L149.67 60.68Q152.70 54.49 155.97 47.68Q159.25 40.88 162.70 33.97Q166.16 27.06 169.54 20.79L169.54 20.79Q170.77 18.63 171.81 17.41Q172.86 16.18 174.58 16.18L174.58 16.18Q175.23 16.18 176.10 16.40Q176.96 16.62 177.75 16.47L177.75 16.47Q176.82 17.48 175.20 20Q173.58 22.52 171.60 26.05Q169.62 29.58 167.42 33.64Q165.22 37.71 163.10 41.85Q160.98 45.99 159.18 49.59L159.18 49.59Q160.62 47.72 162.13 46.06Q163.64 44.41 165.08 43.18L165.08 43.18Q166.66 41.74 169.08 40.16Q171.49 38.58 173.90 37.42Q176.31 36.27 177.75 36.27L177.75 36.27Q178.26 36.27 178.47 36.34L178.47 36.34Q178.47 36.34 177.68 37.78Q176.89 39.22 175.70 41.46Q174.51 43.69 173.25 46.28Q171.99 48.87 171.06 51.21Q170.12 53.55 169.83 55.06L169.83 55.06Q169.62 56.22 169.62 57.01L169.62 57.01Q169.62 58.16 170.05 58.56Q170.48 58.95 170.98 58.95L170.98 58.95Q172.21 58.95 173.61 57.69Q175.02 56.43 176.38 54.49Q177.75 52.54 178.94 50.35Q180.13 48.15 180.85 46.21L180.85 46.21Q181.71 46.21 181.71 46.86L181.71 46.86Q180.92 48.80 179.73 51.14Q178.54 53.48 177.03 55.57Q175.52 57.66 173.72 59.02Q171.92 60.39 169.90 60.39L169.90 60.39Q168.46 60.39 166.95 59.38Q165.44 58.38 165.44 55.71L165.44 55.71Q165.44 54.92 165.58 54.02Q165.73 53.12 166.09 51.97L166.09 51.97Q166.52 50.53 167.53 48.76Q168.54 47.00 170.12 44.34L170.12 44.34Q170.84 43.11 170.84 42.39L170.84 42.39Q170.84 41.53 169.98 41.53L169.98 41.53Q169.26 41.53 168.03 42.25Q166.81 42.97 164.94 44.77L164.94 44.77Q163.14 46.50 160.47 49.81Q157.81 53.12 154.78 59.10L154.78 59.10Q154.28 60.03 153.67 60.07Q153.06 60.10 152.05 60.18L152.05 60.18Q151.40 60.25 150.75 60.28Q150.10 60.32 149.67 60.68ZM182.94 60.10L182.94 60.10Q182.14 60.10 181.03 59.74Q179.91 59.38 179.08 58.41Q178.26 57.44 178.26 55.50L178.26 55.50Q178.26 53.62 179.48 51.18Q180.70 48.73 181.64 46.86L181.64 46.86Q180.85 46.86 180.85 46.21L180.85 46.21Q180.92 45.99 181.50 44.84Q182.07 43.69 182.86 42.10Q183.66 40.52 184.41 39.04Q185.17 37.57 185.60 36.78L185.60 36.78Q186.46 35.19 188.34 35.19L188.34 35.19L192.80 35.19Q191.58 36.13 190.60 37.24Q189.63 38.36 188.19 41.31L188.19 41.31Q188.19 41.31 187.69 42.32Q187.18 43.33 186.43 44.88Q185.67 46.42 184.92 48.01Q184.16 49.59 183.66 50.67L183.66 50.67Q182.72 52.69 182.43 53.88Q182.14 55.06 182.14 56.07L182.14 56.07Q182.14 58.45 183.73 58.45L183.73 58.45Q185.46 58.45 187.90 55.64L187.90 55.64Q189.92 53.26 191.86 49.95Q193.81 46.64 195.57 43.11Q197.34 39.58 198.70 36.78L198.70 36.78Q199.50 35.19 201.51 35.19L201.51 35.19L205.47 35.19Q203.89 36.49 202.27 39.08Q200.65 41.67 198.70 45.70L198.70 45.70Q198.20 46.78 197.41 48.44Q196.62 50.10 196.00 51.97Q195.39 53.84 195.39 55.71L195.39 55.71Q195.39 58.23 197.19 58.23L197.19 58.23Q199.64 58.23 201.94 54.85Q204.25 51.46 206.48 46.21L206.48 46.21Q207.06 46.21 207.16 46.28Q207.27 46.35 207.34 46.86L207.34 46.86Q206.55 48.80 205.44 51.07Q204.32 53.34 202.92 55.42Q201.51 57.51 199.82 58.81Q198.13 60.10 196.11 60.10L196.11 60.10Q194.31 60.10 193.16 58.77Q192.01 57.44 192.01 54.99L192.01 54.99Q192.01 53.05 192.73 50.82L192.73 50.82Q191.50 52.98 189.92 55.14Q188.34 57.30 186.54 58.70Q184.74 60.10 182.94 60.10ZM210.80 60.10L210.80 60.10Q207.85 60.10 206.44 57.98Q205.04 55.86 205.04 52.83L205.04 52.83Q205.04 50.02 206.12 47.00L206.12 47.00Q207.27 43.69 209.32 40.95Q211.38 38.22 213.86 36.52Q216.34 34.83 218.79 34.83L218.79 34.83Q221.74 34.83 223.15 36.85Q224.55 38.86 224.55 41.96L224.55 41.96Q224.55 44.12 223.83 46.50Q223.11 48.87 221.89 51.18L221.89 51.18Q222.82 52.11 224.55 52.11L224.55 52.11Q226.57 52.11 228.01 50.82Q229.45 49.52 230.82 46.21L230.82 46.21Q231.68 46.21 231.68 46.86L231.68 46.86Q230.31 50.17 228.55 51.72Q226.78 53.26 224.05 53.19L224.05 53.19Q222.39 53.19 221.31 52.26L221.31 52.26Q219.30 55.57 216.52 57.84Q213.75 60.10 210.80 60.10ZM211.81 58.52L211.81 58.52Q213.46 58.52 215.12 57.12Q216.78 55.71 218.14 53.91Q219.51 52.11 220.09 50.82L220.09 50.82Q218.94 48.73 218.76 47.68Q218.58 46.64 218.58 46.14L218.58 46.14Q218.58 44.77 219.30 44.05Q220.02 43.33 220.74 43.33L220.74 43.33Q221.74 43.33 222.46 44.19L222.46 44.19Q222.61 43.40 222.68 42.72Q222.75 42.03 222.75 41.38L222.75 41.38Q222.75 39.51 222.07 38.32Q221.38 37.14 219.94 37.14L219.94 37.14Q218.43 37.14 216.78 38.43Q215.12 39.73 213.64 41.89Q212.17 44.05 211.09 46.71L211.09 46.71Q210.15 48.94 209.65 50.92Q209.14 52.90 209.14 54.56L209.14 54.56Q209.14 56.36 209.79 57.44Q210.44 58.52 211.81 58.52Z" data-astro-cid-s4i5izk3></path></mask><g class="logo-ink" mask="url(#site-logo-mask)" fill="none" stroke="currentColor" stroke-width="10.51" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-s4i5izk3><path class="logo-draw" d="M 13.44 51.43 L 11.07 52.68 L 9.69 53.80 L 7.44 56.30 L 5.31 60.18 L 4.31 63.93 L 4.06 69.17 L 4.44 72.05 L 5.56 75.42 L 6.56 77.30 L 7.94 79.17 L 10.44 81.67 L 12.32 83.05 L 14.19 84.05 L 18.57 85.67 L 22.94 86.42 L 27.82 86.55 L 33.57 85.80 L 36.82 84.92 L 40.20 83.55 L 42.82 82.17 L 46.45 79.80 L 50.07 76.92 L 55.45 71.67 L 61.58 64.05 L 64.70 59.30 L 67.45 54.68 L 71.08 47.80 L 75.58 37.68 L 81.71 22.43 L 85.71 14.06 L 87.71 10.69 L 87.96 9.06 L 89.58 8.56 L 89.96 8.06 L 90.21 6.94 L 93.58 3.56 L 95.46 3.19 L 96.21 3.31 L 96.71 3.94 L 96.71 4.81 L 96.34 6.06 L 95.21 7.19 L 94.08 7.69 L 91.46 8.44 L 90.08 8.56 L 89.71 8.31" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" style="--dur: 0.576s; --delay: 0.06s" data-astro-cid-s4i5izk3></path><path class="logo-draw" d="M 68.20 22.31 L 69.20 24.06 L 69.33 28.18 L 68.08 32.56 L 66.20 35.43 L 63.70 37.93 L 60.45 39.80 L 58.70 40.43 L 57.08 40.68 L 54.08 40.68 L 52.82 40.43 L 50.70 39.43 L 48.32 37.18 L 47.57 35.81 L 46.95 33.81 L 46.57 29.68 L 47.07 27.06 L 48.32 24.31 L 49.95 22.18 L 51.45 20.68 L 54.20 18.56 L 56.83 17.06 L 61.20 15.06 L 67.95 12.81 L 79.46 10.19 L 85.83 9.19 L 87.96 9.06" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" style="--dur: 0.296s; --delay: 0.509s" data-astro-cid-s4i5izk3></path><path class="logo-draw" d="M 84.08 58.33 L 84.46 58.33" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" style="--dur: 0.16s; --delay: 0.74s" data-astro-cid-s4i5izk3></path><path class="logo-draw" d="M 123.97 57.68 L 124.59 57.05 L 123.72 55.93 L 119.97 53.68 L 117.84 52.68 L 113.71 51.43 L 110.46 51.30 L 109.34 51.55 L 107.84 52.30 L 106.46 53.80 L 106.09 54.55 L 105.84 56.18 L 106.21 58.18 L 106.59 58.93 L 107.59 60.05 L 109.59 61.30 L 112.34 61.80 L 117.22 61.18 L 119.09 60.55 L 121.59 59.30 L 124.09 57.68 L 124.47 57.05 L 125.47 57.05 L 126.34 57.93 L 128.22 58.93 L 134.72 63.43 L 144.22 69.05 L 148.85 71.17 L 152.60 72.42 L 156.85 73.17 L 159.85 73.30 L 164.10 72.92 L 168.23 71.80 L 170.35 70.80 L 171.48 70.05 L 173.73 67.55 L 174.73 64.93 L 174.85 62.93" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" style="--dur: 0.345s; --delay: 0.865s" data-astro-cid-s4i5izk3></path><path class="logo-draw" d="M 125.84 56.55 L 125.47 56.93 L 125.84 56.68 L 125.97 56.18 L 135.34 46.80 L 141.60 39.80 L 153.47 25.31 L 160.35 17.56 L 165.48 12.56 L 165.85 11.56" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" style="--dur: 0.198s; --delay: 1.134s" data-astro-cid-s4i5izk3></path><path class="logo-draw" d="M 128.97 23.43 L 127.09 22.43 L 125.09 20.31 L 124.34 17.43 L 124.22 16.18 L 124.47 14.93 L 125.84 12.44 L 127.84 10.44 L 129.34 9.44 L 132.97 7.81 L 135.97 7.06 L 139.35 6.69 L 142.72 6.69 L 148.35 7.19 L 155.47 8.44 L 160.60 9.69 L 165.10 10.94 L 165.73 11.56 L 167.60 11.44 L 168.35 11.94 L 171.60 12.69 L 173.23 12.94 L 175.85 12.94 L 177.10 12.69 L 178.48 12.06 L 179.60 10.94 L 179.98 9.94 L 179.98 7.69 L 178.73 6.31 L 177.98 6.06 L 175.48 6.06 L 172.60 7.06 L 170.73 8.19 L 167.98 10.31 L 167.60 11.44" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" style="--dur: 0.286s; --delay: 1.288s" data-astro-cid-s4i5izk3></path><path class="logo-draw" d="M 149.85 60.55 L 150.22 60.05 L 152.47 58.80 L 152.97 58.30 L 156.47 51.43 L 157.97 49.05 L 158.35 46.93 L 164.35 34.93 L 172.23 20.43 L 174.48 17.68 L 177.48 16.56" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" style="--dur: 0.172s; --delay: 1.511s" data-astro-cid-s4i5izk3></path><path class="logo-draw" d="M 157.97 49.05 L 158.10 49.30 L 158.85 49.30 L 159.60 48.80 L 160.10 49.18 L 164.85 44.05 L 168.60 41.18 L 171.35 40.43 L 171.98 40.43 L 172.85 41.05 L 172.98 40.93" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" style="--dur: 0.16s; --delay: 1.645s" data-astro-cid-s4i5izk3></path><path class="logo-draw" d="M 177.98 36.56 L 177.10 36.93 L 176.10 37.81 L 172.73 41.18 L 172.23 44.18 L 168.23 52.43 L 167.60 55.18 L 168.23 58.05 L 168.73 58.93 L 169.35 59.43 L 170.85 59.55 L 172.48 59.18 L 173.48 58.55 L 176.23 55.80 L 177.98 53.18 L 180.48 52.68 L 182.48 47.80 L 187.48 37.81 L 189.36 36.18 L 192.48 35.18" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" style="--dur: 0.203s; --delay: 1.77s" data-astro-cid-s4i5izk3></path><path class="logo-draw" d="M 180.23 52.80 L 180.23 55.43 L 180.86 57.80 L 181.36 58.55 L 182.11 59.05 L 184.36 59.05 L 184.98 58.93 L 186.23 58.18 L 188.11 56.43 L 192.11 50.93 L 194.11 50.55" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" style="--dur: 0.16s; --delay: 1.928s" data-astro-cid-s4i5izk3></path><path class="logo-draw" d="M 205.11 35.31 L 202.36 36.18 L 200.48 37.81 L 194.11 50.55 L 193.73 54.18 L 193.86 56.18 L 194.61 58.30 L 195.73 59.05 L 197.98 58.93 L 200.11 57.80 L 202.49 55.18 L 204.61 51.55 L 206.11 50.80 L 206.86 50.80 L 207.24 51.05 L 208.74 46.30 L 210.11 43.55 L 212.49 40.18 L 214.49 38.06 L 215.49 37.31 L 218.11 36.06 L 219.49 36.06 L 221.36 36.43 L 222.61 37.56 L 223.12 38.43 L 223.49 39.93 L 223.62 42.68 L 223.37 44.55 L 222.74 45.18 L 221.49 45.80 L 220.99 46.55 L 220.99 51.55 L 220.36 52.05 L 219.49 53.55 L 217.61 55.80 L 215.61 57.68 L 213.74 58.80 L 212.36 59.18 L 210.61 59.30 L 208.99 58.55 L 207.99 57.30 L 207.61 56.18 L 207.11 53.05 L 207.24 50.93" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" style="--dur: 0.345s; --delay: 2.053s" data-astro-cid-s4i5izk3></path><path class="logo-draw" d="M 220.74 51.68 L 220.99 51.43 L 221.49 51.93 L 223.87 52.68 L 226.87 52.18 L 228.12 51.43 L 228.99 50.55 L 230.62 48.05 L 231.12 46.80" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" style="--dur: 0.16s; --delay: 2.323s" data-astro-cid-s4i5izk3></path></g></svg></div></a><style>
+  .logo-svg { color: #17191e; }
+  .dark .logo-svg { color: #fdfdfd; }
+
+  .logo-draw {
+    animation: logo-write var(--dur) cubic-bezier(0.4, 0, 0.2, 1) var(--delay) both;
+  }
+
+  @keyframes logo-write {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce), print {
+    .logo-draw {
+      animation: none;
+      stroke-dashoffset: 0;
+    }
+  }
+</style><nav class="flex items-center gap-4.8 w-full lt-md:justify-end
+    justify-end" aria-label="Main menu"><div class="grid grid-flow-col items-center gap-4.8 print:op-0
+              false
+              "><a class="op-60 no-underline hover:op-100 lt-md:hidden op-50! op-transition" href="/blog/" title="Blog" aria-label="Blog" aria-current="false"><span>Blog</span></a><a class="op-60 no-underline hover:op-100 lt-md:hidden op-50! op-transition" href="/projects/" title="Projects" aria-label="Projects" aria-current="false"><span>Projects</span></a><a class="op-60 no-underline hover:op-100 lt-md:hidden op-50! op-transition" href="/photos/" title="Photos" aria-label="Photos" aria-current="false"><div class="i-ri-camera-ai-line"></div></a><a class="op-60 no-underline hover:op-100 lt-md:hidden op-50! op-transition" href="/shorts/" title="Shorts" aria-label="Shorts" aria-current="false"><div class="i-meteor-icons-grid"></div></a><hr class="w-0.25 h-[85%] b-t-0 bg-[#ddd] dark:bg-[#333] lt-md:hidden" aria-hidden="true"><a class="op-60 no-underline hover:op-100 lt-md:hidden op-50! op-transition" href="https://github.com/ffy6511" title="Junhao Zhuo on GitHub" aria-label="Junhao Zhuo on GitHub" rel="noopener noreferrer me" target="_blank"><div class="i-uil-github-alt"></div></a><hr class="w-0.25 h-[85%] b-t-0 bg-[#ddd] dark:bg-[#333] lt-md:hidden" aria-hidden="true"><!-- Search Switch --><button type="button" id="search-switch" class="op-60 hover:op-100 op-transition" title="Search" aria-label="Search"><div u-i-grommet-icons-search></div></button><!-- Search Panel --><search-panel role="dialog" id="search-panel" class="hidden z-200 fixed top-15% lt-lgp:top-10% left-50% translate-x--50%
+    grid grid-rows-[auto_1fr_auto]
+    w-42rem lt-lgp:w-90% max-h-70vh lt-lgp:max-h-80vh p-3 lt-lgp:pb-1 rounded-lg
+    text-[var(--c-text)] bg-[var(--c-bg)] shadow-custom_0_0_10_0" aria-modal="true" aria-labelledby="search-label" aria-keyshortcuts="ArrowUp,ArrowDown,Enter,Esc" data-filter="true" data-batch-size="5" data-max-items="3"><div class="flex flex-col gap-2"><!-- Tab list --><div role="tablist" class="search-tabs flex gap-2 justify-start items-center text-xs" aria-label="Search categories"><button type="button" role="tab" class="px-1.5 py-0.5 rounded
+                bg-[#88888816] dark:bg-[#88888823]
+                aria-[selected=false]:op-40 aria-[selected=true]:op-100
+                aria-[selected=false]:hover:op-70 op-transition cursor-pointer" data-type="blog">Blog</button><button type="button" role="tab" class="px-1.5 py-0.5 rounded
+                bg-[#88888816] dark:bg-[#88888823]
+                aria-[selected=false]:op-40 aria-[selected=true]:op-100
+                aria-[selected=false]:hover:op-70 op-transition cursor-pointer" data-type="shorts">Shorts</button></div><!-- Search Bar --><div class="grid grid-cols-[auto_1fr] items-center
+        h-10 px-3 rounded-md
+        bg-[#88888811] dark:bg-[#88888818]"><div u-i-grommet-icons-search></div><label for="search-input" id="search-label" class="sr-only"></label><input type="search" role="combobox" id="search-input" class="h-full pl-2 bg-transparent outline-0" autocomplete="off" autocorrect="off" spellcheck="false" aria-labelledby="search-label" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false"></div></div><div role="listbox" id="search-results" class="overflow-y-auto my-1" aria-labelledby="search-input" tabindex="-1" data-base="/"><!-- Results --><div id="search-content"></div><!-- Feedback --><div id="search-feedback" class="hidden py-3 text-center text-sm op-40"></div><!-- Pagination --><div id="search-pagination" style="display: none" class="items-center justify-center gap-4 pt-4 pb-3 text-xs"><button class="flex items-center justify-center gap-1 op-40 hover:op-100 op-transition" data-action="more"><div u-i-material-symbols-arrow-cool-down></div><span></span></button><button class="flex items-center justify-center gap-1 op-40 hover:op-100 op-transition" data-action="all"><div u-i-material-symbols-expand-all></div><span></span></button></div></div><footer role="note" aria-label="Keyboard shortcuts"><ul class="flex flex-wrap items-center gap-4.5 lt-md:hidden
+        pt-3 border-t border-[#7d7d7d4d]
+        text-xs op-40 select-none"><li class="flex items-center gap-1"><kbd class="search-kbd-key"><div u-i-material-symbols-arrow-upward></div></kbd><kbd class="search-kbd-key"><div u-i-material-symbols-arrow-downward></div></kbd><span>Navigate</span></li><li class="flex items-center gap-1"><kbd class="search-kbd-key"><div u-i-grommet-icons-return></div></kbd><span>Go to Page</span></li><li class="flex items-center gap-1"><kbd class="search-kbd-key">esc</kbd><span>Close</span></li></ul></footer></search-panel><script type="module" src="/_astro/SearchSwitch.astro_astro_type_script_index_0_lang.UpBtn3wz.js"></script><script type="module" src="/_astro/SearchSwitch.astro_astro_type_script_index_1_lang.DN6mjs0G.js"></script><!-- https://github.com/pagefind/pagefind/blob/production-docs/pagefind_web_js/types/index.d.ts --><script>(function(){const scriptUrl = "/pagefind/pagefind.js";
+const navHighlight = true;
+
+    async function loadPagefind() {
+      const pagefind = await import(scriptUrl)
+
+      // https://pagefind.app/docs/search-config/
+      await pagefind.options({
+        'excerptLength': 20,
+        ...(navHighlight && {
+          'highlightParam': 'search'
+        }),
+
+        // https://pagefind.app/docs/ranking/
+        ranking: {
+          termFrequency: 0.6,
+          termSimilarity: 1.0,
+          pageLength: 0.0,
+          termSaturation: 1.4
+        }
+      })
+
+      pagefind.init()
+      window.pagefind = pagefind
+    }
+
+    if (!window.pagefind) loadPagefind()
+  })();</script><script>(function(){const scriptUrl = "/pagefind/pagefind-highlight.js";
+
+    async function loadPagefindHighlight() {
+      await import(scriptUrl)
+
+      const PagefindHighlight = window.PagefindHighlight
+      if (!PagefindHighlight) return
+      const pagefindHighlight = new PagefindHighlight({
+        // https://pagefind.app/docs/highlight-config
+        highlightParam: "search",
+        markContext: "[data-pagefind-body]",
+        markOptions: {
+          // https://markjs.io/#mark
+          className: "pagefind-highlight",
+          exclude: ["[data-pagefind-ignore]", "[data-pagefind-ignore] *"],
+        },
+        addStyles: false,
+      });
+
+      window.pagefindHighlight = pagefindHighlight
+    }
+
+    if (!window.pagefindHighlight) loadPagefindHighlight()
+  })();</script><script type="module">document.addEventListener(`astro:page-load`,()=>{new URLSearchParams(location.search).has(`search`)&&pagefindHighlight.highlight()});</script><button id="theme-switch" class="op-60 hover:op-100 op-transition" title="Toggle theme" role="switch" aria-label="Dark mode" aria-checked="false"><div u-i-ri-sun-line u-dark:i-ri-moon-line></div></button><script type="module" src="/_astro/ThemeSwitch.astro_astro_type_script_index_0_lang.CZeBNPAj.js"></script><a class="op-60 no-underline hover:op-100 op-transition lt-md:hidden" href="/rss.xml" title="RSS feed" aria-label="RSS feed" rel="noopener noreferrer" target="_blank"><div u-i-lucide-rss></div></a></div><button id="nav-open-button" class="hidden lt-md:block op-60 hover:op-100 op-transition" title="Navigation" aria-label="Navigation" aria-expanded="false" aria-controls="nav-panel"><div u-i-ri-menu-line></div></button><div id="nav-panel" class="hidden! z-200 fixed top-10% left-50% translate-x--50%
+    overflow-y-auto flex flex-col gap-5
+    w-90% max-h-80vh py-4 px-6 rounded-lg
+  bg-[var(--c-bg)] shadow-custom_0_0_10_0 text-[var(--c-text)]"><ul><li class="block py-3 border-b b-[var(--c-scrollbar)] leading-6"><a class="op-60 no-underline hover:op-100 block op-50! op-transition" href="/blog/" title="Blog" aria-label="Blog" aria-current="false"><span>Blog</span></a></li><li class="block py-3 border-b b-[var(--c-scrollbar)] leading-6"><a class="op-60 no-underline hover:op-100 block op-50! op-transition" href="/projects/" title="Projects" aria-label="Projects" aria-current="false"><span>Projects</span></a></li><li class="block py-3 border-b b-[var(--c-scrollbar)] leading-6"><a class="op-60 no-underline hover:op-100 block op-50! op-transition" href="/photos/" title="Photos" aria-label="Photos" aria-current="false"><span>Photos</span></a></li><li class="block py-3 border-b b-[var(--c-scrollbar)] leading-6"><a class="op-60 no-underline hover:op-100 block op-50! op-transition" href="/shorts/" title="Shorts" aria-label="Shorts" aria-current="false"><span>Shorts</span></a></li></ul><div class="flex justify-center items-center gap-4"><a class="op-60 no-underline hover:op-100 block op-50! op-transition" href="https://github.com/ffy6511" title="Junhao Zhuo on GitHub" aria-label="Junhao Zhuo on GitHub" rel="noopener noreferrer me" target="_blank"><div class="i-uil-github-alt"></div></a><a class="op-60 no-underline hover:op-100 op-transition op-50!" href="/rss.xml" title="RSS feed" aria-label="RSS feed" rel="noopener noreferrer" target="_blank"><div u-i-lucide-rss></div></a></div></div><script type="module" src="/_astro/NavSwitch.astro_astro_type_script_index_0_lang.By6UfBvf.js"></script></nav></header><!-- Main --><main id="main" class="px-7 py-10"><!-- Content --><nav id="nav-tabs" class="prose mx-auto mb-8" aria-label="Page sections" data-astro-cid-7paupepg><div u-flex="~ gap-3 lt-sm:col lt-sm:wrap lt-sm:gap-1" class="mb-0 text-3xl select-none" role="tablist" data-astro-cid-7paupepg><a class="op-60 no-underline hover:op-100 link op-transition! inactive" href="/feeds/" role="tab" aria-current="false" data-astro-cid-7paupepg="true">AstroBlog</a><a class="op-60 no-underline hover:op-100 link op-transition! active" href="/streams/" role="tab" aria-current="page" data-astro-cid-7paupepg="true">AstroStreams</a></div><p class="mt-4! op-50 italic" data-astro-cid-7paupepg>Example: displaying Astro streams with local JSON data</p></nav><div class="prose mx-auto" data-astro-cid-7paupepg><aside id="desktop-aside" class="group/aside fixed top-8.875rem z-100 lt-lgp:hidden
+            data-[position=left]:left-2rem data-[position=left]:right-auto
+            data-[position=right]:left-[calc(100vw-15.625rem-3.2rem)] data-[position=right]:right-auto
+            flex flex-col gap-3" data-position="right"><button type="button" class="flex-none flex items-center op-30 op-transition-700
+              data-[display-mode=always]:op-60
+              [.prose:hover_&amp;]:data-[display-mode=content]:op-60
+              group-hover/content:data-[display-mode=content]:op-60
+              group-hover/aside:data-[display-mode=hover]:op-60
+              undefined" aria-label="Table of contents" title="Table of contents" data-display-mode="content"><span u-i-ri-menu-2-fill aria-hidden="true"></span></button><table-of-contents data-pagefind-ignore="all"><!-- Greater than or equal to 1128px --><nav id="toc-sidebar" class="flex flex-col w-15.625rem max-h-[70vh] overflow-hidden
+    op-0 op-transition-700 text-sm
+    data-[display-mode=always]:op-60
+    [.prose:hover_&amp;[data-display-mode=content]]:op-60
+    group-hover/content:data-[display-mode=content]:op-60
+    data-[display-mode=hover]:hover:op-60" aria-label="Table of contents" data-position="right" data-display-mode="content"><a class="op-60 no-underline hover:op-100 sr-only focus:not-sr-only focus:fixed focus:start-1 focus:top-1.5 focus:op-20" href="#skip-toc">Skip toc</a><ul class="h-full first-of-type:mt--2 overflow-y-auto"><li><a class="op-60 no-underline hover:op-100" href="#2024" aria-label="Scroll to 2024">2024</a></li><li><a class="op-60 no-underline hover:op-100" href="#2023" aria-label="Scroll to 2023">2023</a></li><li><a class="op-60 no-underline hover:op-100" href="#2022" aria-label="Scroll to 2022">2022</a></li><li><a class="op-60 no-underline hover:op-100" href="#2021" aria-label="Scroll to 2021">2021</a></li></ul><div id="skip-toc" class="hidden"></div></nav></table-of-contents><script type="module">var e=class extends HTMLElement{#e;#t;#n=null;#r=new Map;#i=null;#a=[];connectedCallback(){this.#s(()=>this.#o())}disconnectedCallback(){this.#m()}#o=()=>{this.#e=this.#l(this.dataset.minH),this.#t=this.#l(this.dataset.maxH);let e=this.#u(`a`,!1);this.#d(e);let t=this.#e&&this.#t?this.#u(this.#f(this.#e,this.#t)):this.#u(`.toc-heading`);this.#n=new IntersectionObserver(this.#c,{root:null,rootMargin:`0% 0% -75% 0%`,threshold:0});for(let e of t)this.#n.observe(e)};#s=e=>(window.requestIdleCallback||(e=>setTimeout(e,1)))(e);#c=e=>{if(!e.length)return;let t=e[0];for(let n=1;n<e.length;n++)e[n].time>t.time&&(t=e[n]);let n=t.target;if(!n)return;let r=t.boundingClientRect.top>window.innerHeight/4?this.#p(this.#r,n):n;if(!r||r===this.#i)return;let i=this.#r.get(r)??[];if(this.#a&&this.#a.length)for(let e of this.#a)e.removeAttribute(`aria-current`);for(let e of i)e.setAttribute(`aria-current`,`true`),e.scrollIntoView({behavior:`smooth`,block:`center`});this.#i=r,this.#a=i};#l=e=>e?parseInt(e,10):void 0;#u=(e,t=!0)=>t?Array.from(document.querySelectorAll(e)):Array.from(this.querySelectorAll(e));#d=e=>{for(let t of e){let{hash:e}=new URL(t.href),n=decodeURIComponent(e.replace(/^#/,``)),r=document.getElementById(n);r&&(this.#r.has(r)?this.#r.get(r)?.push(t):this.#r.set(r,[t]))}};#f=(e,t,n=``)=>{let r=[];for(let i=e;i<=t;i++)n?r.push(`${n} h${i}`):r.push(`h${i}`);return r.join(`, `)};#p=(e,t)=>{let n=null;for(let r of e.keys()){if(r===t)return n;n=r}return null};#m=()=>{this.#n?.disconnect(),this.#n=null,this.#r.clear(),this.#i=null,this.#a=[]}};customElements.define(`table-of-contents`,e);</script></aside><script type="module">document.addEventListener(`astro:page-load`,()=>{let e=`desktop-aside:active:${location.pathname.replace(/\/$/,``)||`/`}`,t=document.querySelector(`[data-type="toc"]`),n=document.querySelector(`[data-type="tag"]`),r=document.querySelector(`#toc-sidebar`),i=document.querySelector(`#tag-sidebar`),a=a=>{a===`toc`?(t?.setAttribute(`aria-selected`,`true`),n?.setAttribute(`aria-selected`,`false`),r instanceof HTMLElement&&(r.style.display=`block`),i instanceof HTMLElement&&(i.style.display=`none`)):(n?.setAttribute(`aria-selected`,`true`),t?.setAttribute(`aria-selected`,`false`),r instanceof HTMLElement&&(r.style.display=`none`),i instanceof HTMLElement&&(i.style.display=`flex`));try{sessionStorage.setItem(e,a)}catch{}};if(!(t&&n))return;let o=`toc`;try{let t=sessionStorage.getItem(e);(t===`toc`||t===`tag`)&&(o=t)}catch{o=`toc`}(r||i)&&a(o),t?.addEventListener(`click`,()=>{a(`toc`)}),n?.addEventListener(`click`,()=>{a(`tag`)})});</script><div id="mobile-control"><button id="toc-open-button" class="z-50 fixed right-5 bottom-18
+    w-10 h-10 rounded-full
+    op-0 bg-#8883 dark:bg-#8886 pointer-events-none op-transition
+    lt-lgp:op-50 lt-lgp:pointer-events-auto
+    hover:op-100 print:hidden" title="Open table of contents"><div u-i-lucide-table-of-contents class="text-gray-700 dark:text-gray-200"></div></button><script type="module" src="/_astro/TocButton.astro_astro_type_script_index_0_lang.DirRoaNl.js"></script><script type="module" src="/_astro/TocPanel.astro_astro_type_script_index_0_lang.CspPcNUX.js"></script><table-of-contents data-pagefind-ignore="all"><!-- less than 1128px --><nav id="toc-panel" class="hidden! z-200 fixed top-10% left-50% translate-x--50%
+    overflow-y-auto flex flex-col
+    w-90% max-h-80vh py-4 px-6 rounded-lg
+    bg-[var(--c-bg)] shadow-custom_0_0_10_0 text-[var(--c-text)]"><div class="pb-1 b-b b-[var(--c-text)] op-50">Table of Contents</div><ul class="text-sm"><li><a class="op-60 no-underline hover:op-100" href="#2024" aria-label="Scroll to 2024">2024</a></li><li><a class="op-60 no-underline hover:op-100" href="#2023" aria-label="Scroll to 2023">2023</a></li><li><a class="op-60 no-underline hover:op-100" href="#2022" aria-label="Scroll to 2022">2022</a></li><li><a class="op-60 no-underline hover:op-100" href="#2021" aria-label="Scroll to 2021">2021</a></li></ul></nav></table-of-contents></div><div aria-label="Stream list"><div id="2024" class="toc-heading relative h-20
+    pointer-events-none select-none
+    slide-enter" style="--enter-stage:-2"><span class="absolute left--12 top--8
+          op-10 text-8em text-stroke-2 text-stroke-#aaa font-800 color-transparent">2024</span></div><div class="slide-enter" style="--enter-stage:0"><a class="op-60 no-underline hover:op-100 border-b-none! mb-6 mt-2 op-transition! overflow-hidden" href="https://shoptalkshow.com/607/" aria-label="Open in new tab" rel="noopener noreferrer" target="_blank" u-flex="~ items-center lt-md:col lt-md:items-start gap-2"><span class="text-lg leading-1.3em align-middle">Astro Launches an Integrated Database</span><span u-flex="~ gap-2 items-center" class="max-w-full"><span u-i-ri-radio-line class="flex-none op-50 align-middle" title="Provided in radio" aria-label="Provided in radio"></span><time class="op-50 text-sm ws-nowrap" datetime="2024-03-18T00:00:00.000Z">Mar 18</time><span class="op-40 text-sm ws-nowrap">· ShopTalk</span></span></a></div><div class="slide-enter" style="--enter-stage:1"><a class="op-60 no-underline hover:op-100 border-b-none! mb-6 mt-2 op-transition! overflow-hidden" href="https://gitnation.com/contents/you-dont-know-how-to-ssr" aria-label="Open in new tab" rel="noopener noreferrer" target="_blank" u-flex="~ items-center lt-md:col lt-md:items-start gap-2"><span class="text-lg leading-1.3em align-middle">You Don’t Know How to SSR</span><span u-flex="~ gap-2 items-center" class="max-w-full"><span u-i-ri-film-line class="flex-none op-50 align-middle" title="Provided in video" aria-label="Provided in video"></span><time class="op-50 text-sm ws-nowrap" datetime="2024-02-16T00:00:00.000Z">Feb 16</time><span class="op-40 text-sm ws-nowrap">· GitNation</span></span></a></div><div id="2023" class="toc-heading relative h-20
+    pointer-events-none select-none
+    slide-enter" style="--enter-stage:0"><span class="absolute left--12 top--8
+          op-10 text-8em text-stroke-2 text-stroke-#aaa font-800 color-transparent">2023</span></div><div class="slide-enter" style="--enter-stage:2"><a class="op-60 no-underline hover:op-100 border-b-none! mb-6 mt-2 op-transition! overflow-hidden" href="https://www.youtube.com/watch?v=XoIHKO6AkoM" aria-label="Open in new tab" rel="noopener noreferrer" target="_blank" u-flex="~ items-center lt-md:col lt-md:items-start gap-2"><span class="text-lg leading-1.3em align-middle">Astro Quick Start Course | Build an SSR Blog</span><span u-flex="~ gap-2 items-center" class="max-w-full"><span u-i-ri-film-line class="flex-none op-50 align-middle" title="Provided in video" aria-label="Provided in video"></span><time class="op-50 text-sm ws-nowrap" datetime="2023-12-19T00:00:00.000Z">Dec 19</time><span class="op-40 text-sm ws-nowrap">· YouTube</span></span></a></div><div class="slide-enter" style="--enter-stage:3"><a class="op-60 no-underline hover:op-100 border-b-none! mb-6 mt-2 op-transition! overflow-hidden" href="https://podrocket.logrocket.com/astro-mdx-kathleen-mcmahon" aria-label="Open in new tab" rel="noopener noreferrer" target="_blank" u-flex="~ items-center lt-md:col lt-md:items-start gap-2"><span class="text-lg leading-1.3em align-middle">Astro and MDX for digital gardening</span><span u-flex="~ gap-2 items-center" class="max-w-full"><span u-i-ri-radio-line class="flex-none op-50 align-middle" title="Provided in radio" aria-label="Provided in radio"></span><time class="op-50 text-sm ws-nowrap" datetime="2023-11-08T00:00:00.000Z">Nov 8</time><span class="op-40 text-sm ws-nowrap">· PodRocket</span></span></a></div><div class="slide-enter" style="--enter-stage:4"><a class="op-60 no-underline hover:op-100 border-b-none! mb-6 mt-2 op-transition! overflow-hidden" href="https://www.youtube.com/watch?v=iT-3amHK7tA" aria-label="Open in new tab" rel="noopener noreferrer" target="_blank" u-flex="~ items-center lt-md:col lt-md:items-start gap-2"><span class="text-lg leading-1.3em align-middle">View Transitions: Fact vs. Fiction</span><span u-flex="~ gap-2 items-center" class="max-w-full"><span u-i-ri-film-line class="flex-none op-50 align-middle" title="Provided in video" aria-label="Provided in video"></span><time class="op-50 text-sm ws-nowrap" datetime="2023-10-20T00:00:00.000Z">Oct 20</time><span class="op-40 text-sm ws-nowrap">· YouTube</span></span></a></div><div class="slide-enter" style="--enter-stage:5"><a class="op-60 no-underline hover:op-100 border-b-none! mb-6 mt-2 op-transition! overflow-hidden" href="https://www.youtube.com/watch?v=e-hTm5VmofI" aria-label="Open in new tab" rel="noopener noreferrer" target="_blank" u-flex="~ items-center lt-md:col lt-md:items-start gap-2"><span class="text-lg leading-1.3em align-middle">Astro Web Framework Crash Course</span><span u-flex="~ gap-2 items-center" class="max-w-full"><span u-i-ri-film-line class="flex-none op-50 align-middle" title="Provided in video" aria-label="Provided in video"></span><time class="op-50 text-sm ws-nowrap" datetime="2023-09-29T00:00:00.000Z">Sep 29</time><span class="op-40 text-sm ws-nowrap">· YouTube</span></span></a></div><div class="slide-enter" style="--enter-stage:6"><a class="op-60 no-underline hover:op-100 border-b-none! mb-6 mt-2 op-transition! overflow-hidden" href="https://www.youtube.com/watch?v=rRxuVOutmFQ" aria-label="Open in new tab" rel="noopener noreferrer" target="_blank" u-flex="~ items-center lt-md:col lt-md:items-start gap-2"><span class="text-lg leading-1.3em align-middle">Everything You Need to Know about Astro</span><span u-flex="~ gap-2 items-center" class="max-w-full"><span u-i-ri-film-line class="flex-none op-50 align-middle" title="Provided in video" aria-label="Provided in video"></span><time class="op-50 text-sm ws-nowrap" datetime="2023-09-19T00:00:00.000Z">Sep 19</time><span class="op-40 text-sm ws-nowrap">· YouTube</span></span></a></div><div class="slide-enter" style="--enter-stage:7"><a class="op-60 no-underline hover:op-100 border-b-none! mb-6 mt-2 op-transition! overflow-hidden" href="https://www.youtube.com/watch?v=0eka27P4Pr4" aria-label="Open in new tab" rel="noopener noreferrer" target="_blank" u-flex="~ items-center lt-md:col lt-md:items-start gap-2"><span class="text-lg leading-1.3em align-middle">Building faster websites with Astro</span><span u-flex="~ gap-2 items-center" class="max-w-full"><span u-i-ri-film-line class="flex-none op-50 align-middle" title="Provided in video" aria-label="Provided in video"></span><time class="op-50 text-sm ws-nowrap" datetime="2023-01-20T00:00:00.000Z">Jan 20</time><span class="op-40 text-sm ws-nowrap">· YouTube</span></span></a></div><div id="2022" class="toc-heading relative h-20
+    pointer-events-none select-none
+    slide-enter" style="--enter-stage:6"><span class="absolute left--12 top--8
+          op-10 text-8em text-stroke-2 text-stroke-#aaa font-800 color-transparent">2022</span></div><div class="slide-enter" style="--enter-stage:8"><a class="op-60 no-underline hover:op-100 border-b-none! mb-6 mt-2 op-transition! overflow-hidden" href="https://www.youtube.com/watch?v=wND4lSml31A" aria-label="Open in new tab" rel="noopener noreferrer" target="_blank" u-flex="~ items-center lt-md:col lt-md:items-start gap-2"><span class="text-lg leading-1.3em align-middle">I Tried Astro and I LOVE IT - 5 Reasons You Will TOO!</span><span u-flex="~ gap-2 items-center" class="max-w-full"><span u-i-ri-film-line class="flex-none op-50 align-middle" title="Provided in video" aria-label="Provided in video"></span><time class="op-50 text-sm ws-nowrap" datetime="2022-08-30T00:00:00.000Z">Aug 30</time><span class="op-40 text-sm ws-nowrap">· YouTube</span></span></a></div><div id="2021" class="toc-heading relative h-20
+    pointer-events-none select-none
+    slide-enter" style="--enter-stage:7"><span class="absolute left--12 top--8
+          op-10 text-8em text-stroke-2 text-stroke-#aaa font-800 color-transparent">2021</span></div><div class="slide-enter" style="--enter-stage:9"><a class="op-60 no-underline hover:op-100 border-b-none! mb-6 mt-2 op-transition! overflow-hidden" href="https://www.youtube.com/watch?v=dsTXcSeAZq8" aria-label="Open in new tab" rel="noopener noreferrer" target="_blank" u-flex="~ items-center lt-md:col lt-md:items-start gap-2"><span class="text-lg leading-1.3em align-middle">Astro in 100 Seconds</span><span u-flex="~ gap-2 items-center" class="max-w-full"><span u-i-ri-film-line class="flex-none op-50 align-middle" title="Provided in video" aria-label="Provided in video"></span><time class="op-50 text-sm ws-nowrap" datetime="2021-07-16T00:00:00.000Z">Jul 16</time><span class="op-40 text-sm ws-nowrap">· YouTube</span></span></a></div></div></div><!-- Share --><footer class="slide-enter animate-delay-1000! prose mx-auto mt-8 print:hidden"><br><span class="font-mono op-50">&gt; </span><a class="op-60 no-underline hover:op-100 font-mono op-50!" href="/">cd ..</a></footer><!-- Comments --></main><!-- Footer --><footer class="slide-enter animate-delay-1600! px-7 mt-auto mb-8"><div class="prose mx-auto op-50"><div class="flex lt-sm:flex-col items-center text-sm whitespace-nowrap"><span>© 2026 Junhao Zhuo</span><span class="lt-sm:hidden">&nbsp;|&nbsp;</span><span>Powered by <a class="op-60 no-underline hover:op-100 op-100! color-[--fg]!" href="https://github.com/lin-stephanie/astro-antfustyle-theme" aria-label="Open in new tab" rel="noopener noreferrer" target="_blank">Astro AntfuStyle Theme</a></span></div></div></footer><button id="to-top-button" class="z-50 fixed right-5 bottom-6
+    w-10 h-10 rounded-full
+    op-0 pointer-events-none op-transition
+    lt-lgp:op-50! lt-lgp:bg-#8883 lt-lgp:dark:bg-#8886 lt-lgp:pointer-events-auto!
+    hover:op-100! hover:bg-#8883 print:hidden" title="Scroll to top"><div u-i-ri-arrow-up-line></div></button><script type="module">document.addEventListener(`astro:page-load`,()=>{document.getElementById(`to-top-button`)?.addEventListener(`click`,()=>{window.scrollTo({top:0})})}),window.addEventListener(`scroll`,()=>{let e=document.getElementById(`to-top-button`);e&&window.matchMedia(`(min-width: 1024px)`).matches&&((window.scrollY||document.documentElement.scrollTop)<=300?(e.style.opacity=`0`,e.style.pointerEvents=`none`):(e.style.opacity=`0.3`,e.style.pointerEvents=`auto`))});</script><!-- Panel Backdrop (on mobile) --><div id="backdrop" class="hidden z-150 fixed inset-0 bg-[#ffffffcc] dark:bg-[#000000cc]" aria-hidden="true"></div><script type="module" src="/_astro/Backdrop.astro_astro_type_script_index_0_lang.BUq9iU50.js"></script><!-- Progress Bar --><script type="module" src="/_astro/BaseLayout.astro_astro_type_script_index_0_lang.CIADTz_V.js"></script><script>
+      ;(() => {
+        const offsetFor = (el) => {
+          const margin = Number.parseFloat(getComputedStyle(el).scrollMarginTop)
+          if (Number.isFinite(margin) && margin > 0) return margin
+          return window.innerHeight * 0.2
+        }
+
+        const hashId = () => {
+          const hash = location.hash
+          if (!hash || hash === '#') return ''
+          try {
+            return decodeURIComponent(hash.slice(1))
+          } catch {
+            return ''
+          }
+        }
+
+        const readingTarget = () => {
+          const id = hashId()
+          if (!id) return null
+          const el = document.getElementById(id)
+          if (!el || !el.closest('article')) return null
+          return el
+        }
+
+        const reveal = (el) => {
+          const article = el.closest('.slide-enter-content')
+          if (!article) return
+          const children = [...article.children]
+          const index = children.findIndex((child) => child === el || child.contains(el))
+          if (article.dataset.anchorQueued === el.id) {
+            for (const [i, child] of children.entries()) {
+              if (index === -1 || i <= index) child.classList.add('is-anchor-shown')
+            }
+            return
+          }
+          article.dataset.anchorQueued = el.id
+          const after = []
+          let stage = 1
+          for (const [i, child] of children.entries()) {
+            if (index !== -1 && i > index) {
+              child.classList.remove('is-anchor-shown')
+              child.style.setProperty('--enter-stage', String(stage), 'important')
+              child.style.animation = 'none'
+              after.push(child)
+              stage += 1
+              continue
+            }
+            child.classList.add('is-anchor-shown')
+            child.style.removeProperty('--enter-stage')
+            child.style.animation = ''
+          }
+          void article.offsetWidth
+          for (const child of after) child.style.animation = ''
+        }
+
+        const land = (el) => {
+          const root = document.documentElement
+          root.classList.add('anchor-land')
+          const top =
+            el.getBoundingClientRect().top + window.scrollY - offsetFor(el)
+          window.scrollTo(0, Math.max(0, top))
+          reveal(el)
+          window.__anchorPlacedAt = window.scrollY
+        }
+
+        const settle = () => {
+          document.documentElement.style.scrollBehavior = ''
+          const el = readingTarget()
+          if (!el) {
+            document.documentElement.classList.remove('anchor-land')
+            return
+          }
+          land(el)
+        }
+
+        const stillThere = () =>
+          Math.abs(window.scrollY - window.__anchorPlacedAt) <= 120
+
+        if (!window.__anchorLand) {
+          window.__anchorLand = true
+          document.addEventListener('astro:after-swap', settle)
+          document.addEventListener('astro:page-load', () => {
+            requestAnimationFrame(() => {
+              const el = readingTarget()
+              if (!el || !stillThere()) return
+              const drift = Math.abs(el.getBoundingClientRect().top - offsetFor(el))
+              if (drift > 16) land(el)
+            })
+          })
+          document.addEventListener(
+            'click',
+            (event) => {
+              const link = event.target?.closest?.('a[href]')
+              if (!link || !link.hash || link.hash === '#') return
+              document.documentElement.style.scrollBehavior = 'auto'
+            },
+            true
+          )
+          document.addEventListener('click', (event) => {
+            if (
+              event.defaultPrevented ||
+              event.button !== 0 ||
+              event.metaKey ||
+              event.ctrlKey ||
+              event.shiftKey ||
+              event.altKey
+            )
+              return
+            const link = event.target?.closest?.('a[href]')
+            if (!link) return
+            let url
+            try {
+              url = new URL(link.href, location.href)
+            } catch {
+              return
+            }
+            if (
+              url.origin !== location.origin ||
+              url.pathname !== location.pathname ||
+              !url.hash
+            )
+              return
+            let id
+            try {
+              id = decodeURIComponent(url.hash.slice(1))
+            } catch {
+              return
+            }
+            const el = document.getElementById(id)
+            if (!el || !el.closest('article')) return
+            // Run after the client router starts its own hash scroll.
+            setTimeout(() => land(el), 0)
+          })
+          document.fonts?.ready.then(() => {
+            if (!stillThere()) return
+            const el = readingTarget()
+            if (el) land(el)
+          })
+        }
+
+        if (location.hash.length > 1)
+          document.documentElement.style.scrollBehavior = 'auto'
+        settle()
+        document.documentElement.style.scrollBehavior = ''
+      })()
+    </script></body></html>
